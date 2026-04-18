@@ -7,7 +7,6 @@ extends Button
 
 func _ready() -> void:
 	toggle_mode = true
-	text = "Loupe"
 
 
 func _on_button_up() -> void:
