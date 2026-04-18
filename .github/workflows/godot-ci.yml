@@ -45,40 +45,40 @@ jobs:
           name: windows
           path: build/windows
 
-  export-linux:
-    name: Linux Export
-    runs-on: ubuntu-24.04
-    container:
-      image: barichello/godot-ci:4.6
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
+#   export-linux:
+#     name: Linux Export
+#     runs-on: ubuntu-24.04
+#     container:
+#       image: barichello/godot-ci:4.6
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#         with:
+#           lfs: true
 
-      # ИСПРАВЛЕНИЕ: Установка библиотек для Linux
-      - name: Install Dependencies
-        run: |
-          apt-get update && apt-get install -y libfontconfig1 libdbus-1-3
+#       # ИСПРАВЛЕНИЕ: Установка библиотек для Linux
+#       - name: Install Dependencies
+#         run: |
+#           apt-get update && apt-get install -y libfontconfig1 libdbus-1-3
 
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          # Используем cp -rn вместо mv, чтобы избежать ошибок доступа и пустых папок
-          cp -rn /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/
+#       - name: Setup
+#         run: |
+#           mkdir -v -p ~/.local/share/godot/export_templates/
+#           # Используем cp -rn вместо mv, чтобы избежать ошибок доступа и пустых папок
+#           cp -rn /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/
           
-      - name: Linux Build
-        run: |
-          mkdir -v -p build/linux
-          EXPORT_DIR="$(readlink -f build)"
-          cd ${PROJECT_PATH:-.} 
-          godot --headless --verbose --export-release "Linux/X11" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+#       - name: Linux Build
+#         run: |
+#           mkdir -v -p build/linux
+#           EXPORT_DIR="$(readlink -f build)"
+#           cd ${PROJECT_PATH:-.} 
+#           godot --headless --verbose --export-release "Linux/X11" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: linux
-          path: build/linux
+#       - name: Upload Artifact
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: linux
+#           path: build/linux
 
   export-web:
     name: Web Export
