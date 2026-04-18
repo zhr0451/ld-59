@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://deakmdwibn73a"]
 
-[ext_resource type="Texture2D" uid="uid://b6v8m7dja2r78" path="res://assets/world_map_prototype.png" id="1_7ykc4"]
+[ext_resource type="Texture2D" uid="uid://do7n6p62d5ie" path="res://assets/prototypes/world_map_prototype_2.png" id="1_7ykc4"]
 [ext_resource type="Script" uid="uid://di4mfv62h22uq" path="res://src/controls/viewport_controller.gd" id="1_pw63i"]
+[ext_resource type="Script" uid="uid://beasvjm628eb4" path="res://src/controls/telescope_logic.gd" id="3_7ykc4"]
 
 [node name="MainScene" type="Node2D" unique_id=1750581879]
 
 [node name="WorldRoot" type="Node2D" parent="." unique_id=1941747639]
 
 [node name="Map" type="Sprite2D" parent="WorldRoot" unique_id=1082791430]
-position = Vector2(1022.9409, 359.25003)
+position = Vector2(1274, 362)
 scale = Vector2(0.4982639, 0.49826393)
 texture = ExtResource("1_7ykc4")
 
@@ -45,6 +46,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Panel/Buttons" unique_id=1416254591]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer" unique_id=2001458344]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+script = ExtResource("3_7ykc4")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot/Panel/Buttons" unique_id=1226876305]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer2" unique_id=648229110]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot/Panel/Buttons" unique_id=1583419901]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3" unique_id=1952506162]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
 
 [node name="NarrativePopup" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1685485273]
 layout_mode = 1
@@ -55,3 +91,17 @@ offset_right = 0.023986816
 offset_bottom = 0.023956299
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="NarrativePopup2" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1681741021]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.86100006
+anchor_right = 0.9990001
+anchor_bottom = 0.78700006
+offset_left = 0.9199219
+offset_right = 0.9439697
+offset_bottom = 0.023925781
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" method="_on_button_up"]
