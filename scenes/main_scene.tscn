@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://fgsufl0x83yi" path="res://assets/prototypes/pers/GnomeGome.png" id="7_c16ls"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
+[ext_resource type="Script" uid="uid://c3oa2oi35q8ex" path="res://src/ui/popup_button.gd" id="10_6wevv"]
+[ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/popup_menu_logic.gd" id="10_e1cbu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7t0g"]
 shader = ExtResource("4_j4h3n")
@@ -50,6 +52,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
+visible = false
 material = SubResource("ShaderMaterial_h7t0g")
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 0
@@ -120,10 +123,10 @@ script = ExtResource("6_rt2n2")
 [node name="LeftPanel" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1685485273]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.13800001
+anchor_right = 0.19800001
 anchor_bottom = 0.78700006
-offset_right = 0.023986816
-offset_bottom = 0.023956299
+offset_right = -0.4400177
+offset_bottom = 0.023925781
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -209,6 +212,48 @@ text = "Evil: "
 layout_mode = 2
 text = "Chaos:"
 
+[node name="PopUpPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1174193133]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0050000004
+anchor_top = 0.033
+anchor_right = 0.18100001
+anchor_bottom = 0.73700005
+offset_left = 0.5999994
+offset_top = -5.76
+offset_right = 0.31999207
+offset_bottom = 0.35998535
+script = ExtResource("10_e1cbu")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UIRoot/PopUpPanel" unique_id=1507323505]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot/PopUpPanel/PanelContainer" unique_id=1396994]
+layout_mode = 2
+texture = ExtResource("7_c16ls")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PopupTestButton" type="Button" parent="CanvasLayer/UIRoot" unique_id=1978039071]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.023000002
+anchor_top = 0.84700006
+anchor_right = 0.11100001
+anchor_bottom = 0.93200004
+offset_left = 0.55999756
+offset_top = 0.15997314
+offset_right = -0.08001709
+offset_bottom = -0.040039063
+text = "Popup Test"
+script = ExtResource("10_6wevv")
+
 [connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/PopupTestButton" to="CanvasLayer/UIRoot/PopupTestButton" method="_on_button_up"]
