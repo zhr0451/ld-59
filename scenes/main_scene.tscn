@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://u2jgbdsy7cqe" path="res://src/controls/loupe_overlay.gdshader" id="4_j4h3n"]
 [ext_resource type="Script" uid="uid://1viu3hx1lrpg" path="res://src/ui/leveler_logic.gd" id="6_rt2n2"]
 [ext_resource type="Texture2D" uid="uid://fgsufl0x83yi" path="res://assets/prototypes/pers/GnomeGome.png" id="7_c16ls"]
+[ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7t0g"]
 shader = ExtResource("4_j4h3n")
@@ -115,7 +116,7 @@ layout_mode = 2
 text = "lever"
 script = ExtResource("6_rt2n2")
 
-[node name="NarrativePopup" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1685485273]
+[node name="LeftPanel" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1685485273]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.13800001
@@ -125,7 +126,7 @@ offset_bottom = 0.023956299
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NarrativePopup2" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1681741021]
+[node name="RightPanel" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1681741021]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.86100006
@@ -137,5 +138,37 @@ offset_bottom = 0.023925781
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Tutorial" type="Panel" parent="CanvasLayer/UIRoot" unique_id=855282225]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.33800003
+anchor_top = 0.060000002
+anchor_right = 0.665
+anchor_bottom = 0.71000004
+offset_left = 0.35995483
+offset_top = -0.20000076
+offset_right = -0.2000122
+offset_bottom = -0.2000122
+script = ExtResource("8_18nlu")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Tutorial" unique_id=111368027]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/UIRoot/Tutorial/MarginContainer" unique_id=1334644845]
+layout_mode = 2
+text = "Жесткий туториал"
+horizontal_alignment = 1
+
 [connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3/Button" method="_on_button_up"]
