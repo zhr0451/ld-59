@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://deakmdwibn73a"]
+
+[ext_resource type="Texture2D" uid="uid://dd3gax0jqledp" path="res://icon.svg" id="1_7ykc4"]
+[ext_resource type="Script" uid="uid://di4mfv62h22uq" path="res://src/controls/viewport_controller.gd" id="1_pw63i"]
+
+[node name="MainScene" type="Node2D" unique_id=1750581879]
+
+[node name="WorldRoot" type="Node2D" parent="." unique_id=1941747639]
+
+[node name="Map" type="Sprite2D" parent="WorldRoot" unique_id=1082791430]
+position = Vector2(626.00006, 361.625)
+scale = Vector2(27.312502, 5.666015)
+texture = ExtResource("1_7ykc4")
+
+[node name="Events" type="Node2D" parent="WorldRoot" unique_id=1802516773]
+
+[node name="LocationCamera" type="Camera2D" parent="." unique_id=651496615]
+position = Vector2(638, 360)
+script = ExtResource("1_pw63i")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1003541147]
+
+[node name="UIRoot" type="Control" parent="CanvasLayer" unique_id=1751583459]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=687187129]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.785
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 0.3199768
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/UIRoot/Panel" unique_id=1768514046]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NarrativePopup" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1685485273]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.13800001
+anchor_bottom = 0.78700006
+offset_right = 0.023986816
+offset_bottom = 0.023956299
+grow_horizontal = 2
+grow_vertical = 2
