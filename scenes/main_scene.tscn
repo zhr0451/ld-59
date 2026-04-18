@@ -2,7 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://do7n6p62d5ie" path="res://assets/prototypes/world_map_prototype_2.png" id="1_7ykc4"]
 [ext_resource type="Script" uid="uid://di4mfv62h22uq" path="res://src/controls/viewport_controller.gd" id="1_pw63i"]
+[ext_resource type="Script" path="res://src/controls/loupe_overlay.gd" id="2_y6x8v"]
 [ext_resource type="Script" uid="uid://beasvjm628eb4" path="res://src/controls/telescope_logic.gd" id="3_7ykc4"]
+[ext_resource type="Shader" path="res://src/controls/loupe_overlay.gdshader" id="4_j4h3n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h7t0g"]
+shader = ExtResource("4_j4h3n")
 
 [node name="MainScene" type="Node2D" unique_id=1750581879]
 
@@ -28,6 +33,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
+custom_minimum_size = Vector2(240, 240)
+offset_right = 240.0
+offset_bottom = 240.0
+mouse_filter = 2
+material = SubResource("ShaderMaterial_h7t0g")
+script = ExtResource("2_y6x8v")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=687187129]
 layout_mode = 1
