@@ -1,0 +1,453 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://06xokgtyqpey"]
+
+[ext_resource type="Texture2D" uid="uid://cxqahx2vf2j" path="res://assets/animations/gnome_gome/raw/Unnamed_0001.png" id="1_wns01"]
+[ext_resource type="Texture2D" uid="uid://brboqbg34ymb3" path="res://assets/animations/gnome_gome/raw/Unnamed_0002.png" id="2_3wipc"]
+[ext_resource type="Texture2D" uid="uid://cj1cpol68n16i" path="res://assets/animations/gnome_gome/raw/Unnamed_0003.png" id="3_mynf8"]
+[ext_resource type="Texture2D" uid="uid://c0g8083fts4rn" path="res://assets/animations/gnome_gome/raw/Unnamed_0004.png" id="4_shwvk"]
+[ext_resource type="Texture2D" uid="uid://bjoia80vcwf1n" path="res://assets/animations/gnome_gome/raw/Unnamed_0005.png" id="5_kldaf"]
+[ext_resource type="Texture2D" uid="uid://b58erex3prkur" path="res://assets/animations/gnome_gome/raw/Unnamed_0006.png" id="6_vr74s"]
+[ext_resource type="Texture2D" uid="uid://c8iuiycy8me3e" path="res://assets/animations/gnome_gome/raw/Unnamed_0007.png" id="7_f4555"]
+[ext_resource type="Texture2D" uid="uid://b3rbm33boamdj" path="res://assets/animations/gnome_gome/raw/Unnamed_0008.png" id="8_6ht23"]
+[ext_resource type="Texture2D" uid="uid://bflpvxduxkf0x" path="res://assets/animations/gnome_gome/raw/Unnamed_0009.png" id="9_mcddc"]
+[ext_resource type="Texture2D" uid="uid://do1y5662l3x2t" path="res://assets/animations/gnome_gome/raw/Unnamed_0010.png" id="10_wgun8"]
+[ext_resource type="Texture2D" uid="uid://caxfegi6rqmk1" path="res://assets/animations/gnome_gome/raw/Unnamed_0011.png" id="11_jpjbl"]
+[ext_resource type="Texture2D" uid="uid://c7cgsja1iu1e2" path="res://assets/animations/gnome_gome/raw/Unnamed_0012.png" id="12_k1bds"]
+[ext_resource type="Texture2D" uid="uid://bnplwf0wbejux" path="res://assets/animations/gnome_gome/raw/Unnamed_0013.png" id="13_yvi23"]
+[ext_resource type="Texture2D" uid="uid://csh30rr8677yq" path="res://assets/animations/gnome_gome/raw/Unnamed_0014.png" id="14_es5c1"]
+[ext_resource type="Texture2D" uid="uid://dpi2jc76y1o8h" path="res://assets/animations/gnome_gome/raw/Unnamed_0015.png" id="15_khpsf"]
+[ext_resource type="Texture2D" uid="uid://h7gkl23cmjaj" path="res://assets/animations/gnome_gome/raw/Unnamed_0016.png" id="16_ht6d1"]
+[ext_resource type="Texture2D" uid="uid://c4jy08w76lw30" path="res://assets/animations/gnome_gome/raw/Unnamed_0017.png" id="17_5bu55"]
+[ext_resource type="Texture2D" uid="uid://bn4mfvtd3ek80" path="res://assets/animations/gnome_gome/raw/Unnamed_0018.png" id="18_ilpu5"]
+[ext_resource type="Texture2D" uid="uid://chthimv0ro78v" path="res://assets/animations/gnome_gome/raw/Unnamed_0019.png" id="19_xptln"]
+[ext_resource type="Texture2D" uid="uid://dq2ddfekw523l" path="res://assets/animations/gnome_gome/raw/Unnamed_0020.png" id="20_63hay"]
+[ext_resource type="Texture2D" uid="uid://16vyhl3yomvo" path="res://assets/animations/gnome_gome/raw/Unnamed_0021.png" id="21_0cxal"]
+[ext_resource type="Texture2D" uid="uid://dk7ql18fn7ij7" path="res://assets/animations/gnome_gome/raw/Unnamed_0022.png" id="22_53vic"]
+[ext_resource type="Texture2D" uid="uid://c6rydoamm2xla" path="res://assets/animations/gnome_gome/raw/Unnamed_0023.png" id="23_uqdd4"]
+[ext_resource type="Texture2D" uid="uid://bqy8bftck12nd" path="res://assets/animations/gnome_gome/raw/Unnamed_0024.png" id="24_j411u"]
+[ext_resource type="Texture2D" uid="uid://cjgrb8uceppjp" path="res://assets/animations/gnome_gome/raw/Unnamed_0025.png" id="25_ayoj6"]
+[ext_resource type="Texture2D" uid="uid://db158jdcy5xdu" path="res://assets/animations/gnome_gome/raw/Unnamed_0026.png" id="26_umlwh"]
+[ext_resource type="Texture2D" uid="uid://btgurex8juqyt" path="res://assets/animations/gnome_gome/raw/Unnamed_0027.png" id="27_1jol0"]
+[ext_resource type="Texture2D" uid="uid://dlhbwvh8nli57" path="res://assets/animations/gnome_gome/raw/Unnamed_0028.png" id="28_64mx8"]
+[ext_resource type="Texture2D" uid="uid://b7in6kph087bt" path="res://assets/animations/gnome_gome/raw/Unnamed_0029.png" id="29_i12ac"]
+[ext_resource type="Texture2D" uid="uid://cf2b4lxv2d6ud" path="res://assets/animations/gnome_gome/raw/Unnamed_0030.png" id="30_0kdlm"]
+[ext_resource type="Texture2D" uid="uid://cjqwhxonxph3m" path="res://assets/animations/gnome_gome/raw/Unnamed_0031.png" id="31_gydu3"]
+[ext_resource type="Texture2D" uid="uid://ddo2ykbyvbnxe" path="res://assets/animations/gnome_gome/raw/Unnamed_0032.png" id="32_84w7r"]
+[ext_resource type="Texture2D" uid="uid://coxbtwritmhbk" path="res://assets/animations/gnome_gome/raw/Unnamed_0033.png" id="33_i8jia"]
+[ext_resource type="Texture2D" uid="uid://br3drkn38dj3t" path="res://assets/animations/gnome_gome/raw/Unnamed_0034.png" id="34_stqbq"]
+[ext_resource type="Texture2D" uid="uid://dck3vhmqfr1lx" path="res://assets/animations/gnome_gome/raw/Unnamed_0035.png" id="35_p8ive"]
+[ext_resource type="Texture2D" uid="uid://d26jmljedb3ku" path="res://assets/animations/gnome_gome/raw/Unnamed_0036.png" id="36_s7voa"]
+[ext_resource type="Texture2D" uid="uid://dmr4ksgx0p00p" path="res://assets/animations/gnome_gome/raw/Unnamed_0037.png" id="37_n17tt"]
+[ext_resource type="Texture2D" uid="uid://vdi4sg88hn5n" path="res://assets/animations/gnome_gome/raw/Unnamed_0038.png" id="38_pd6jx"]
+[ext_resource type="Texture2D" uid="uid://bulh2f8cfq6gu" path="res://assets/animations/gnome_gome/raw/Unnamed_0039.png" id="39_qtcdi"]
+[ext_resource type="Texture2D" uid="uid://c8hhmlv6bb1d7" path="res://assets/animations/gnome_gome/raw/Unnamed_0040.png" id="40_pt0uj"]
+[ext_resource type="Texture2D" uid="uid://dnxkm3fmdcj2y" path="res://assets/animations/gnome_gome/raw/Unnamed_0041.png" id="41_54kox"]
+[ext_resource type="Texture2D" uid="uid://bcrw5vfr1jeuy" path="res://assets/animations/gnome_gome/raw/Unnamed_0042.png" id="42_m81pw"]
+[ext_resource type="Texture2D" uid="uid://bdbecv8361n10" path="res://assets/animations/gnome_gome/raw/Unnamed_0043.png" id="43_mq6ps"]
+[ext_resource type="Texture2D" uid="uid://bmejt0f6mnv1b" path="res://assets/animations/gnome_gome/raw/Unnamed_0044.png" id="44_m7kc0"]
+[ext_resource type="Texture2D" uid="uid://bgr3kk44fbpe3" path="res://assets/animations/gnome_gome/raw/Unnamed_0045.png" id="45_5307t"]
+[ext_resource type="Texture2D" uid="uid://cihvsqmj8wrjq" path="res://assets/animations/gnome_gome/raw/Unnamed_0046.png" id="46_empwo"]
+[ext_resource type="Texture2D" uid="uid://dxmn44ogfqp6o" path="res://assets/animations/gnome_gome/raw/Unnamed_0047.png" id="47_7jion"]
+[ext_resource type="Texture2D" uid="uid://clepx22384s3g" path="res://assets/animations/gnome_gome/raw/Unnamed_0048.png" id="48_dpict"]
+[ext_resource type="Texture2D" uid="uid://woeugaj7l2bk" path="res://assets/animations/gnome_gome/raw/Unnamed_0049.png" id="49_rtweb"]
+[ext_resource type="Texture2D" uid="uid://bgn7eugb1xvc1" path="res://assets/animations/gnome_gome/raw/Unnamed_0050.png" id="50_mdr4l"]
+[ext_resource type="Texture2D" uid="uid://dgnhokss5b3j4" path="res://assets/animations/gnome_gome/raw/Unnamed_0051.png" id="51_2bva1"]
+[ext_resource type="Texture2D" uid="uid://gr73u0nai5ff" path="res://assets/animations/gnome_gome/raw/Unnamed_0052.png" id="52_u4flg"]
+[ext_resource type="Texture2D" uid="uid://bfxyljyepds2i" path="res://assets/animations/gnome_gome/raw/Unnamed_0053.png" id="53_qeib0"]
+[ext_resource type="Texture2D" uid="uid://c4grwtitqsecf" path="res://assets/animations/gnome_gome/raw/Unnamed_0054.png" id="54_654sc"]
+[ext_resource type="Texture2D" uid="uid://d2cfrvjwneoc2" path="res://assets/animations/gnome_gome/raw/Unnamed_0055.png" id="55_fh2np"]
+[ext_resource type="Texture2D" uid="uid://okmyldad6juu" path="res://assets/animations/gnome_gome/raw/Unnamed_0056.png" id="56_i4n62"]
+[ext_resource type="Texture2D" uid="uid://0fvry4jmn5w4" path="res://assets/animations/gnome_gome/raw/Unnamed_0057.png" id="57_yqrxn"]
+[ext_resource type="Texture2D" uid="uid://dtbstes6myrm8" path="res://assets/animations/gnome_gome/raw/Unnamed_0058.png" id="58_iah0t"]
+[ext_resource type="Texture2D" uid="uid://d0n1k4o0xw6om" path="res://assets/animations/gnome_gome/raw/Unnamed_0059.png" id="59_klyrs"]
+[ext_resource type="Texture2D" uid="uid://c3tds3okub571" path="res://assets/animations/gnome_gome/raw/Unnamed_0060.png" id="60_kav22"]
+[ext_resource type="Texture2D" uid="uid://c1aln5kaf5hpd" path="res://assets/animations/gnome_gome/raw/Unnamed_0061.png" id="61_3mi5r"]
+[ext_resource type="Texture2D" uid="uid://df8snwj1sl0kj" path="res://assets/animations/gnome_gome/raw/Unnamed_0062.png" id="62_i6drl"]
+[ext_resource type="Texture2D" uid="uid://bv87g30n06jan" path="res://assets/animations/gnome_gome/raw/Unnamed_0063.png" id="63_s3s13"]
+[ext_resource type="Texture2D" uid="uid://cac7fpv585qoy" path="res://assets/animations/gnome_gome/raw/Unnamed_0064.png" id="64_j8nn3"]
+[ext_resource type="Texture2D" uid="uid://dia22xqbt83gh" path="res://assets/animations/gnome_gome/raw/Unnamed_0065.png" id="65_4cwxt"]
+[ext_resource type="Texture2D" uid="uid://dbnnjqrni7vn5" path="res://assets/animations/gnome_gome/raw/Unnamed_0066.png" id="66_nf130"]
+[ext_resource type="Texture2D" uid="uid://dl3lsje22l0xj" path="res://assets/animations/gnome_gome/raw/Unnamed_0067.png" id="67_ichgr"]
+[ext_resource type="Texture2D" uid="uid://bdocu72iuixt" path="res://assets/animations/gnome_gome/raw/Unnamed_0068.png" id="68_f4688"]
+[ext_resource type="Texture2D" uid="uid://dxjr31gdkbps5" path="res://assets/animations/gnome_gome/raw/Unnamed_0069.png" id="69_i56bc"]
+[ext_resource type="Texture2D" uid="uid://b2x1w1k2gtnyo" path="res://assets/animations/gnome_gome/raw/Unnamed_0070.png" id="70_bonoi"]
+[ext_resource type="Texture2D" uid="uid://s0qfnl45riw8" path="res://assets/animations/gnome_gome/raw/Unnamed_0071.png" id="71_lwoaw"]
+[ext_resource type="Texture2D" uid="uid://ciwe0xupt8f18" path="res://assets/animations/gnome_gome/raw/Unnamed_0072.png" id="72_eukvd"]
+[ext_resource type="Texture2D" uid="uid://co7wpieie1v5a" path="res://assets/animations/gnome_gome/raw/Unnamed_0073.png" id="73_k6nnb"]
+[ext_resource type="Texture2D" uid="uid://3qglvo0qd68i" path="res://assets/animations/gnome_gome/raw/Unnamed_0074.png" id="74_maebx"]
+[ext_resource type="Texture2D" uid="uid://wuyfn0jc2axg" path="res://assets/animations/gnome_gome/raw/Unnamed_0075.png" id="75_xe0r0"]
+[ext_resource type="Texture2D" uid="uid://ydyh45c26aqb" path="res://assets/animations/gnome_gome/raw/Unnamed_0076.png" id="76_eglai"]
+[ext_resource type="Texture2D" uid="uid://c32dw2wxmgajy" path="res://assets/animations/gnome_gome/raw/Unnamed_0077.png" id="77_w1g6w"]
+[ext_resource type="Texture2D" uid="uid://bl0trkuvsn6so" path="res://assets/animations/gnome_gome/raw/Unnamed_0078.png" id="78_f0fba"]
+[ext_resource type="Texture2D" uid="uid://bw6happgyq6r4" path="res://assets/animations/gnome_gome/raw/Unnamed_0079.png" id="79_qvpvy"]
+[ext_resource type="Texture2D" uid="uid://cfhi8ji4b3m78" path="res://assets/animations/gnome_gome/raw/Unnamed_0080.png" id="80_mrqx7"]
+[ext_resource type="Texture2D" uid="uid://brhd0npbm5fhq" path="res://assets/animations/gnome_gome/raw/Unnamed_0081.png" id="81_n1ac4"]
+[ext_resource type="Texture2D" uid="uid://b5ah6w6wsa7sm" path="res://assets/animations/gnome_gome/raw/Unnamed_0082.png" id="82_kib7a"]
+[ext_resource type="Texture2D" uid="uid://dljlvhrqycnch" path="res://assets/animations/gnome_gome/raw/Unnamed_0083.png" id="83_6h5bk"]
+[ext_resource type="Texture2D" uid="uid://bi1pss48tgpgh" path="res://assets/animations/gnome_gome/raw/Unnamed_0084.png" id="84_5h7sy"]
+[ext_resource type="Texture2D" uid="uid://dgq0ggv5c8nam" path="res://assets/animations/gnome_gome/raw/Unnamed_0085.png" id="85_2s0by"]
+[ext_resource type="Texture2D" uid="uid://dnw5wgsvup3w0" path="res://assets/animations/gnome_gome/raw/Unnamed_0086.png" id="86_ewfux"]
+[ext_resource type="Texture2D" uid="uid://b447i608ieex0" path="res://assets/animations/gnome_gome/raw/Unnamed_0087.png" id="87_sl74i"]
+[ext_resource type="Texture2D" uid="uid://bjx1aqi60inri" path="res://assets/animations/gnome_gome/raw/Unnamed_0088.png" id="88_4y6vk"]
+[ext_resource type="Texture2D" uid="uid://bjj3xr1eusp1n" path="res://assets/animations/gnome_gome/raw/Unnamed_0089.png" id="89_3tuj4"]
+[ext_resource type="Texture2D" uid="uid://baomw366pe2va" path="res://assets/animations/gnome_gome/raw/Unnamed_0090.png" id="90_dy4c1"]
+[ext_resource type="Texture2D" uid="uid://bp1b77vy5prrf" path="res://assets/animations/gnome_gome/raw/Unnamed_0091.png" id="91_x6fch"]
+[ext_resource type="Texture2D" uid="uid://b273g76y4pl1y" path="res://assets/animations/gnome_gome/raw/Unnamed_0092.png" id="92_f4mec"]
+[ext_resource type="Texture2D" uid="uid://dms1w164fjs8" path="res://assets/animations/gnome_gome/raw/Unnamed_0093.png" id="93_ricp7"]
+[ext_resource type="Texture2D" uid="uid://cjw0nmewrp4kw" path="res://assets/animations/gnome_gome/raw/Unnamed_0094.png" id="94_8ju7l"]
+[ext_resource type="Texture2D" uid="uid://crm7wdq2wg7aj" path="res://assets/animations/gnome_gome/raw/Unnamed_0095.png" id="95_d1ab5"]
+[ext_resource type="Texture2D" uid="uid://bgdvrdmdqu2m3" path="res://assets/animations/gnome_gome/raw/Unnamed_0096.png" id="96_nxw07"]
+[ext_resource type="Texture2D" uid="uid://bxybyderg2alc" path="res://assets/animations/gnome_gome/raw/Unnamed_0097.png" id="97_xsvkr"]
+[ext_resource type="Texture2D" uid="uid://de8w3t71qtj7b" path="res://assets/animations/gnome_gome/raw/Unnamed_0098.png" id="98_r3p2y"]
+[ext_resource type="Texture2D" uid="uid://qyea36xwglg8" path="res://assets/animations/gnome_gome/raw/Unnamed_0099.png" id="99_5jgfs"]
+[ext_resource type="Texture2D" uid="uid://bvb4ctvrhqpch" path="res://assets/animations/gnome_gome/raw/Unnamed_0100.png" id="100_imwt1"]
+[ext_resource type="Texture2D" uid="uid://krfgm0s771ge" path="res://assets/animations/gnome_gome/raw/Unnamed_0101.png" id="101_l8uda"]
+[ext_resource type="Texture2D" uid="uid://dufade6ejsqp0" path="res://assets/animations/gnome_gome/raw/Unnamed_0102.png" id="102_1yxgm"]
+[ext_resource type="Texture2D" uid="uid://dvl73ctbmgk85" path="res://assets/animations/gnome_gome/raw/Unnamed_0103.png" id="103_iyfja"]
+[ext_resource type="Texture2D" uid="uid://cswv88y0d42ul" path="res://assets/animations/gnome_gome/raw/Unnamed_0104.png" id="104_64p2u"]
+[ext_resource type="Texture2D" uid="uid://b6k5e4bwjjqm0" path="res://assets/animations/gnome_gome/raw/Unnamed_0105.png" id="105_kenor"]
+[ext_resource type="Texture2D" uid="uid://d2nbp27qxadlb" path="res://assets/animations/gnome_gome/raw/Unnamed_0106.png" id="106_hs8by"]
+[ext_resource type="Texture2D" uid="uid://bpwds8rrbldwd" path="res://assets/animations/gnome_gome/raw/Unnamed_0107.png" id="107_i2l4p"]
+[ext_resource type="Texture2D" uid="uid://bko2n0mle8gpy" path="res://assets/animations/gnome_gome/raw/Unnamed_0108.png" id="108_1wtjn"]
+[ext_resource type="Texture2D" uid="uid://d2sqv2frwroab" path="res://assets/animations/gnome_gome/raw/Unnamed_0109.png" id="109_tq0bo"]
+[ext_resource type="Texture2D" uid="uid://b4w3svedohf77" path="res://assets/animations/gnome_gome/raw/Unnamed_0110.png" id="110_kt6lr"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wns01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_3wipc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mynf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_shwvk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kldaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vr74s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_f4555")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6ht23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mcddc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wgun8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jpjbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_k1bds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_yvi23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_es5c1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_khpsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ht6d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_5bu55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ilpu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xptln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_63hay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_0cxal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_53vic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_uqdd4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_j411u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_ayoj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_umlwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_1jol0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_64mx8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_i12ac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0kdlm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_gydu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_84w7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_i8jia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_stqbq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_p8ive")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_s7voa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_n17tt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_pd6jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_qtcdi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_pt0uj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_54kox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_m81pw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_mq6ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_m7kc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_5307t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_empwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_7jion")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_dpict")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_rtweb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_mdr4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_2bva1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_u4flg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_qeib0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_654sc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_fh2np")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_i4n62")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_yqrxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_iah0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_klyrs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_kav22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_3mi5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_i6drl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_s3s13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_j8nn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_4cwxt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_nf130")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_ichgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_f4688")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_i56bc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_bonoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_lwoaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_eukvd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_k6nnb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_maebx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_xe0r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_eglai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_w1g6w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_f0fba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_qvpvy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_mrqx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_n1ac4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_kib7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_6h5bk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_5h7sy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_2s0by")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_ewfux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_sl74i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_4y6vk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_3tuj4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_dy4c1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_x6fch")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_f4mec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_ricp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_8ju7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_d1ab5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_nxw07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_xsvkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_r3p2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_5jgfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_imwt1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_l8uda")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_1yxgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_iyfja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_64p2u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_kenor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_hs8by")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_i2l4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_1wtjn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_tq0bo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_kt6lr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_kt6lr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 24.0
+}]
