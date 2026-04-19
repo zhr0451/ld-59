@@ -16,6 +16,7 @@ func _input_event(_viewport, event, _shape_idx):
 			name_label.set_text(GNOME_GOME.name)
 			message_lable.set_text(GNOME_GOME.message)
 			texture_icon.set_texture(GNOME_GOME.icon)
+			loupe_overlay.set_loupe_enabled(false)
 			pop_up_panel.set_open(true)
 			quest_panel.set_open(true)
 			if quest_logic.has_method("start_puzzle"):
