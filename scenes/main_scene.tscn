@@ -85,8 +85,8 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Table" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1261978325]
-position = Vector2(680.5, 430.51703)
-scale = Vector2(0.3555085, 0.3555085)
+position = Vector2(730.99994, 442.3051)
+scale = Vector2(0.39915264, 0.3991526)
 texture = ExtResource("7_xdqt8")
 
 [node name="LeftWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=71823105]
@@ -95,7 +95,7 @@ scale = Vector2(0.39279658, 0.39279664)
 texture = ExtResource("7_k6f3i")
 
 [node name="RightWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1262638848]
-position = Vector2(1338.6908, 362.25)
+position = Vector2(1442.6907, 362.25003)
 scale = Vector2(0.39597452, 0.39597458)
 texture = ExtResource("20_xdqt8")
 
