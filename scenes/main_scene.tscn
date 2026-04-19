@@ -16,7 +16,8 @@
 [ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/left_popup_menu_logic.gd" id="10_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://dd3gax0jqledp" path="res://icon.svg" id="14_01n6w"]
 [ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
-[ext_resource type="Script" uid="uid://bn7vfbo7ptuda" path="res://src/ui/right_popup_button.gd" id="15_si52b"]
+[ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
+[ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -320,50 +321,154 @@ text = "Message"
 autowrap_mode = 3
 
 [node name="TeleportPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=347741597]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.882
-anchor_top = 0.165
-anchor_right = 0.98
-anchor_bottom = 0.606
-offset_left = 0.039916992
-offset_top = 0.19999695
-offset_right = 0.5999756
-offset_bottom = -0.32000732
-script = ExtResource("15_01n6w")
-hidden_padding = 40.0
-
-[node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=576573461]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.883
-anchor_top = 0.629
+anchor_left = 0.882
+anchor_top = 0.172
 anchor_right = 0.98
-anchor_bottom = 0.758
-offset_left = -0.23999023
-offset_top = 0.11999512
-offset_right = 0.5998535
-offset_bottom = 0.23999023
+anchor_bottom = 0.74
+offset_left = 0.039916992
+offset_top = 0.15999603
+offset_right = 0.5999756
+offset_bottom = 0.2000122
 script = ExtResource("15_01n6w")
 hidden_padding = 40.0
 
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot" unique_id=1072441780]
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/TeleportPanel" unique_id=2085511164]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.878
-anchor_top = 0.83100003
-anchor_right = 0.9850001
-anchor_bottom = 0.95400006
-offset_left = 0.15991211
-offset_top = -0.32000732
-offset_right = 0.19995117
-offset_bottom = 0.11993408
-text = "Right popup test"
-script = ExtResource("15_si52b")
+anchor_left = 0.15100001
+anchor_top = 0.342
+anchor_right = 0.841
+anchor_bottom = 0.572
+offset_left = -0.026000977
+offset_top = 0.12199402
+offset_right = 0.033996582
+offset_bottom = 0.051986694
+text = "Teleport"
+script = ExtResource("17_bcnxi")
+
+[node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1670368985]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(524, 280)
+layout_mode = 1
+anchors_preset = -1
+offset_left = 580.0
+offset_top = 286.0
+offset_right = 1104.0
+offset_bottom = 566.0
+script = ExtResource("15_01n6w")
+hidden_padding = 370.0
+bind_target_path = NodePath("../RightPanel")
+
+[node name="QuestLogic" type="Node" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1585092825]
+unique_name_in_owner = true
+script = ExtResource("16_qstlg")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1151457975]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.72
+offset_right = 0.00012207031
+offset_bottom = 0.040000916
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/QuestPanel/Panel" unique_id=106543735]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer" unique_id=453118132]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=626508639]
+layout_mode = 2
+text = "Quest Puzzle"
+horizontal_alignment = 1
+
+[node name="ProblemLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=76897833]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Stabilize the route: 1 + 1 = ?"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=2101317685]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "Choose the correct answer."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1391336009]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.753
+anchor_right = 0.30400002
+anchor_bottom = 1.0
+offset_top = -0.028999329
+offset_right = 3.4332275e-05
+
+[node name="AnswerButton1" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel2" unique_id=842406623]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=984412285]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.344
+anchor_top = 0.753
+anchor_right = 0.64000005
+anchor_bottom = 1.0
+offset_left = 4.196167e-05
+offset_top = -0.028999329
+offset_right = 6.866455e-05
+
+[node name="AnswerButton2" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel3" unique_id=1955192354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1147281451]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.712
+anchor_top = 0.753
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.392334e-05
+offset_top = -0.028999329
+offset_right = 0.00012207031
+
+[node name="AnswerButton3" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel4" unique_id=30587644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
 
 [connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer/Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3/Button" to="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3/Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer/Close Button" to="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer/Close Button" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/Button" to="CanvasLayer/UIRoot/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]
