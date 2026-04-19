@@ -16,6 +16,7 @@ func _input_event(_viewport, event, _shape_idx):
 			name_label.set_text(VALENTIN_PETROVICH.name)
 			message_lable.set_text(VALENTIN_PETROVICH.message)
 			texture_icon.set_texture(VALENTIN_PETROVICH.icon)
+			loupe_overlay.set_loupe_enabled(false)
 			pop_up_panel.set_open(true)
 			quest_panel.set_open(true)
 			if quest_logic.has_method("start_puzzle"):

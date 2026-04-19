@@ -3,7 +3,8 @@ extends Node
 var counter = preload("uid://cs5lr50tom8xo")
 
 @export var base_tasks_required := 1
-@export var tasks_increment_per_attempt := 1
+@export var max_tasks_required := 6
+@export var attempts_per_difficulty_step := 2
 
 @onready var quest_panel: Panel = %QuestPanel
 @onready var teleport_panel: Panel = %TeleportPanel
@@ -40,7 +41,7 @@ func start_puzzle(target_name: String) -> void:
 
 	current_target_name = target_name
 	teleport_attempts += 1
-	tasks_required = base_tasks_required + (teleport_attempts - 1) * tasks_increment_per_attempt
+	tasks_required = _get_tasks_required_for_attempt()
 	tasks_solved = 0
 	puzzle_in_progress = true
 
@@ -139,3 +140,11 @@ func _reset_labels() -> void:
 
 func _get_progress_text() -> String:
 	return "Solve route %d/%d." % [tasks_solved + 1, tasks_required]
+
+
+func _get_tasks_required_for_attempt() -> int:
+	var safe_step := maxi(attempts_per_difficulty_step, 1)
+	var difficulty_level := int((teleport_attempts - 1) / safe_step)
+	var required := base_tasks_required + difficulty_level
+
+	return mini(required, max_tasks_required)

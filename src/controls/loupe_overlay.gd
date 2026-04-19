@@ -5,9 +5,11 @@ signal world_focus_changed(world_position: Vector2)
 @export var lens_radius: float = 120.0
 @export var magnification: float = 2.0
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../../../LocationCamera")
+@export_node_path("BaseButton") var toggle_button_path: NodePath = NodePath("DownPanel/Buttons/MarginContainer/Button")
 
 @onready var camera: Camera2D = get_node_or_null(camera_path) as Camera2D
 @onready var shader_material: ShaderMaterial = material as ShaderMaterial
+@onready var toggle_button: BaseButton = get_node_or_null(toggle_button_path) as BaseButton
 
 var loupe_enabled := false
 var world_focus_position := Vector2.ZERO
@@ -28,6 +30,8 @@ func set_loupe_enabled(value: bool) -> void:
 	loupe_enabled = value
 	visible = value
 	set_process(value)
+
+	_sync_toggle_buttons(value)
 
 	if value:
 		_update_loupe()
@@ -78,3 +82,13 @@ func _update_world_focus(mouse_position: Vector2) -> void:
 
 	world_focus_position = camera.get_screen_center_position() + screen_offset / camera.zoom
 	world_focus_changed.emit(world_focus_position)
+
+
+func _sync_toggle_buttons(value: bool) -> void:
+	if toggle_button != null and toggle_button.button_pressed != value:
+		toggle_button.set_pressed_no_signal(value)
+
+	for button in get_tree().get_nodes_in_group("loupe_toggle_buttons"):
+		var toggle := button as BaseButton
+		if toggle != null and toggle.button_pressed != value:
+			toggle.set_pressed_no_signal(value)
