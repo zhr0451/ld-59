@@ -7,7 +7,7 @@ var counter = preload("uid://cs5lr50tom8xo")
 @export var base_tasks_required := 1
 @export var max_tasks_required := 6
 @export var attempts_per_difficulty_step := 2
-@export var initial_timer_seconds := 15.0
+@export var initial_timer_seconds := 30.0
 @export var solved_task_time_bonus := 5.0
 @export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
 
