@@ -1,6 +1,5 @@
 extends Resource
 class_name Counters
 
-@export var chaos: int
-@export var evil: int
-@export var good: int
+@export var evil: int = 0
+@export var good: int = 0

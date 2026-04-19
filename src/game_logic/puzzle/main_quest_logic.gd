@@ -1,6 +1,9 @@
 extends Node
 
-var counter: Counters = preload("uid://cs5lr50tom8xo")
+var counter = preload("uid://cs5lr50tom8xo")
+
+@export var base_tasks_required := 1
+@export var tasks_increment_per_attempt := 1
 
 @onready var quest_panel: Panel = %QuestPanel
 @onready var teleport_panel: Panel = %TeleportPanel
@@ -16,6 +19,10 @@ var counter: Counters = preload("uid://cs5lr50tom8xo")
 var correct_answer := 0
 var input_locked := false
 var current_target_name := "Traveler"
+var teleport_attempts := 0
+var tasks_required := 1
+var tasks_solved := 0
+var puzzle_in_progress := false
 
 
 func _ready() -> void:
@@ -28,7 +35,15 @@ func _ready() -> void:
 
 
 func start_puzzle(target_name: String) -> void:
+	if puzzle_in_progress and target_name == current_target_name:
+		return
+
 	current_target_name = target_name
+	teleport_attempts += 1
+	tasks_required = base_tasks_required + (teleport_attempts - 1) * tasks_increment_per_attempt
+	tasks_solved = 0
+	puzzle_in_progress = true
+
 	title_label.text = "Route for %s" % current_target_name
 	teleport_panel.set_open(false)
 	quest_panel.set_open(true)
@@ -62,7 +77,7 @@ func _generate_task() -> void:
 		button.set_meta("answer_value", answer_value)
 		button.disabled = false
 
-	result_label.text = "Choose the correct answer."
+	result_label.text = _get_progress_text()
 	input_locked = false
 
 
@@ -94,15 +109,24 @@ func _on_answer_pressed(button: Button) -> void:
 	var is_correct := chosen_answer == correct_answer
 
 	if is_correct:
+		tasks_solved += 1
+
+		if tasks_solved < tasks_required:
+			result_label.text = "Correct. %s" % _get_progress_text()
+			await get_tree().create_timer(0.8).timeout
+			_generate_task()
+			return
+
 		counter.good += 1
+		puzzle_in_progress = false
 		result_label.text = "Correct. Teleport window unlocked."
 		await get_tree().create_timer(0.8).timeout
 		quest_panel.set_open(false)
 		teleport_panel.set_open(true)
 		_reset_labels()
 	else:
-		counter.chaos += 1
-		result_label.text = "Incorrect. The route destabilized."
+		counter.evil += 1
+		result_label.text = "Incorrect. Evil grows stronger."
 		await get_tree().create_timer(1.0).timeout
 		_generate_task()
 
@@ -111,3 +135,7 @@ func _reset_labels() -> void:
 	title_label.text = "Quest Puzzle"
 	problem_label.text = "Awaiting a traveler."
 	result_label.text = "Use the loupe and select a character."
+
+
+func _get_progress_text() -> String:
+	return "Solve route %d/%d." % [tasks_solved + 1, tasks_required]

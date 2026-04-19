@@ -57,15 +57,16 @@ func toggle_open() -> void:
 	set_open(!is_open)
 
 
-func _refresh_layout_from_target() -> void:
+func _refresh_layout_from_target() -> bool:
 	var bind_target := get_node_or_null(bind_target_path) as Control
 	if bind_target == null:
-		return
+		return false
 
 	global_position = Vector2(
 		bind_target.global_position.x - size.x - bind_gap,
 		global_position.y
 	)
+	return true
 
 
 func _on_viewport_size_changed() -> void:
@@ -73,10 +74,14 @@ func _on_viewport_size_changed() -> void:
 
 
 func _recalculate_positions_after_resize() -> void:
-	_refresh_layout_from_target()
+	var has_bind_target := _refresh_layout_from_target()
 
-	shown_left = offset_left
-	shown_right = offset_right
+	# When the panel is closed, current offsets already point to the hidden state.
+	# Only recapture shown offsets from the live layout if the panel is open,
+	# or if we can explicitly align it from a bind target.
+	if is_open or has_bind_target:
+		shown_left = offset_left
+		shown_right = offset_right
 
 	var shift := size.x + hidden_padding
 	hidden_left = shown_left + shift

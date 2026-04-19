@@ -9,7 +9,10 @@
 [ext_resource type="Script" uid="uid://beasvjm628eb4" path="res://src/controls/telescope_logic.gd" id="3_7ykc4"]
 [ext_resource type="Shader" uid="uid://u2jgbdsy7cqe" path="res://src/controls/loupe_overlay.gdshader" id="4_j4h3n"]
 [ext_resource type="Script" uid="uid://cv8frnsp56xje" path="res://src/game_logic/characters/valentin_petrovich_left_menu.gd" id="5_bcnxi"]
+[ext_resource type="Script" uid="uid://66oskmwptrwq" path="res://src/game_logic/scene_changer.gd" id="6_f7n2c"]
 [ext_resource type="Script" uid="uid://1viu3hx1lrpg" path="res://src/ui/leveler_logic.gd" id="6_rt2n2"]
+[ext_resource type="Texture2D" uid="uid://b3g65cwu6y3hd" path="res://assets/props/left_wall.png" id="7_k6f3i"]
+[ext_resource type="Texture2D" uid="uid://fb4udx0hs41b" path="res://assets/props/table.png" id="7_xdqt8"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
 [ext_resource type="Script" uid="uid://c3oa2oi35q8ex" path="res://src/ui/left_popup_button.gd" id="10_6wevv"]
@@ -18,6 +21,7 @@
 [ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
+[ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -70,6 +74,10 @@ shape = SubResource("RectangleShape2D_6u1mn")
 position = Vector2(638, 360)
 script = ExtResource("1_pw63i")
 
+[node name="SceneChanger" type="Node" parent="." unique_id=1107763342]
+unique_name_in_owner = true
+script = ExtResource("6_f7n2c")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1003541147]
 
 [node name="UIRoot" type="Control" parent="CanvasLayer" unique_id=1751583459]
@@ -80,6 +88,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="Table" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1261978325]
+position = Vector2(730.99994, 442.3051)
+scale = Vector2(0.39915264, 0.3991526)
+texture = ExtResource("7_xdqt8")
+
+[node name="LeftWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=71823105]
+position = Vector2(27.999992, 365.00003)
+scale = Vector2(0.39279658, 0.39279664)
+texture = ExtResource("7_k6f3i")
+
+[node name="RightWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1262638848]
+position = Vector2(1442.6907, 362.25003)
+scale = Vector2(0.39597452, 0.39597458)
+texture = ExtResource("20_xdqt8")
 
 [node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
 visible = false
@@ -253,10 +276,6 @@ text = "Good: "
 [node name="Evil" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=1854768296]
 layout_mode = 2
 text = "Evil: "
-
-[node name="Chaos" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=827965865]
-layout_mode = 2
-text = "Chaos:"
 
 [node name="PopUpPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1174193133]
 layout_mode = 1
