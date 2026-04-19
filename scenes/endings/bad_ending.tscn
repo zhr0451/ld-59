@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c5ryjt2i58n1h"]
+
+[node name="BadEnding" type="Node2D" unique_id=190980222]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=385478461]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=763494490]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1191907940]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer" unique_id=795607374]
+layout_mode = 2
+text = "Your Kingdom was destroyed by pure chaos! But, you can allways try again!
+
+Thanks for playing the game was made by:
+zhr – code and game design
+Kataron – art"
+horizontal_alignment = 1
+vertical_alignment = 1
