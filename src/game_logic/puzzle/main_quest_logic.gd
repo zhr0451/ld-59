@@ -7,8 +7,8 @@ var counter = preload("uid://cs5lr50tom8xo")
 @export var base_tasks_required := 1
 @export var max_tasks_required := 6
 @export var attempts_per_difficulty_step := 2
-@export var initial_timer_seconds := 30.0
-@export var solved_task_time_bonus := 15.0
+@export var initial_timer_seconds := 15.0
+@export var solved_task_time_bonus := 5.0
 @export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
 
 @onready var quest_panel: Panel = %QuestPanel
@@ -197,7 +197,7 @@ func _get_progress_text() -> String:
 
 func _get_tasks_required_for_attempt() -> int:
 	var safe_step := maxi(attempts_per_difficulty_step, 1)
-	var difficulty_level := int((teleport_attempts - 1) / safe_step)
+	var difficulty_level := floori(float(teleport_attempts - 1) / float(safe_step))
 	var required := base_tasks_required + difficulty_level
 
 	return mini(required, max_tasks_required)

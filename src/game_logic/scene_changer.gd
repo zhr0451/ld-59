@@ -17,7 +17,7 @@ var active_character: Area2D = null
 
 func _ready() -> void:
 	randomize()
-	var map := get_node_or_null(map_path) as Node2D
+	var map := _get_map()
 	if map != null:
 		for character in _get_map_characters(map):
 			_set_character_active(character, false)
@@ -37,7 +37,7 @@ func _process(_delta: float) -> void:
 
 
 func show_random_character() -> void:
-	var map := get_node_or_null(map_path) as Node2D
+	var map := _get_map()
 	if map == null:
 		push_warning("scene_changer.gd: map node not found.")
 		return
@@ -55,6 +55,18 @@ func show_random_character() -> void:
 	active_character = _pick_next_character(characters, previous_character)
 	active_character.position = _get_spawn_position(map) - _get_character_offset(active_character)
 	_set_character_active(active_character, true)
+
+
+func _get_map() -> Node2D:
+	var map := get_node_or_null(map_path) as Node2D
+	if map != null:
+		return map
+
+	var current_scene := get_tree().current_scene
+	if current_scene == null:
+		return null
+
+	return current_scene.get_node_or_null("WorldRoot/Map") as Node2D
 
 
 func _get_map_characters(map: Node2D) -> Array[Area2D]:
