@@ -12,8 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://fgsufl0x83yi" path="res://assets/persons/GnomeGome.png" id="7_c16ls"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
-[ext_resource type="Script" uid="uid://c3oa2oi35q8ex" path="res://src/ui/popup_button.gd" id="10_6wevv"]
-[ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/popup_menu_logic.gd" id="10_e1cbu"]
+[ext_resource type="Script" uid="uid://c3oa2oi35q8ex" path="res://src/ui/left_popup_button.gd" id="10_6wevv"]
+[ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/left_popup_menu_logic.gd" id="10_e1cbu"]
+[ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
+[ext_resource type="Script" uid="uid://bn7vfbo7ptuda" path="res://src/ui/right_popup_button.gd" id="15_si52b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4w45t"]
 size = Vector2(377.31018, 226.77005)
@@ -80,7 +82,7 @@ offset_bottom = 208.0
 mouse_filter = 2
 script = ExtResource("2_y6x8v")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=687187129]
+[node name="DownPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=687187129]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.785
@@ -90,7 +92,7 @@ offset_top = 0.3199768
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/UIRoot/Panel" unique_id=1768514046]
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/UIRoot/DownPanel" unique_id=1768514046]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -99,39 +101,39 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Panel/Buttons" unique_id=1416254591]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/DownPanel/Buttons" unique_id=1416254591]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer" unique_id=2001458344]
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer" unique_id=2001458344]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 text = "Loop"
 script = ExtResource("3_7ykc4")
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot/Panel/Buttons" unique_id=1226876305]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot/DownPanel/Buttons" unique_id=1226876305]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer2" unique_id=648229110]
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer2" unique_id=648229110]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 text = "Tutorial"
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot/Panel/Buttons" unique_id=1583419901]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot/DownPanel/Buttons" unique_id=1583419901]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3" unique_id=1952506162]
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3" unique_id=1952506162]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 text = "lever"
@@ -198,8 +200,8 @@ anchor_top = 0.101
 anchor_right = 1.0
 anchor_bottom = 0.21400002
 offset_left = -0.36010742
-offset_top = 0.27999878
-offset_bottom = -0.08001709
+offset_top = -52.72
+offset_bottom = -53.080017
 script = ExtResource("9_c1pb6")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Counters" unique_id=316029579]
@@ -271,19 +273,50 @@ offset_bottom = 0.11999512
 text = "Popup Test"
 script = ExtResource("10_6wevv")
 
-[node name="Panel2" type="Panel" parent="CanvasLayer/UIRoot" unique_id=347741597]
+[node name="TeleportPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=347741597]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.882
-anchor_top = 0.28300002
-anchor_right = 0.97900003
-anchor_bottom = 0.71500003
+anchor_top = 0.165
+anchor_right = 0.98
+anchor_bottom = 0.606
 offset_left = 0.039916992
-offset_top = 0.23999023
-offset_right = -0.11999512
-offset_bottom = 0.19995117
+offset_top = 0.19999695
+offset_right = 0.5999756
+offset_bottom = -0.32000732
+script = ExtResource("15_01n6w")
+hidden_padding = 40.0
 
-[connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer/Button" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3/Button" to="CanvasLayer/UIRoot/Panel/Buttons/MarginContainer3/Button" method="_on_button_up"]
+[node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=576573461]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.883
+anchor_top = 0.629
+anchor_right = 0.98
+anchor_bottom = 0.758
+offset_left = -0.23999023
+offset_top = 0.11999512
+offset_right = 0.5999756
+offset_bottom = 0.23999023
+script = ExtResource("15_01n6w")
+hidden_padding = 40.0
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot" unique_id=1072441780]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.878
+anchor_top = 0.83100003
+anchor_right = 0.9850001
+anchor_bottom = 0.95400006
+offset_left = 0.15991211
+offset_top = -0.32000732
+offset_right = 0.19995117
+offset_bottom = 0.11993408
+text = "Right popup test"
+script = ExtResource("15_si52b")
+
+[connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3/Button" to="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3/Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/PopupTestButton" to="CanvasLayer/UIRoot/PopupTestButton" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/Button" to="CanvasLayer/UIRoot/Button" method="_on_button_up"]
