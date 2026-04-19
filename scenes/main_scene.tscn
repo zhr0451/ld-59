@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://deakmdwibn73a"]
 
-[ext_resource type="Texture2D" uid="uid://do7n6p62d5ie" path="res://assets/prototypes/world/world_map_prototype_2.png" id="1_7ykc4"]
+[ext_resource type="Texture2D" uid="uid://b0qf5wjylvsgc" path="res://assets/props/background .png" id="1_adb74"]
 [ext_resource type="Script" uid="uid://di4mfv62h22uq" path="res://src/controls/viewport_controller.gd" id="1_pw63i"]
 [ext_resource type="PackedScene" uid="uid://c1dyi4jdbh8jf" path="res://scenes/characters/gnome_gome.tscn" id="2_si52b"]
 [ext_resource type="Script" uid="uid://cjcajwpgwgujd" path="res://src/controls/loupe_overlay.gd" id="2_y6x8v"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://66oskmwptrwq" path="res://src/game_logic/scene_changer.gd" id="6_f7n2c"]
 [ext_resource type="Script" uid="uid://1viu3hx1lrpg" path="res://src/ui/leveler_logic.gd" id="6_rt2n2"]
 [ext_resource type="Texture2D" uid="uid://b3g65cwu6y3hd" path="res://assets/props/left_wall.png" id="7_k6f3i"]
-[ext_resource type="Texture2D" uid="uid://fb4udx0hs41b" path="res://assets/props/table.png" id="7_xdqt8"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
 [ext_resource type="Script" uid="uid://c3oa2oi35q8ex" path="res://src/ui/left_popup_button.gd" id="10_6wevv"]
@@ -22,6 +21,7 @@
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
+[ext_resource type="Texture2D" uid="uid://baiddp5iya6wh" path="res://assets/props/tablefinal.png" id="22_adb74"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -40,9 +40,9 @@ shader_parameter/rim_color = Color(0.85, 0.93, 1, 0.95)
 [node name="WorldRoot" type="Node2D" parent="." unique_id=1941747639]
 
 [node name="Map" type="Sprite2D" parent="WorldRoot" unique_id=1082791430]
-position = Vector2(1274, 362)
-scale = Vector2(0.4982639, 0.49826393)
-texture = ExtResource("1_7ykc4")
+position = Vector2(1512, 371)
+scale = Vector2(0.47843128, 0.4784313)
+texture = ExtResource("1_adb74")
 
 [node name="GnomeArea2D" type="Area2D" parent="WorldRoot/Map" unique_id=1696528081]
 script = ExtResource("3_6u1mn")
@@ -89,20 +89,20 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Table" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1261978325]
-position = Vector2(730.99994, 442.3051)
-scale = Vector2(0.39915264, 0.3991526)
-texture = ExtResource("7_xdqt8")
-
 [node name="LeftWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=71823105]
 position = Vector2(27.999992, 365.00003)
 scale = Vector2(0.39279658, 0.39279664)
 texture = ExtResource("7_k6f3i")
 
 [node name="RightWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1262638848]
-position = Vector2(1442.6907, 362.25003)
+position = Vector2(1369.0001, 370.00003)
 scale = Vector2(0.39597452, 0.39597458)
 texture = ExtResource("20_xdqt8")
+
+[node name="Tablefinal" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1098941262]
+position = Vector2(683, 539)
+scale = Vector2(0.34628958, 0.34628966)
+texture = ExtResource("22_adb74")
 
 [node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
 visible = false
@@ -509,7 +509,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 24
-text = "Time: 15"
+text = "Time: 30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
