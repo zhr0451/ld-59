@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b5cvyrfwh7s2p"]
+
+[ext_resource type="SpriteFrames" uid="uid://eif3au7e3651" path="res://assets/animations/valentin_petrovich/valentin_petrovich.tres" id="1_2ou4c"]
+[ext_resource type="Script" uid="uid://dhk4xti56cq1r" path="res://src/game_logic/animator.gd" id="2_7vuwb"]
+
+[node name="ValentinPetrovich" type="Node2D" unique_id=1121587406]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1231940248]
+sprite_frames = ExtResource("1_2ou4c")
+animation = &"idle"
+frame_progress = 0.089131206
+script = ExtResource("2_7vuwb")

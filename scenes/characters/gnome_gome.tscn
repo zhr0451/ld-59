@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c1dyi4jdbh8jf"]
+
+[ext_resource type="SpriteFrames" uid="uid://06xokgtyqpey" path="res://assets/animations/gnome_gome/gnome_gome.tres" id="1_0elwy"]
+[ext_resource type="Script" uid="uid://dhk4xti56cq1r" path="res://src/game_logic/animator.gd" id="2_rceqf"]
+
+[node name="GnomeGome" type="Node2D" unique_id=368732774]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2103270664]
+position = Vector2(0, -1)
+sprite_frames = ExtResource("1_0elwy")
+animation = &"idle"
+frame_progress = 0.21725808
+script = ExtResource("2_rceqf")
