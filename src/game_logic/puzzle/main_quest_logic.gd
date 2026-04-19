@@ -101,8 +101,8 @@ func _on_answer_pressed(button: Button) -> void:
 		teleport_panel.set_open(true)
 		_reset_labels()
 	else:
-		counter.chaos += 1
-		result_label.text = "Incorrect. The route destabilized."
+		counter.evil += 1
+		result_label.text = "Incorrect. Evil grows stronger."
 		await get_tree().create_timer(1.0).timeout
 		_generate_task()
 
