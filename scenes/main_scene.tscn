@@ -115,85 +115,7 @@ offset_right = -13.0
 offset_bottom = 208.0
 mouse_filter = 2
 script = ExtResource("2_y6x8v")
-
-[node name="DownPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=687187129]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.785
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 0.3199768
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/UIRoot/DownPanel" unique_id=1768514046]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/DownPanel/Buttons" unique_id=1416254591]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer" unique_id=2001458344]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-text = "Loop"
-script = ExtResource("3_7ykc4")
-
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot/DownPanel/Buttons" unique_id=1226876305]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer2" unique_id=648229110]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-text = "Tutorial"
-
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot/DownPanel/Buttons" unique_id=1583419901]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3" unique_id=1952506162]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-text = "lever"
-script = ExtResource("6_rt2n2")
-
-[node name="LeftPanel" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1685485273]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.19800001
-anchor_bottom = 0.78700006
-offset_right = -0.4400177
-offset_bottom = 0.023925781
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RightPanel" type="PanelContainer" parent="CanvasLayer/UIRoot" unique_id=1681741021]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.86100006
-anchor_right = 0.9990001
-anchor_bottom = 0.78700006
-offset_left = 0.9199219
-offset_right = 0.94384766
-offset_bottom = 0.023925781
-grow_horizontal = 2
-grow_vertical = 2
+toggle_button_path = NodePath("../MarginContainer/Button")
 
 [node name="Tutorial" type="Panel" parent="CanvasLayer/UIRoot" unique_id=855282225]
 visible = false
@@ -379,7 +301,6 @@ offset_right = 1104.0
 offset_bottom = 566.0
 script = ExtResource("15_01n6w")
 hidden_padding = 370.0
-bind_target_path = NodePath("../RightPanel")
 
 [node name="QuestLogic" type="Node" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1585092825]
 unique_name_in_owner = true
@@ -513,8 +434,59 @@ text = "Time: 30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer/Button" to="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer/Button" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3/Button" to="CanvasLayer/UIRoot/DownPanel/Buttons/MarginContainer3/Button" method="_on_button_up"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1416254591]
+layout_mode = 0
+offset_left = 414.0
+offset_top = 565.52
+offset_right = 562.0
+offset_bottom = 719.52
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/MarginContainer" unique_id=2001458344]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+text = "Loop"
+script = ExtResource("3_7ykc4")
+loupe_overlay_path = NodePath("../../LoupeOverlay")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1226876305]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 565.52
+offset_right = 714.0
+offset_bottom = 719.52
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/MarginContainer2" unique_id=648229110]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+text = "Tutorial"
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1583419901]
+layout_mode = 0
+offset_left = 718.0
+offset_top = 565.52
+offset_right = 866.0
+offset_bottom = 719.52
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/MarginContainer3" unique_id=1952506162]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+text = "lever"
+script = ExtResource("6_rt2n2")
+
 [connection signal="button_up" from="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer/Close Button" to="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer/Close Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer/Button" to="CanvasLayer/UIRoot/MarginContainer/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer3/Button" to="CanvasLayer/UIRoot/MarginContainer3/Button" method="_on_button_up"]
