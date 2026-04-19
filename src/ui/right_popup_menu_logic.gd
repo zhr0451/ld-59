@@ -2,6 +2,8 @@ extends Panel
 
 @export var slide_duration := 0.25
 @export var hidden_padding := 24.0
+@export_node_path("Control") var bind_target_path: NodePath
+@export var bind_gap := 0.0
 
 var is_open := false
 var slide_tween: Tween
@@ -15,20 +17,20 @@ var hidden_right := 0.0
 
 func _ready() -> void:
 	await get_tree().process_frame
+	_refresh_layout_from_target()
 
-	# текущее положение (видимое)
 	shown_left = offset_left
 	shown_right = offset_right
 
 	var shift := size.x + hidden_padding
 
-	# скрытое положение (сдвиг вправо)
 	hidden_left = shown_left + shift
 	hidden_right = shown_right + shift
 
-	# стартуем скрытой
 	offset_left = hidden_left
 	offset_right = hidden_right
+
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
 
 
 func set_open(value: bool) -> void:
@@ -53,3 +55,36 @@ func set_open(value: bool) -> void:
 
 func toggle_open() -> void:
 	set_open(!is_open)
+
+
+func _refresh_layout_from_target() -> void:
+	var bind_target := get_node_or_null(bind_target_path) as Control
+	if bind_target == null:
+		return
+
+	global_position = Vector2(
+		bind_target.global_position.x - size.x - bind_gap,
+		global_position.y
+	)
+
+
+func _on_viewport_size_changed() -> void:
+	call_deferred("_recalculate_positions_after_resize")
+
+
+func _recalculate_positions_after_resize() -> void:
+	_refresh_layout_from_target()
+
+	shown_left = offset_left
+	shown_right = offset_right
+
+	var shift := size.x + hidden_padding
+	hidden_left = shown_left + shift
+	hidden_right = shown_right + shift
+
+	if is_open:
+		offset_left = shown_left
+		offset_right = shown_right
+	else:
+		offset_left = hidden_left
+		offset_right = hidden_right

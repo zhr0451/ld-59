@@ -360,6 +360,7 @@ offset_right = 1104.0
 offset_bottom = 566.0
 script = ExtResource("15_01n6w")
 hidden_padding = 370.0
+bind_target_path = NodePath("../RightPanel")
 
 [node name="QuestLogic" type="Node" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1585092825]
 unique_name_in_owner = true
