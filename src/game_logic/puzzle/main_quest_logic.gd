@@ -1,6 +1,7 @@
 extends Node
 
-var counter: Counters = preload("uid://cs5lr50tom8xo")
+var counter = preload("uid://cs5lr50tom8xo")
+
 
 @onready var quest_panel: Panel = %QuestPanel
 @onready var teleport_panel: Panel = %TeleportPanel
