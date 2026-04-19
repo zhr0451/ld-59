@@ -8,7 +8,7 @@ const GOOD_ENDING = preload("uid://be3ux7u1sf57l")
 
 @export_node_path("Node2D") var map_path: NodePath = NodePath("../WorldRoot/Map")
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../LocationCamera")
-@export var screen_margin := Vector2(400.0, 400.0)
+@export var screen_margin := Vector2(600.0, 600.0)
 
 var counter = preload("uid://cs5lr50tom8xo")
 var final: bool
