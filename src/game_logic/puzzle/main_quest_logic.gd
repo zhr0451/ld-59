@@ -1,13 +1,19 @@
 extends Node
 
+const BAD_ENDING = preload("res://scenes/endings/bad_ending.tscn")
+
 var counter = preload("uid://cs5lr50tom8xo")
 
 @export var base_tasks_required := 1
 @export var max_tasks_required := 6
 @export var attempts_per_difficulty_step := 2
+@export var initial_timer_seconds := 30.0
+@export var solved_task_time_bonus := 15.0
+@export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
 
 @onready var quest_panel: Panel = %QuestPanel
 @onready var teleport_panel: Panel = %TeleportPanel
+@onready var timer_label: Label = get_node_or_null(timer_label_path) as Label
 @onready var title_label: Label = $"../Panel/MarginContainer/VBoxContainer/TitleLabel"
 @onready var problem_label: Label = $"../Panel/MarginContainer/VBoxContainer/ProblemLabel"
 @onready var result_label: Label = $"../Panel/MarginContainer/VBoxContainer/ResultLabel"
@@ -24,6 +30,8 @@ var teleport_attempts := 0
 var tasks_required := 1
 var tasks_solved := 0
 var puzzle_in_progress := false
+var timer_started := false
+var timer_remaining := 0.0
 
 
 func _ready() -> void:
@@ -33,6 +41,19 @@ func _ready() -> void:
 		button.pressed.connect(_on_answer_pressed.bind(button))
 
 	_reset_labels()
+	_reset_timer_label()
+
+
+func _process(delta: float) -> void:
+	if not timer_started:
+		return
+
+	timer_remaining -= delta
+	_update_timer_label()
+
+	if timer_remaining <= 0.0:
+		timer_started = false
+		get_tree().change_scene_to_packed(BAD_ENDING)
 
 
 func start_puzzle(target_name: String) -> void:
@@ -52,21 +73,9 @@ func start_puzzle(target_name: String) -> void:
 
 
 func _generate_task() -> void:
-	var a := randi_range(1, 9)
-	var b := randi_range(1, 9)
-	var operation := randi_range(0, 1)
-
-	if operation == 0:
-		correct_answer = a + b
-		problem_label.text = "Stabilize the route: %d + %d = ?" % [a, b]
-	else:
-		if b > a:
-			var temp := a
-			a = b
-			b = temp
-
-		correct_answer = a - b
-		problem_label.text = "Stabilize the route: %d - %d = ?" % [a, b]
+	var task := _build_task()
+	correct_answer = task.answer
+	problem_label.text = "Stabilize the route: %s = ?" % task.expression
 
 	var answers := _build_answers()
 	answers.shuffle()
@@ -80,6 +89,46 @@ func _generate_task() -> void:
 
 	result_label.text = _get_progress_text()
 	input_locked = false
+
+
+func _build_task() -> Dictionary:
+	var operation := randi_range(0, 3)
+	var a := 0
+	var b := 0
+	var expression := ""
+	var answer := 0
+
+	match operation:
+		0:
+			a = randi_range(1, 20)
+			b = randi_range(1, 20)
+			answer = a + b
+			expression = "%d + %d" % [a, b]
+		1:
+			a = randi_range(1, 20)
+			b = randi_range(1, 20)
+			if b > a:
+				var temp := a
+				a = b
+				b = temp
+
+			answer = a - b
+			expression = "%d - %d" % [a, b]
+		2:
+			a = randi_range(2, 9)
+			b = randi_range(2, 9)
+			answer = a * b
+			expression = "%d x %d" % [a, b]
+		3:
+			b = randi_range(2, 9)
+			answer = randi_range(2, 9)
+			a = b * answer
+			expression = "%d / %d" % [a, b]
+
+	return {
+		"expression": expression,
+		"answer": answer,
+	}
 
 
 func _build_answers() -> Array[int]:
@@ -110,6 +159,7 @@ func _on_answer_pressed(button: Button) -> void:
 	var is_correct := chosen_answer == correct_answer
 
 	if is_correct:
+		_apply_correct_answer_timer_reward()
 		tasks_solved += 1
 
 		if tasks_solved < tasks_required:
@@ -127,9 +177,12 @@ func _on_answer_pressed(button: Button) -> void:
 		_reset_labels()
 	else:
 		counter.evil += 1
-		result_label.text = "Incorrect. Evil grows stronger."
+		puzzle_in_progress = false
+		tasks_solved = 0
+		result_label.text = "Incorrect. Teleport failed."
 		await get_tree().create_timer(1.0).timeout
-		_generate_task()
+		quest_panel.set_open(false)
+		_reset_labels()
 
 
 func _reset_labels() -> void:
@@ -148,3 +201,26 @@ func _get_tasks_required_for_attempt() -> int:
 	var required := base_tasks_required + difficulty_level
 
 	return mini(required, max_tasks_required)
+
+
+func _apply_correct_answer_timer_reward() -> void:
+	if not timer_started:
+		timer_started = true
+		timer_remaining = initial_timer_seconds
+	else:
+		timer_remaining += solved_task_time_bonus
+
+	_update_timer_label()
+
+
+func _reset_timer_label() -> void:
+	timer_remaining = initial_timer_seconds
+	_update_timer_label()
+
+
+func _update_timer_label() -> void:
+	if timer_label == null:
+		return
+
+	var seconds_left := maxi(ceili(timer_remaining), 0)
+	timer_label.text = "Time: %02d" % seconds_left

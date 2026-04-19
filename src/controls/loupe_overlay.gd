@@ -5,7 +5,7 @@ signal world_focus_changed(world_position: Vector2)
 @export var lens_radius: float = 120.0
 @export var magnification: float = 2.0
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../../../LocationCamera")
-@export_node_path("BaseButton") var toggle_button_path: NodePath = NodePath("DownPanel/Buttons/MarginContainer/Button")
+@export_node_path("BaseButton") var toggle_button_path: NodePath = NodePath("../DownPanel/Buttons/MarginContainer/Button")
 
 @onready var camera: Camera2D = get_node_or_null(camera_path) as Camera2D
 @onready var shader_material: ShaderMaterial = material as ShaderMaterial
