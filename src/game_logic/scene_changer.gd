@@ -9,10 +9,12 @@ const GOOD_ENDING = preload("uid://be3ux7u1sf57l")
 @export_node_path("Node2D") var map_path: NodePath = NodePath("../WorldRoot/Map")
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../LocationCamera")
 @export var screen_margin := Vector2(600.0, 600.0)
+@export var spawn_delay_seconds := 2.0
 
 var counter = preload("uid://cs5lr50tom8xo")
 var final: bool
 var active_character: Area2D = null
+var spawn_request_id := 0
 
 
 func _ready() -> void:
@@ -21,7 +23,7 @@ func _ready() -> void:
 	if map != null:
 		for character in _get_map_characters(map):
 			_set_character_active(character, false)
-	call_deferred("show_random_character")
+	call_deferred("show_random_character", false)
 
 
 func _process(_delta: float) -> void:
@@ -36,7 +38,7 @@ func _process(_delta: float) -> void:
 			get_tree().change_scene_to_packed(BAD_ENDING)
 
 
-func show_random_character() -> void:
+func show_random_character(use_delay := true) -> void:
 	var map := _get_map()
 	if map == null:
 		push_warning("scene_changer.gd: map node not found.")
@@ -51,6 +53,17 @@ func show_random_character() -> void:
 
 	for character in characters:
 		_set_character_active(character, false)
+
+	active_character = null
+	spawn_request_id += 1
+	var current_request_id := spawn_request_id
+
+	if use_delay and spawn_delay_seconds > 0.0:
+		await get_tree().create_timer(spawn_delay_seconds).timeout
+		if current_request_id != spawn_request_id:
+			return
+		if not is_inside_tree() or not is_instance_valid(map):
+			return
 
 	active_character = _pick_next_character(characters, previous_character)
 	active_character.position = _get_spawn_position(map) - _get_character_offset(active_character)

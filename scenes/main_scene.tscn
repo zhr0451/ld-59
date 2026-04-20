@@ -10,11 +10,11 @@
 [ext_resource type="Shader" uid="uid://u2jgbdsy7cqe" path="res://src/controls/loupe_overlay.gdshader" id="4_j4h3n"]
 [ext_resource type="Script" uid="uid://cv8frnsp56xje" path="res://src/game_logic/characters/valentin_petrovich_left_menu.gd" id="5_bcnxi"]
 [ext_resource type="Script" uid="uid://66oskmwptrwq" path="res://src/game_logic/scene_changer.gd" id="6_f7n2c"]
-[ext_resource type="Script" uid="uid://1viu3hx1lrpg" path="res://src/ui/leveler_logic.gd" id="6_rt2n2"]
 [ext_resource type="Texture2D" uid="uid://b3g65cwu6y3hd" path="res://assets/props/left_wall.png" id="7_k6f3i"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
 [ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/left_popup_menu_logic.gd" id="10_e1cbu"]
+[ext_resource type="Texture2D" uid="uid://bma6howp64tn2" path="res://assets/scope/scope.png" id="13_58gk3"]
 [ext_resource type="Texture2D" uid="uid://dd3gax0jqledp" path="res://icon.svg" id="14_01n6w"]
 [ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
 [ext_resource type="Texture2D" uid="uid://bo783s4fqtrox" path="res://assets/props/mirror .png" id="15_58gk3"]
@@ -23,6 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
 [ext_resource type="Texture2D" uid="uid://baiddp5iya6wh" path="res://assets/props/tablefinal.png" id="22_adb74"]
 [ext_resource type="Script" uid="uid://dm4aqm464dwcb" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
+[ext_resource type="Texture2D" uid="uid://5rusyddre0gj" path="res://assets/props/scope.png" id="24_scope"]
+[ext_resource type="Texture2D" uid="uid://dbolal5u0ngrc" path="res://assets/props/scope_active.png" id="25_scope_active"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -135,18 +137,58 @@ texture = ExtResource("22_adb74")
 expand_mode = 1
 stretch_mode = 6
 
+[node name="Button" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=2001458344]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.02109375
+anchor_top = -0.83055556
+anchor_right = 1.2726562
+anchor_bottom = 1.5772569
+texture = ExtResource("24_scope")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("3_7ykc4")
+inactive_texture = ExtResource("24_scope")
+active_texture = ExtResource("25_scope_active")
+
+[node name="ClickArea" type="Control" parent="CanvasLayer/UIRoot/Button" unique_id=715016475]
+layout_mode = 1
+anchor_left = 0.27100003
+anchor_top = 0.625
+anchor_right = 0.46500003
+anchor_bottom = 0.68600005
+offset_left = -0.7760315
+offset_top = 0.484375
+offset_right = -0.040039063
+offset_bottom = 0.70617676
+
 [node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
 visible = false
 material = SubResource("ShaderMaterial_h7t0g")
 custom_minimum_size = Vector2(240, 240)
-layout_mode = 0
-offset_left = -253.0
-offset_top = -32.0
-offset_right = -13.0
-offset_bottom = 208.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.19800001
+anchor_top = -0.044000003
+anchor_right = -0.010000001
+anchor_bottom = 0.289
+offset_left = 0.4400177
+offset_top = -0.3199978
+offset_right = -0.19999886
+offset_bottom = -0.08000183
 mouse_filter = 2
 script = ExtResource("2_y6x8v")
-toggle_button_path = NodePath("../MarginContainer/Button")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot/LoupeOverlay" unique_id=766402495]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.008
+anchor_bottom = 1.0040001
+offset_right = 0.08000183
+offset_bottom = 0.039978027
+texture = ExtResource("13_58gk3")
+expand_mode = 1
 
 [node name="Tutorial" type="Panel" parent="CanvasLayer/UIRoot" unique_id=855282225]
 visible = false
@@ -290,6 +332,7 @@ script = ExtResource("17_bcnxi")
 
 [node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1670368985]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(524, 420)
 layout_mode = 1
 anchors_preset = -1
@@ -460,58 +503,14 @@ text = "Time: 30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1416254591]
-layout_mode = 0
-offset_left = 407.0
-offset_top = 549.0
-offset_right = 555.0
-offset_bottom = 703.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/MarginContainer" unique_id=2001458344]
+[node name="Button2" type="Button" parent="CanvasLayer/UIRoot" unique_id=648229110]
 custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-text = "Loop"
-script = ExtResource("3_7ykc4")
-loupe_overlay_path = NodePath("../../LoupeOverlay")
-
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1226876305]
 layout_mode = 0
-offset_left = 559.0
-offset_top = 549.0
-offset_right = 707.0
-offset_bottom = 703.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/MarginContainer2" unique_id=648229110]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
+offset_left = 797.0
+offset_top = 474.0
+offset_right = 925.0
+offset_bottom = 608.0
 text = "Tutorial"
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1583419901]
-layout_mode = 0
-offset_left = 711.0
-offset_top = 549.0
-offset_right = 859.0
-offset_bottom = 703.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/MarginContainer3" unique_id=1952506162]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 2
-text = "lever"
-script = ExtResource("6_rt2n2")
-
 [connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer/Button" to="CanvasLayer/UIRoot/MarginContainer/Button" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer3/Button" to="CanvasLayer/UIRoot/MarginContainer3/Button" method="_on_button_up"]
+[connection signal="button_up" from="CanvasLayer/UIRoot/Button2" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]

@@ -1,6 +1,10 @@
 extends Node
 
 const BAD_ENDING = preload("res://scenes/endings/bad_ending.tscn")
+const META_WAS_INPUT_PICKABLE = "quest_was_input_pickable"
+const META_WAS_PROCESSING = "quest_was_processing"
+const META_WAS_PHYSICS_PROCESSING = "quest_was_physics_processing"
+const META_WAS_ANIMATION_PLAYING = "quest_was_animation_playing"
 
 var counter = preload("uid://cs5lr50tom8xo")
 
@@ -23,6 +27,7 @@ var counter = preload("uid://cs5lr50tom8xo")
 var correct_answer_index := -1
 var input_locked := false
 var current_target_name := "Traveler"
+var current_character: Area2D = null
 var puzzle_in_progress := false
 var timer_started := false
 var timer_remaining := 0.0
@@ -50,12 +55,15 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_packed(BAD_ENDING)
 
 
-func start_puzzle(target_name: String, questions_config: CharacterQuestions = null) -> void:
+func start_puzzle(target_name: String, questions_config: CharacterQuestions = null, character: Area2D = null) -> void:
 	if puzzle_in_progress and target_name == current_target_name:
 		return
 
+	_release_current_character()
 	current_target_name = target_name
+	current_character = character
 	puzzle_in_progress = true
+	_set_character_frozen(current_character, true)
 
 	title_label.text = "Question for %s" % current_target_name
 	teleport_panel.set_open(false)
@@ -112,6 +120,7 @@ func _is_valid_question(question: NarrativeQuestion) -> bool:
 func _show_unavailable_question() -> void:
 	correct_answer_index = -1
 	input_locked = true
+	puzzle_in_progress = false
 	problem_label.text = "No narrative question is configured for this character."
 	result_label.text = "Add questions to the character resource."
 
@@ -119,6 +128,7 @@ func _show_unavailable_question() -> void:
 		button.text = "-"
 		button.disabled = true
 
+	_release_current_character()
 	push_warning("main_quest_logic.gd: no valid questions for %s." % current_target_name)
 
 
@@ -142,6 +152,7 @@ func _on_answer_pressed(button: Button) -> void:
 		await get_tree().create_timer(0.8).timeout
 		quest_panel.set_open(false)
 		teleport_panel.set_open(true)
+		_release_current_character()
 		_reset_labels()
 	else:
 		counter.evil += 1
@@ -149,6 +160,7 @@ func _on_answer_pressed(button: Button) -> void:
 		result_label.text = "Incorrect. Teleport failed."
 		await get_tree().create_timer(1.0).timeout
 		quest_panel.set_open(false)
+		_release_current_character()
 		_reset_labels()
 
 
@@ -156,6 +168,61 @@ func _reset_labels() -> void:
 	title_label.text = "Narrative Puzzle"
 	problem_label.text = "Awaiting a traveler."
 	result_label.text = "Use the loupe and select a character."
+
+
+func _release_current_character() -> void:
+	_set_character_frozen(current_character, false)
+	current_character = null
+
+
+func _set_character_frozen(character: Area2D, value: bool) -> void:
+	if character == null:
+		return
+
+	if value:
+		character.set_meta(META_WAS_INPUT_PICKABLE, character.input_pickable)
+		character.input_pickable = false
+	else:
+		if character.has_meta(META_WAS_INPUT_PICKABLE):
+			character.input_pickable = bool(character.get_meta(META_WAS_INPUT_PICKABLE))
+			character.remove_meta(META_WAS_INPUT_PICKABLE)
+
+	_set_process_tree_frozen(character, value)
+	_set_animated_sprites_paused(character, value)
+
+
+func _set_process_tree_frozen(node: Node, value: bool) -> void:
+	if value:
+		node.set_meta(META_WAS_PROCESSING, node.is_processing())
+		node.set_meta(META_WAS_PHYSICS_PROCESSING, node.is_physics_processing())
+		node.set_process(false)
+		node.set_physics_process(false)
+	else:
+		if node.has_meta(META_WAS_PROCESSING):
+			node.set_process(bool(node.get_meta(META_WAS_PROCESSING)))
+			node.remove_meta(META_WAS_PROCESSING)
+		if node.has_meta(META_WAS_PHYSICS_PROCESSING):
+			node.set_physics_process(bool(node.get_meta(META_WAS_PHYSICS_PROCESSING)))
+			node.remove_meta(META_WAS_PHYSICS_PROCESSING)
+
+	for child in node.get_children():
+		_set_process_tree_frozen(child, value)
+
+
+func _set_animated_sprites_paused(node: Node, value: bool) -> void:
+	if node is AnimatedSprite2D:
+		var animated_sprite := node as AnimatedSprite2D
+		if value:
+			animated_sprite.set_meta(META_WAS_ANIMATION_PLAYING, animated_sprite.is_playing())
+			animated_sprite.pause()
+		else:
+			if animated_sprite.has_meta(META_WAS_ANIMATION_PLAYING):
+				if bool(animated_sprite.get_meta(META_WAS_ANIMATION_PLAYING)):
+					animated_sprite.play()
+				animated_sprite.remove_meta(META_WAS_ANIMATION_PLAYING)
+
+	for child in node.get_children():
+		_set_animated_sprites_paused(child, value)
 
 
 func _apply_correct_answer_timer_reward() -> void:
