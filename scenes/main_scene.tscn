@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://beasvjm628eb4" path="res://src/controls/telescope_logic.gd" id="3_7ykc4"]
 [ext_resource type="Shader" uid="uid://u2jgbdsy7cqe" path="res://src/controls/loupe_overlay.gdshader" id="4_j4h3n"]
 [ext_resource type="Script" uid="uid://cv8frnsp56xje" path="res://src/game_logic/characters/valentin_petrovich_left_menu.gd" id="5_bcnxi"]
+[ext_resource type="Script" uid="uid://dteknw1vaj6hy" path="res://src/game_logic/characters/fairy_fire_left_menu.gd" id="6_02d50"]
+[ext_resource type="PackedScene" uid="uid://i0mq0sopb015" path="res://scenes/characters/fairy_fire.tscn" id="6_4bgka"]
 [ext_resource type="Script" uid="uid://66oskmwptrwq" path="res://src/game_logic/scene_changer.gd" id="6_f7n2c"]
 [ext_resource type="Texture2D" uid="uid://b3g65cwu6y3hd" path="res://assets/props/left_wall.png" id="7_k6f3i"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
@@ -28,9 +30,14 @@
 [ext_resource type="Texture2D" uid="uid://5rusyddre0gj" path="res://assets/props/scope.png" id="24_scope"]
 [ext_resource type="Texture2D" uid="uid://dbolal5u0ngrc" path="res://assets/props/scope_active.png" id="25_scope_active"]
 [ext_resource type="Texture2D" uid="uid://b18gpwjbdeimj" path="res://assets/props/truba.png" id="27_k3g67"]
+[ext_resource type="Texture2D" uid="uid://cx2y77ud305ur" path="res://assets/props/good_and_evil.png" id="28_good_evil"]
+[ext_resource type="Texture2D" uid="uid://bi6cqtbpbjf1s" path="res://assets/props/teleport-button.png" id="29_teleport_button"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02d50"]
+size = Vector2(225.73761, 135.86127)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7t0g"]
 shader = ExtResource("4_j4h3n")
@@ -74,6 +81,19 @@ position = Vector2(-1358.7177, -8.027887)
 scale = Vector2(0.9999999, 1)
 shape = SubResource("RectangleShape2D_6u1mn")
 
+[node name="Area2D" type="Area2D" parent="WorldRoot/Map" unique_id=495661995]
+position = Vector2(-1952.2135, -6.27063)
+script = ExtResource("6_02d50")
+
+[node name="FairyFire" parent="WorldRoot/Map/Area2D" unique_id=80381251 instance=ExtResource("6_4bgka")]
+position = Vector2(0.0001912117, -2.9563904e-05)
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldRoot/Map/Area2D" unique_id=1729356890]
+position = Vector2(0.00012207031, 0)
+scale = Vector2(0.99999946, 0.99999905)
+shape = SubResource("RectangleShape2D_02d50")
+
 [node name="Events" type="Node2D" parent="WorldRoot" unique_id=1802516773]
 
 [node name="LocationCamera" type="Camera2D" parent="." unique_id=651496615]
@@ -109,6 +129,62 @@ mouse_filter = 2
 texture = ExtResource("7_k6f3i")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="Counters" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=1753977379]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85800004
+anchor_right = 1.0
+anchor_bottom = 0.14
+offset_left = -234.23999
+offset_top = 34.0
+offset_right = -98.85144
+offset_bottom = 109.2
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("28_good_evil")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("9_c1pb6")
+
+[node name="Good" type="Label" parent="CanvasLayer/UIRoot/Counters" unique_id=2107815132]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.59900004
+anchor_top = 0.165
+anchor_right = 0.68500006
+anchor_bottom = 0.323
+offset_left = 0.028015137
+offset_top = -0.040000916
+offset_right = -0.015472412
+offset_bottom = -0.08800125
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Evil" type="Label" parent="CanvasLayer/UIRoot/Counters" unique_id=1854768296]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.605
+anchor_top = 0.551
+anchor_right = 0.67200005
+anchor_bottom = 0.703
+offset_left = 0.12513733
+offset_top = 0.024002075
+offset_right = -0.04107666
+offset_bottom = -0.04800415
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RightWall" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=397688501]
 layout_mode = 1
@@ -456,66 +532,33 @@ scale = Vector2(0.18981484, 0.18981484)
 sprite_frames = ExtResource("2_valve")
 animation = &"left"
 
-[node name="TeleportPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=347741597]
+[node name="TeleportPanel" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=347741597]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.85800004
-anchor_right = 1.001
+anchor_left = 0.81600004
+anchor_right = 0.95900005
 anchor_bottom = 1.001
-offset_left = -0.23999023
+offset_left = -0.48010254
 offset_top = -1.0
-offset_right = -0.2800293
+offset_right = -0.52001953
 offset_bottom = 0.27996826
+mouse_filter = 2
+texture = ExtResource("29_teleport_button")
+expand_mode = 1
+stretch_mode = 5
 script = ExtResource("15_01n6w")
-hidden_padding = 40.0
+hidden_padding = 60.0
 
 [node name="Button" type="Button" parent="CanvasLayer/UIRoot/TeleportPanel" unique_id=2085511164]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.15100001
-anchor_top = 0.342
-anchor_right = 0.841
-anchor_bottom = 0.572
-offset_left = -0.026000977
-offset_top = 0.12199402
-offset_right = 0.033996582
-offset_bottom = 0.051986694
-text = "Teleport"
-script = ExtResource("17_bcnxi")
-
-[node name="Counters" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1753977379]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.85800004
-anchor_right = 1.0
-anchor_bottom = 0.14
-offset_left = -0.23999023
-offset_bottom = 0.19999695
-script = ExtResource("9_c1pb6")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Counters" unique_id=316029579]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIRoot/Counters/MarginContainer" unique_id=2074876555]
-layout_mode = 2
-
-[node name="Good" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=2107815132]
-layout_mode = 2
-text = "Good: "
-
-[node name="Evil" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=1854768296]
-layout_mode = 2
-text = "Evil: "
+flat = true
+script = ExtResource("17_bcnxi")
 
 [node name="TimerPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1323233606]
 layout_mode = 1

@@ -1,4 +1,4 @@
-extends Panel
+extends Control
 
 @export var slide_duration := 0.25
 @export var hidden_padding := 24.0

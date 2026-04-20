@@ -13,7 +13,7 @@ var counter = preload("uid://cs5lr50tom8xo")
 @export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
 
 @onready var quest_panel: Panel = %QuestPanel
-@onready var teleport_panel: Panel = %TeleportPanel
+@onready var teleport_panel: Control = %TeleportPanel
 @onready var scene_changer: Node = %SceneChanger
 @onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
 @onready var timer_label: Label = get_node_or_null(timer_label_path) as Label

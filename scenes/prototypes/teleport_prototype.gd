@@ -1,6 +1,6 @@
 extends Button
 
-@onready var teleport_panel: Panel = %TeleportPanel
+@onready var teleport_panel: Control = %TeleportPanel
 @onready var pop_up_panel = $"../../PopUpPanel"
 @onready var scene_changer: Node = %SceneChanger
 
