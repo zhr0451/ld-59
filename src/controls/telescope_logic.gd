@@ -9,6 +9,7 @@ extends TextureRect
 @onready var click_area: Control = get_node_or_null(click_area_path) as Control
 
 var button_pressed := false
+var is_hovered := false
 
 
 func _ready() -> void:
@@ -25,10 +26,14 @@ func _gui_input(event: InputEvent) -> void:
 func _setup_click_area() -> void:
 	if click_area == null:
 		mouse_filter = Control.MOUSE_FILTER_STOP
+		mouse_entered.connect(_on_hover_started)
+		mouse_exited.connect(_on_hover_ended)
 		return
 
 	click_area.mouse_filter = Control.MOUSE_FILTER_STOP
 	click_area.gui_input.connect(_on_click_area_gui_input)
+	click_area.mouse_entered.connect(_on_hover_started)
+	click_area.mouse_exited.connect(_on_hover_ended)
 
 
 func _on_click_area_gui_input(event: InputEvent) -> void:
@@ -59,7 +64,17 @@ func _apply_loupe_state() -> void:
 
 
 func _update_texture() -> void:
-	if button_pressed and active_texture != null:
+	if (button_pressed or is_hovered) and active_texture != null:
 		texture = active_texture
 	elif inactive_texture != null:
 		texture = inactive_texture
+
+
+func _on_hover_started() -> void:
+	is_hovered = true
+	_update_texture()
+
+
+func _on_hover_ended() -> void:
+	is_hovered = false
+	_update_texture()

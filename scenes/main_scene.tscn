@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b0qf5wjylvsgc" path="res://assets/props/background .png" id="1_adb74"]
 [ext_resource type="Script" uid="uid://di4mfv62h22uq" path="res://src/controls/viewport_controller.gd" id="1_pw63i"]
 [ext_resource type="PackedScene" uid="uid://c1dyi4jdbh8jf" path="res://scenes/characters/gnome_gome.tscn" id="2_si52b"]
+[ext_resource type="SpriteFrames" uid="uid://bgbi7c0kbcps4" path="res://assets/animations/valve/valve.tres" id="2_valve"]
 [ext_resource type="Script" uid="uid://cjcajwpgwgujd" path="res://src/controls/loupe_overlay.gd" id="2_y6x8v"]
 [ext_resource type="PackedScene" uid="uid://b5cvyrfwh7s2p" path="res://scenes/characters/valentin_petrovich.tscn" id="3_01n6w"]
 [ext_resource type="Script" uid="uid://gbjdeqynm6wf" path="res://src/game_logic/characters/gnome_gome_left_menu.gd" id="3_6u1mn"]
@@ -14,10 +15,11 @@
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
 [ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/left_popup_menu_logic.gd" id="10_e1cbu"]
-[ext_resource type="Texture2D" uid="uid://bma6howp64tn2" path="res://assets/scope/scope.png" id="13_58gk3"]
+[ext_resource type="Script" uid="uid://bo5e6tlr2agib" path="res://src/controls/valve_ui_logic.gd" id="11_valve_logic"]
 [ext_resource type="Texture2D" uid="uid://dd3gax0jqledp" path="res://icon.svg" id="14_01n6w"]
 [ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
 [ext_resource type="Texture2D" uid="uid://bo783s4fqtrox" path="res://assets/props/mirror .png" id="15_58gk3"]
+[ext_resource type="Texture2D" uid="uid://cfifpd6qrrtln" path="res://assets/props/lupamax.png" id="16_k67gn"]
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
@@ -168,7 +170,6 @@ offset_right = -0.040039063
 offset_bottom = 0.70617676
 
 [node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
-visible = false
 material = SubResource("ShaderMaterial_h7t0g")
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 1
@@ -191,7 +192,7 @@ anchor_right = 1.008
 anchor_bottom = 1.0040001
 offset_right = 0.08000183
 offset_bottom = 0.039978027
-texture = ExtResource("13_58gk3")
+texture = ExtResource("16_k67gn")
 expand_mode = 1
 
 [node name="Tutorial" type="Panel" parent="CanvasLayer/UIRoot" unique_id=855282225]
@@ -514,14 +515,27 @@ text = "Time: 30"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button2" type="Button" parent="CanvasLayer/UIRoot" unique_id=648229110]
+[node name="Button2" type="Control" parent="CanvasLayer/UIRoot" unique_id=648229110]
 custom_minimum_size = Vector2(128, 128)
-layout_mode = 0
-offset_left = 1125.0
-offset_top = 439.0
-offset_right = 1253.0
-offset_bottom = 573.0
-text = "Tutorial"
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -155.0
+offset_top = -290.0
+offset_right = -27.0
+offset_bottom = -132.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("11_valve_logic")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/UIRoot/Button2" unique_id=2010984916]
+position = Vector2(67.000015, 110.00003)
+scale = Vector2(0.18981484, 0.18981484)
+sprite_frames = ExtResource("2_valve")
+animation = &"left"
 
 [connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]
-[connection signal="button_up" from="CanvasLayer/UIRoot/Button2" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]

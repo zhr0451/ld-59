@@ -6,6 +6,8 @@ extends Node
 const BAD_ENDING = preload("uid://c5ryjt2i58n1h")
 const GOOD_ENDING = preload("uid://be3ux7u1sf57l")
 const PORTAL_FRAMES = preload("res://assets/animations/portal/portal.tres")
+const BAD_PORTAL_FRAMES = preload("res://assets/animations/portal/portal_bad.tres")
+const BAD_PORTAL_RAW_DIR = "res://assets/animations/portal/portal_bad_raw"
 
 @export_node_path("Node2D") var map_path: NodePath = NodePath("../WorldRoot/Map")
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../LocationCamera")
@@ -13,12 +15,15 @@ const PORTAL_FRAMES = preload("res://assets/animations/portal/portal.tres")
 @export var spawn_delay_seconds := 2.0
 @export var portal_duration_seconds := 1.2
 @export var portal_scale := Vector2(0.35, 0.35)
-@export var portal_animation_name := "portal"
+@export var portal_animation_name: StringName = &"portal"
+@export var bad_portal_animation_name: StringName = &"portal"
+@export var bad_portal_speed := 25.0
 
 var counter = preload("uid://cs5lr50tom8xo")
 var final: bool
 var active_character: Area2D = null
 var spawn_request_id := 0
+var cached_bad_portal_frames: SpriteFrames = null
 
 
 func _ready() -> void:
@@ -43,6 +48,18 @@ func _process(_delta: float) -> void:
 
 
 func show_random_character(use_delay := true) -> void:
+	_transition_to_random_character(active_character, PORTAL_FRAMES, portal_animation_name, use_delay)
+
+
+func show_failed_character(character: Area2D = null, use_delay := true) -> void:
+	var failed_character := character
+	if failed_character == null:
+		failed_character = active_character
+
+	_transition_to_random_character(failed_character, _get_bad_portal_frames(), bad_portal_animation_name, use_delay)
+
+
+func _transition_to_random_character(previous_character: Area2D, portal_frames: SpriteFrames, animation_name: StringName, use_delay: bool) -> void:
 	var map := _get_map()
 	if map == null:
 		push_warning("scene_changer.gd: map node not found.")
@@ -53,8 +70,7 @@ func show_random_character(use_delay := true) -> void:
 		push_warning("scene_changer.gd: no Area2D characters found under map.")
 		return
 
-	var previous_character := active_character
-	_spawn_portal_for_character(map, previous_character)
+	_spawn_portal_for_character(map, previous_character, portal_frames, animation_name)
 
 	for character in characters:
 		_set_character_active(character, false)
@@ -75,14 +91,22 @@ func show_random_character(use_delay := true) -> void:
 	_set_character_active(active_character, true)
 
 
-func _spawn_portal_for_character(map: Node2D, character: Area2D) -> void:
+func _spawn_portal_for_character(map: Node2D, character: Area2D, portal_frames: SpriteFrames, animation_name: StringName) -> void:
 	if character == null:
+		return
+	if portal_frames == null:
+		push_warning("scene_changer.gd: portal frames resource is not configured.")
+		return
+
+	var resolved_animation_name := _get_portal_animation_name(portal_frames, animation_name)
+	if resolved_animation_name == &"":
+		push_warning("scene_changer.gd: portal frames resource has no animations.")
 		return
 
 	var portal := AnimatedSprite2D.new()
 	portal.name = "TeleportPortal"
-	portal.sprite_frames = PORTAL_FRAMES
-	portal.animation = portal_animation_name
+	portal.sprite_frames = portal_frames
+	portal.animation = resolved_animation_name
 	portal.scale = portal_scale
 	portal.z_index = 100
 	portal.position = character.position + _get_character_offset(character)
@@ -90,6 +114,49 @@ func _spawn_portal_for_character(map: Node2D, character: Area2D) -> void:
 	map.add_child(portal)
 	portal.play()
 	_free_portal_after_delay(portal)
+
+
+func _get_portal_animation_name(portal_frames: SpriteFrames, animation_name: StringName) -> StringName:
+	if portal_frames.has_animation(animation_name) and portal_frames.get_frame_count(animation_name) > 0:
+		return animation_name
+
+	var animation_names := portal_frames.get_animation_names()
+	for portal_animation_name_candidate in animation_names:
+		var candidate := StringName(portal_animation_name_candidate)
+		if portal_frames.get_frame_count(candidate) > 0:
+			return candidate
+
+	return &""
+
+
+func _get_bad_portal_frames() -> SpriteFrames:
+	if _get_portal_animation_name(BAD_PORTAL_FRAMES, bad_portal_animation_name) != &"":
+		return BAD_PORTAL_FRAMES
+	if cached_bad_portal_frames != null:
+		return cached_bad_portal_frames
+
+	var frames := SpriteFrames.new()
+	frames.add_animation(bad_portal_animation_name)
+	frames.set_animation_loop(bad_portal_animation_name, true)
+	frames.set_animation_speed(bad_portal_animation_name, bad_portal_speed)
+
+	var file_names := DirAccess.get_files_at(BAD_PORTAL_RAW_DIR)
+	file_names.sort()
+
+	for file_name in file_names:
+		if file_name.get_extension().to_lower() != "png":
+			continue
+
+		var texture := load("%s/%s" % [BAD_PORTAL_RAW_DIR, file_name]) as Texture2D
+		if texture != null:
+			frames.add_frame(bad_portal_animation_name, texture)
+
+	if frames.get_frame_count(bad_portal_animation_name) == 0:
+		push_warning("scene_changer.gd: portal_bad.tres is empty and no fallback raw frames were loaded.")
+		return BAD_PORTAL_FRAMES
+
+	cached_bad_portal_frames = frames
+	return cached_bad_portal_frames
 
 
 func _free_portal_after_delay(portal: AnimatedSprite2D) -> void:

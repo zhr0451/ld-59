@@ -14,6 +14,8 @@ var counter = preload("uid://cs5lr50tom8xo")
 
 @onready var quest_panel: Panel = %QuestPanel
 @onready var teleport_panel: Panel = %TeleportPanel
+@onready var scene_changer: Node = %SceneChanger
+@onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
 @onready var timer_label: Label = get_node_or_null(timer_label_path) as Label
 @onready var title_label: Label = $"../Panel/MarginContainer/VBoxContainer/TitleLabel"
 @onready var problem_label: Label = $"../Panel/MarginContainer/VBoxContainer/ProblemLabel"
@@ -159,8 +161,11 @@ func _on_answer_pressed(button: Button) -> void:
 		puzzle_in_progress = false
 		result_label.text = "Incorrect. Teleport failed."
 		await get_tree().create_timer(1.0).timeout
+		var failed_character := current_character
 		quest_panel.set_open(false)
+		_hide_pop_up_panel()
 		_release_current_character()
+		_show_failed_character_portal(failed_character)
 		_reset_labels()
 
 
@@ -173,6 +178,16 @@ func _reset_labels() -> void:
 func _release_current_character() -> void:
 	_set_character_frozen(current_character, false)
 	current_character = null
+
+
+func _show_failed_character_portal(character: Area2D) -> void:
+	if scene_changer != null and scene_changer.has_method("show_failed_character"):
+		scene_changer.call("show_failed_character", character)
+
+
+func _hide_pop_up_panel() -> void:
+	if pop_up_panel != null and pop_up_panel.has_method("set_open"):
+		pop_up_panel.call("set_open", false)
 
 
 func _set_character_frozen(character: Area2D, value: bool) -> void:
