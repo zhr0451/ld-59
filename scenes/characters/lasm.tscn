@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b3ho15kti568d"]
+
+[ext_resource type="SpriteFrames" uid="uid://fepbb1u8tnn3" path="res://assets/animations/lasm/lasm.tres" id="1_syadv"]
+[ext_resource type="Script" uid="uid://dhk4xti56cq1r" path="res://src/game_logic/animator.gd" id="2_hlhwf"]
+
+[node name="Lasm" type="Node2D" unique_id=1890961152]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2032912931]
+sprite_frames = ExtResource("1_syadv")
+animation = &"idle"
+frame = 55
+frame_progress = 0.4466802
+script = ExtResource("2_hlhwf")

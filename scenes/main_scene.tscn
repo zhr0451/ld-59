@@ -15,6 +15,8 @@
 [ext_resource type="Script" uid="uid://66oskmwptrwq" path="res://src/game_logic/scene_changer.gd" id="6_f7n2c"]
 [ext_resource type="Texture2D" uid="uid://b3g65cwu6y3hd" path="res://assets/props/left_wall.png" id="7_k6f3i"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
+[ext_resource type="PackedScene" uid="uid://b3ho15kti568d" path="res://scenes/characters/lasm.tscn" id="8_iav3h"]
+[ext_resource type="Script" uid="uid://1r50n25yklmd" path="res://src/game_logic/characters/lasm_left_menu_logic.gd" id="8_womr8"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
 [ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/left_popup_menu_logic.gd" id="10_e1cbu"]
 [ext_resource type="Script" uid="uid://bo5e6tlr2agib" path="res://src/controls/valve_ui_logic.gd" id="11_valve_logic"]
@@ -40,6 +42,9 @@ size = Vector2(194.67593, 142.45996)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02d50"]
 size = Vector2(225.73761, 135.86127)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_womr8"]
+size = Vector2(280.08212, 133.77054)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h7t0g"]
 shader = ExtResource("4_j4h3n")
@@ -83,18 +88,29 @@ position = Vector2(-1358.7177, -8.027887)
 scale = Vector2(0.9999999, 1)
 shape = SubResource("RectangleShape2D_6u1mn")
 
-[node name="Area2D" type="Area2D" parent="WorldRoot/Map" unique_id=495661995]
+[node name="FairyArea2D" type="Area2D" parent="WorldRoot/Map" unique_id=495661995]
 position = Vector2(-1952.2135, -6.27063)
 script = ExtResource("6_02d50")
 
-[node name="FairyFire" parent="WorldRoot/Map/Area2D" unique_id=80381251 instance=ExtResource("6_4bgka")]
+[node name="FairyFire" parent="WorldRoot/Map/FairyArea2D" unique_id=80381251 instance=ExtResource("6_4bgka")]
 position = Vector2(0.0001912117, -2.9563904e-05)
 scale = Vector2(0.2, 0.2)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldRoot/Map/Area2D" unique_id=1729356890]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldRoot/Map/FairyArea2D" unique_id=1729356890]
 position = Vector2(0.00012207031, 0)
 scale = Vector2(0.99999946, 0.99999905)
 shape = SubResource("RectangleShape2D_02d50")
+
+[node name="LasmArea2D" type="Area2D" parent="WorldRoot/Map" unique_id=1664906245]
+position = Vector2(-1103.6067, -6.270472)
+script = ExtResource("8_womr8")
+
+[node name="Lasm" parent="WorldRoot/Map/LasmArea2D" unique_id=1890961152 instance=ExtResource("8_iav3h")]
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldRoot/Map/LasmArea2D" unique_id=2022864241]
+scale = Vector2(0.99999964, 0.9999993)
+shape = SubResource("RectangleShape2D_womr8")
 
 [node name="Events" type="Node2D" parent="WorldRoot" unique_id=1802516773]
 
@@ -356,6 +372,7 @@ offset_left = 1.7522392
 offset_top = -8.63559
 offset_right = -0.3553772
 offset_bottom = -0.37286377
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -389,6 +406,7 @@ offset_left = 0.6097183
 offset_top = 0.4515381
 offset_right = -0.33746338
 offset_bottom = -0.5083618
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Message"
 horizontal_alignment = 1
 autowrap_mode = 3
@@ -645,8 +663,7 @@ offset_top = 1.5735626e-05
 offset_right = 0.00035858154
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 24
 text = "Time: 30"
