@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cfifpd6qrrtln" path="res://assets/props/lupamax.png" id="16_k67gn"]
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
+[ext_resource type="FontFile" uid="uid://bjkm3mc1an7ev" path="res://assets/fonts/Spaghetti Cyrillic/Spaghetti Cyrillic.otf" id="17_jix7a"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
 [ext_resource type="Texture2D" uid="uid://baiddp5iya6wh" path="res://assets/props/tablefinal.png" id="22_adb74"]
 [ext_resource type="Script" uid="uid://dong3r02pt8ru" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
@@ -39,6 +40,10 @@
 [ext_resource type="Texture2D" uid="uid://ct2ambum7uqb8" path="res://assets/props/svitok.png" id="30_svitok"]
 [ext_resource type="Texture2D" uid="uid://dj6ubmes24y7x" path="res://assets/props/quest.png" id="31_answer_bg"]
 [ext_resource type="Script" uid="uid://do87buyrh4g8a" path="res://src/ui/outcome_banner_logic.gd" id="32_outcome"]
+[ext_resource type="Script" uid="uid://hsedy3yi3di0" path="res://src/ui/guide_toggle_logic.gd" id="33_guide_logic"]
+[ext_resource type="Texture2D" uid="uid://f51pf51siyg8" path="res://assets/ui/guide.png" id="34_guide"]
+[ext_resource type="Texture2D" uid="uid://bphqn8wgv8fq3" path="res://assets/ui/guide-activate.png" id="35_guide_active"]
+[ext_resource type="Texture2D" uid="uid://m5i3qj5kj3vt" path="res://assets/ui/close.png" id="36_close"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -192,14 +197,14 @@ anchor_left = 0.59900004
 anchor_top = 0.165
 anchor_right = 0.68500006
 anchor_bottom = 0.323
-offset_left = 0.028015137
-offset_top = -0.040000916
-offset_right = -0.015472412
-offset_bottom = -0.08800125
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+offset_left = -1.9720001
+offset_top = -8.040001
+offset_right = -2.0154877
+offset_bottom = -2.8480034
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 27
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -211,14 +216,14 @@ anchor_left = 0.605
 anchor_top = 0.551
 anchor_right = 0.67200005
 anchor_bottom = 0.703
-offset_left = 0.12513733
-offset_top = 0.024002075
-offset_right = -0.04107666
-offset_bottom = -0.04800415
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+offset_left = 0.12512207
+offset_top = -7.975998
+offset_right = -0.04109192
+offset_bottom = -1.7280045
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 27
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -252,6 +257,38 @@ mouse_filter = 2
 texture = ExtResource("22_adb74")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot/TextureRect" unique_id=243406889]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.12
+anchor_right = 0.78
+anchor_bottom = 0.28
+offset_left = -899.1
+offset_top = -299.72
+offset_right = 285.26086
+offset_bottom = 588.32
+mouse_filter = 2
+texture = ExtResource("35_guide_active")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ClickArea" type="Control" parent="CanvasLayer/UIRoot/TextureRect/TextureRect" unique_id=1868736694]
+layout_mode = 1
+anchor_left = 0.381
+anchor_top = 0.56700003
+anchor_right = 0.54800004
+anchor_bottom = 0.693
+offset_left = -0.34735107
+offset_top = -0.1550293
+offset_right = -0.27648926
+offset_bottom = 0.25500488
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("33_guide_logic")
+guide_texture = ExtResource("34_guide")
+active_texture = ExtResource("35_guide_active")
 
 [node name="Button" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=2001458344]
 custom_minimum_size = Vector2(128, 128)
@@ -392,6 +429,8 @@ offset_top = -8.63559
 offset_right = -0.3553772
 offset_bottom = -0.37286377
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 36
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -403,11 +442,11 @@ anchors_preset = -1
 anchor_left = 0.029000001
 anchor_top = 0.39900002
 anchor_right = 0.19000001
-anchor_bottom = 0.669
+anchor_bottom = 0.59400004
 offset_left = -0.7113228
 offset_top = -0.12945557
 offset_right = 0.615448
-offset_bottom = 0.14385986
+offset_bottom = -0.5987549
 mouse_filter = 2
 texture = ExtResource("14_01n6w")
 expand_mode = 1
@@ -417,22 +456,23 @@ stretch_mode = 5
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.034
-anchor_top = 0.66400003
-anchor_right = 0.19
-anchor_bottom = 0.795
-offset_left = 0.6097183
-offset_top = 0.4515381
-offset_right = -0.33746338
-offset_bottom = -0.5083618
+anchor_left = 0.021000002
+anchor_top = 0.58900005
+anchor_right = 0.19600001
+anchor_bottom = 0.711
+offset_left = -0.6530323
+offset_top = 0.6184082
+offset_right = -0.4282837
+offset_bottom = -0.08026123
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 30
 text = "Message"
 horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="QuestPanel" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=1670368985]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(786, 630)
 layout_mode = 1
 anchors_preset = 8
@@ -490,15 +530,10 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -14
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 38
 text = "Question text"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ResultLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=2101317685]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Choose the correct answer."
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -532,6 +567,8 @@ offset_bottom = 0.08467102
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 38
 text = "Answer 1"
 flat = true
 autowrap_mode = 3
@@ -566,6 +603,8 @@ offset_bottom = -0.024841309
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 38
 text = "Answer 2"
 flat = true
 autowrap_mode = 3
@@ -600,9 +639,25 @@ offset_bottom = 0.054611206
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("17_jix7a")
+theme_override_font_sizes/font_size = 38
 text = "Answer 3"
 flat = true
 autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1156324952]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.65900004
+anchor_top = 0.079
+anchor_right = 0.69100004
+anchor_bottom = 0.11800001
+offset_left = -0.016174316
+offset_top = -0.19400406
+offset_right = -0.40393066
+offset_bottom = 0.051994324
+texture = ExtResource("36_close")
+expand_mode = 1
 
 [node name="Button2" type="Control" parent="CanvasLayer/UIRoot" unique_id=648229110]
 custom_minimum_size = Vector2(128, 128)
@@ -659,36 +714,6 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 script = ExtResource("17_bcnxi")
-
-[node name="TimerPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1323233606]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -0.45996094
-offset_top = 17.0
-offset_right = 0.45996094
-offset_bottom = 17.040009
-grow_horizontal = 2
-
-[node name="Timer" type="Label" parent="CanvasLayer/UIRoot/TimerPanel" unique_id=1739964339]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -52.765003
-anchor_top = -174.46301
-anchor_right = 53.765003
-anchor_bottom = 675.356
-offset_left = -0.00035858154
-offset_top = 1.5735626e-05
-offset_right = 0.00035858154
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 24
-text = "Time: 30"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="OutcomePanel" type="Control" parent="CanvasLayer/UIRoot" unique_id=2103706472]
 unique_name_in_owner = true

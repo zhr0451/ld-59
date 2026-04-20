@@ -1,6 +1,5 @@
 extends Node
 
-const BAD_ENDING = preload("res://scenes/endings/bad_ending.tscn")
 const META_WAS_INPUT_PICKABLE = "quest_was_input_pickable"
 const META_WAS_PROCESSING = "quest_was_processing"
 const META_WAS_PHYSICS_PROCESSING = "quest_was_physics_processing"
@@ -8,19 +7,15 @@ const META_WAS_ANIMATION_PLAYING = "quest_was_animation_playing"
 
 var counter = preload("uid://cs5lr50tom8xo")
 
-@export var initial_timer_seconds := 60.0
-@export var solved_task_time_bonus := 15.0
-@export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
-
 @onready var quest_panel: Control = %QuestPanel
 @onready var teleport_panel: Control = %TeleportPanel
 @onready var scene_changer: Node = %SceneChanger
 @onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
 @onready var outcome_panel: Node = get_node_or_null("../../OutcomePanel")
-@onready var timer_label: Label = get_node_or_null(timer_label_path) as Label
 @onready var title_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/TitleLabel") as Label
 @onready var problem_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/ProblemLabel") as Label
 @onready var result_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/ResultLabel") as Label
+@onready var close_button: Control = get_node_or_null("../TextureRect") as Control
 @onready var answer_buttons: Array[Button] = [
 	get_node_or_null("../Panel2/AnswerButton1") as Button,
 	get_node_or_null("../Panel3/AnswerButton2") as Button,
@@ -33,9 +28,6 @@ var current_target_name := "Traveler"
 var current_character: Area2D = null
 var current_question: NarrativeQuestion = null
 var puzzle_in_progress := false
-var timer_started := false
-var timer_paused := false
-var timer_remaining := 0.0
 
 
 func _ready() -> void:
@@ -48,26 +40,20 @@ func _ready() -> void:
 
 		button.pressed.connect(_on_answer_pressed.bind(button))
 
+	if close_button != null:
+		close_button.mouse_filter = Control.MOUSE_FILTER_STOP
+		close_button.gui_input.connect(_on_close_button_gui_input)
+	else:
+		push_warning("main_quest_logic.gd: close button TextureRect node not found.")
+
 	_reset_labels()
-	_reset_timer_label()
-
-
-func _process(delta: float) -> void:
-	if not timer_started:
-		return
-	if timer_paused:
-		return
-
-	timer_remaining -= delta
-	_update_timer_label()
-
-	if timer_remaining <= 0.0:
-		timer_started = false
-		get_tree().change_scene_to_packed(BAD_ENDING)
 
 
 func start_puzzle(target_name: String, questions_config: CharacterQuestions = null, character: Area2D = null) -> void:
 	if puzzle_in_progress and target_name == current_target_name:
+		current_character = character
+		_set_character_frozen(current_character, true)
+		_restore_current_question()
 		return
 
 	_release_current_character()
@@ -102,6 +88,27 @@ func _show_random_question(questions_config: CharacterQuestions) -> void:
 		button.disabled = false
 
 	_set_label_text(result_label, "Choose an answer.")
+	input_locked = false
+
+
+func _restore_current_question() -> void:
+	if current_question == null:
+		return
+
+	correct_answer_index = current_question.correct_answer_index
+	_set_label_text(title_label, "Question for %s" % current_target_name)
+	_set_label_text(problem_label, current_question.question_text)
+	_set_label_text(result_label, "Choose an answer.")
+
+	for i in range(answer_buttons.size()):
+		var button := answer_buttons[i]
+		if button == null:
+			continue
+
+		button.text = current_question.answers[i]
+		button.set_meta("answer_index", i)
+		button.disabled = false
+
 	input_locked = false
 
 
@@ -165,19 +172,18 @@ func _on_answer_pressed(button: Button) -> void:
 
 	var chosen_answer_index := int(button.get_meta("answer_index", -1))
 	var is_correct := chosen_answer_index == correct_answer_index
-	_start_timer_if_needed()
 
 	if is_correct:
-		_apply_correct_answer_timer_reward()
 		counter.good += 1
 		puzzle_in_progress = false
-		_set_label_text(result_label, "Correct. Teleport window unlocked.")
+		_set_label_text(result_label, "Correct. Teleport started.")
 		var showed_outcome := await _show_outcome_banner(chosen_answer_index)
 		if not showed_outcome:
 			await get_tree().create_timer(0.8).timeout
 			quest_panel.set_open(false)
-		teleport_panel.set_open(true)
+		_hide_pop_up_panel()
 		_release_current_character()
+		_show_success_character_portal()
 		_reset_labels()
 	else:
 		counter.evil += 1
@@ -194,6 +200,20 @@ func _on_answer_pressed(button: Button) -> void:
 		_reset_labels()
 
 
+func _on_close_button_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		if input_locked:
+			return
+
+		_hide_active_question_window()
+
+
+func _hide_active_question_window() -> void:
+	quest_panel.set_open(false)
+	_hide_pop_up_panel()
+	_release_current_character()
+
+
 func _show_outcome_banner(answer_index: int) -> bool:
 	var banner := _get_banner_for_answer(answer_index)
 	if banner == null:
@@ -203,15 +223,12 @@ func _show_outcome_banner(answer_index: int) -> bool:
 	if not outcome_panel.has_method("show_banner") or not outcome_panel.has_method("wait_until_closed"):
 		return false
 
-	timer_paused = true
 	quest_panel.set_open(false)
 	var was_shown: bool = bool(outcome_panel.call("show_banner", banner))
 	if not was_shown:
-		timer_paused = false
 		return false
 
 	await outcome_panel.call("wait_until_closed")
-	timer_paused = false
 	return true
 
 
@@ -240,6 +257,11 @@ func _set_label_text(label: Label, text: String) -> void:
 func _release_current_character() -> void:
 	_set_character_frozen(current_character, false)
 	current_character = null
+
+
+func _show_success_character_portal() -> void:
+	if scene_changer != null and scene_changer.has_method("show_random_character"):
+		scene_changer.call("show_random_character")
 
 
 func _show_failed_character_portal(character: Area2D) -> void:
@@ -300,31 +322,3 @@ func _set_animated_sprites_paused(node: Node, value: bool) -> void:
 
 	for child in node.get_children():
 		_set_animated_sprites_paused(child, value)
-
-
-func _apply_correct_answer_timer_reward() -> void:
-	timer_remaining += solved_task_time_bonus
-
-	_update_timer_label()
-
-
-func _start_timer_if_needed() -> void:
-	if timer_started:
-		return
-
-	timer_started = true
-	timer_remaining = initial_timer_seconds
-	_update_timer_label()
-
-
-func _reset_timer_label() -> void:
-	timer_remaining = initial_timer_seconds
-	_update_timer_label()
-
-
-func _update_timer_label() -> void:
-	if timer_label == null:
-		return
-
-	var seconds_left := maxi(ceili(timer_remaining), 0)
-	timer_label.text = "Time: %02d" % seconds_left

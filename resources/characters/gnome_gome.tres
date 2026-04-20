@@ -9,7 +9,7 @@
 script = ExtResource("1_4ff8i")
 icon = ExtResource("1_m3h2p")
 sprite = ExtResource("3_238w3")
-name = "Gnome Gome"
-message = "Hi, my name is Gnome Gome"
+name = "Dwarf Gom"
+message = "It's a little gnome with a cartoonishly large hat..."
 questions = ExtResource("3_4ff8i")
 metadata/_custom_type_script = "uid://jsu3gxaymauu"

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="CharacterQuestions" format=3 uid="uid://bvvofkwaidfij"]
+
+[ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_questions"]
+[ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="2_question"]
+[ext_resource type="Texture2D" uid="uid://byfkwobtly3vl" path="res://assets/banners/lasm-wood.png" id="3_lasm_forest"]
+[ext_resource type="Texture2D" uid="uid://rk4aswpqfy61" path="res://assets/banners/lasm-zamok.png" id="4_lasm_castle"]
+[ext_resource type="Texture2D" uid="uid://dj8qbujlu5qek" path="res://assets/banners/lasm-sea.png" id="5_lasm_port"]
+[ext_resource type="Texture2D" uid="uid://b6cjlyx13ome4" path="res://assets/banners/lasm-pystosh.png" id="6_lasm_desert"]
+[ext_resource type="Texture2D" uid="uid://bfrkavw1qghdh" path="res://assets/banners/lasm-dragon.png" id="7_lasm_dragon"]
+
+[sub_resource type="Resource" id="Resource_lasm_1"]
+script = ExtResource("2_question")
+question_text = "Oh, she wants to find friends, she needs to go to a crowded place!"
+answers = Array[String](["Forest of Fairies", "Castle", "Port"])
+correct_answer_index = 1
+answer_banners = Array[Texture2D]([ExtResource("3_lasm_forest"), ExtResource("4_lasm_castle"), ExtResource("5_lasm_port")])
+
+[sub_resource type="Resource" id="Resource_lasm_2"]
+script = ExtResource("2_question")
+question_text = "She said she wants to see a tumbleweed."
+answers = Array[String](["Desert", "The Dragon's Lair", "Port"])
+answer_banners = Array[Texture2D]([ExtResource("6_lasm_desert"), ExtResource("7_lasm_dragon"), ExtResource("5_lasm_port")])
+
+[resource]
+script = ExtResource("1_questions")
+questions = Array[Resource]([SubResource("Resource_lasm_1"), SubResource("Resource_lasm_2")])
+metadata/_custom_type_script = "uid://dhxyto3vvjwjf"

@@ -14,7 +14,7 @@
 4. Открывается `CanvasLayer/UIRoot/QuestPanel`.
 5. Для выбранного персонажа берётся случайный вопрос из его конфига.
 6. Игрок выбирает один из трёх ответов.
-7. Правильный ответ увеличивает `Good` на `+1` и открывает `TeleportPanel`.
+7. Правильный ответ увеличивает `Good` на `+1`, показывает баннер последствия и запускает телепортацию.
 8. Неправильный ответ увеличивает `Evil` на `+1` и закрывает проверку.
 
 ## Основные файлы
@@ -66,6 +66,7 @@ CanvasLayer/UIRoot/QuestPanel
 ```text
 QuestPanel
 |- QuestLogic
+|- TextureRect
 |- Panel
 |  |- MarginContainer
 |     |- VBoxContainer
@@ -79,6 +80,8 @@ QuestPanel
 |- Panel4
    |- AnswerButton3
 ```
+
+`QuestPanel/TextureRect` используется как кнопка закрытия окна вопроса.
 
 `Panel2`, `Panel3`, `Panel4` расположены вертикально. Они не переименованы, потому что `main_quest_logic.gd` использует существующие пути:
 
@@ -204,6 +207,10 @@ quest_logic.start_puzzle(GNOME_GOME.name, GNOME_GOME.questions)
 5. Записывает ответы в `AnswerButton1`, `AnswerButton2`, `AnswerButton3`.
 6. Сохраняет индекс ответа в `button.set_meta("answer_index", i)`.
 
+Если игрок закрывает `QuestPanel` через `QuestPanel/TextureRect`, выбранный вопрос не сбрасывается.
+При повторном открытии этого же персонажа будет восстановлен тот же вопрос и те же варианты ответа.
+Если открывается другой персонаж или текущая проверка уже завершилась, снова используется обычный случайный выбор вопроса.
+
 ## Проверка ответа
 
 При нажатии на кнопку ответа:
@@ -215,18 +222,17 @@ var is_correct := chosen_answer_index == correct_answer_index
 
 Если ответ правильный:
 
-- вызывается таймерная награда;
 - `counter.good += 1`;
-- если у выбранного ответа есть баннер, открывается `CanvasLayer/UIRoot/OutcomePanel`;
 - `QuestPanel` закрывается;
-- `TeleportPanel` открывается.
+- если у выбранного ответа есть баннер, открывается `CanvasLayer/UIRoot/OutcomePanel`;
+- после закрытия баннера запускается телепортация персонажа.
 
 Если ответ неправильный:
 
 - `counter.evil += 1`;
-- если у выбранного ответа есть баннер, открывается `CanvasLayer/UIRoot/OutcomePanel`;
 - `QuestPanel` закрывается;
-- `TeleportPanel` не открывается.
+- если у выбранного ответа есть баннер, открывается `CanvasLayer/UIRoot/OutcomePanel`;
+- после закрытия баннера запускается провал и плохой портал.
 
 `OutcomePanel` не меняет результат проверки. Он только показывает арт последствия и ждёт нажатия `Continue`.
 После закрытия баннера игра продолжает прежнюю ветку успеха или провала.
@@ -304,7 +310,7 @@ quest_logic.start_puzzle(NEW_CHARACTER.name, NEW_CHARACTER.questions)
 - `counter_logic.gd`;
 - `Counters`;
 - `QuestPanel`, если хватает текущего UI;
-- `TeleportPanel`.
+- систему телепортации.
 
 Менять нужно только `.tres` ресурс вопросов и ссылку на него в `.tres` ресурсе персонажа.
 
