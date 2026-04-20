@@ -1,6 +1,7 @@
-extends Panel
+extends Control
 
 @export var fade_duration := 0.15
+@export var panel_size := Vector2(524.0, 420.0)
 
 var is_open := false
 var fade_tween: Tween
@@ -45,14 +46,14 @@ func _center_panel() -> void:
 	anchor_right = 0.5
 	anchor_bottom = 0.5
 
-	var panel_size := size
-	if panel_size.x <= 0.0 or panel_size.y <= 0.0:
-		panel_size = custom_minimum_size
+	var target_size := panel_size
+	if target_size.x <= 0.0 or target_size.y <= 0.0:
+		target_size = custom_minimum_size
 
-	offset_left = -panel_size.x * 0.5
-	offset_top = -panel_size.y * 0.5
-	offset_right = panel_size.x * 0.5
-	offset_bottom = panel_size.y * 0.5
+	offset_left = -target_size.x * 0.5
+	offset_top = -target_size.y * 0.5
+	offset_right = target_size.x * 0.5
+	offset_bottom = target_size.y * 0.5
 
 
 func _hide_after_fade() -> void:

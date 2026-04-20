@@ -26,12 +26,14 @@
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
 [ext_resource type="Texture2D" uid="uid://baiddp5iya6wh" path="res://assets/props/tablefinal.png" id="22_adb74"]
-[ext_resource type="Script" uid="uid://dm4aqm464dwcb" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
+[ext_resource type="Script" uid="uid://dong3r02pt8ru" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
 [ext_resource type="Texture2D" uid="uid://5rusyddre0gj" path="res://assets/props/scope.png" id="24_scope"]
 [ext_resource type="Texture2D" uid="uid://dbolal5u0ngrc" path="res://assets/props/scope_active.png" id="25_scope_active"]
 [ext_resource type="Texture2D" uid="uid://b18gpwjbdeimj" path="res://assets/props/truba.png" id="27_k3g67"]
 [ext_resource type="Texture2D" uid="uid://cx2y77ud305ur" path="res://assets/props/good_and_evil.png" id="28_good_evil"]
 [ext_resource type="Texture2D" uid="uid://bi6cqtbpbjf1s" path="res://assets/props/teleport-button.png" id="29_teleport_button"]
+[ext_resource type="Texture2D" uid="uid://ct2ambum7uqb8" path="res://assets/props/svitok.png" id="30_svitok"]
+[ext_resource type="Texture2D" uid="uid://dj6ubmes24y7x" path="res://assets/props/quest.png" id="31_answer_bg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -391,38 +393,50 @@ text = "Message"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1670368985]
+[node name="QuestPanel" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=1670368985]
 unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(524, 420)
+custom_minimum_size = Vector2(786, 630)
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -262.0
-offset_top = -210.0
-offset_right = 262.0
-offset_bottom = 210.0
+offset_left = -430.0
+offset_top = -362.0
+offset_right = 425.8667
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("30_svitok")
+expand_mode = 1
+stretch_mode = 5
 script = ExtResource("23_qcent")
+panel_size = Vector2(786, 630)
 
 [node name="QuestLogic" type="Node" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1585092825]
 unique_name_in_owner = true
 script = ExtResource("16_qstlg")
 
-[node name="Panel" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1151457975]
+[node name="Panel" type="Control" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1151457975]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.48
-offset_right = 0.00012207031
+anchor_left = 0.29000002
+anchor_top = 0.16000001
+anchor_right = 0.707
+anchor_bottom = 0.35700002
+offset_left = -0.20137024
+offset_top = -1.5258789e-05
+offset_right = -0.09777832
+offset_bottom = -0.017974854
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/QuestPanel/Panel" unique_id=106543735]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -25.937973
+offset_bottom = -18.062027
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 16
@@ -434,14 +448,10 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="TitleLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=626508639]
-layout_mode = 2
-text = "Quest Puzzle"
-horizontal_alignment = 1
-
 [node name="ProblemLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=76897833]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Question text"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -449,60 +459,112 @@ autowrap_mode = 2
 [node name="ResultLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=2101317685]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Choose the correct answer."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Panel2" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1391336009]
+[node name="Panel2" type="TextureRect" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1391336009]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.08
-anchor_top = 0.54
-anchor_right = 0.92
-anchor_bottom = 0.66
+anchor_left = 0.31500003
+anchor_top = 0.344
+anchor_right = 0.688
+anchor_bottom = 0.5
+offset_left = 1.4019775
+offset_top = -133.98401
+offset_right = 1.1636963
+offset_bottom = 102.58121
+mouse_filter = 2
+texture = ExtResource("31_answer_bg")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="AnswerButton1" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel2" unique_id=842406623]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.078
+anchor_top = 0.363
+anchor_right = 0.92200005
+anchor_bottom = 0.632
+offset_left = 0.11800003
+offset_top = -0.08111572
+offset_right = -0.118011475
+offset_bottom = 0.08467102
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Answer 1"
+flat = true
+autowrap_mode = 3
 
-[node name="Panel3" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=984412285]
+[node name="Panel3" type="TextureRect" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=984412285]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.08
-anchor_top = 0.7
-anchor_right = 0.92
-anchor_bottom = 0.82
+anchor_left = 0.34600002
+anchor_top = 0.5
+anchor_right = 0.66200006
+anchor_bottom = 0.637
+offset_left = -126.12988
+offset_top = -108.0
+offset_right = 118.4162
+offset_bottom = 111.53653
+mouse_filter = 2
+texture = ExtResource("31_answer_bg")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="AnswerButton2" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel3" unique_id=1955192354]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.24300002
+anchor_top = 0.36
+anchor_right = 0.757
+anchor_bottom = 0.638
+offset_left = -0.14501953
+offset_top = 0.13330841
+offset_right = 0.14498901
+offset_bottom = -0.024841309
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Answer 2"
+flat = true
+autowrap_mode = 3
 
-[node name="Panel4" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1147281451]
+[node name="Panel4" type="TextureRect" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1147281451]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.08
-anchor_top = 0.86
-anchor_right = 0.92
-anchor_bottom = 0.98
+anchor_left = 0.333
+anchor_top = 0.70400006
+anchor_right = 0.66700006
+anchor_bottom = 0.837
+offset_left = -13.003601
+offset_top = -152.94403
+offset_right = 15.136841
+offset_bottom = 124.39551
+mouse_filter = 2
+texture = ExtResource("31_answer_bg")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="AnswerButton3" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel4" unique_id=30587644]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.076000005
+anchor_top = 0.38300002
+anchor_right = 0.924
+anchor_bottom = 0.63100004
+offset_left = 0.13599777
+offset_top = -0.16519165
+offset_right = -0.13601685
+offset_bottom = 0.054611206
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Answer 3"
+flat = true
+autowrap_mode = 3
 
 [node name="Button2" type="Control" parent="CanvasLayer/UIRoot" unique_id=648229110]
 custom_minimum_size = Vector2(128, 128)

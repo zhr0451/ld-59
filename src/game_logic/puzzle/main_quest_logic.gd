@@ -12,18 +12,18 @@ var counter = preload("uid://cs5lr50tom8xo")
 @export var solved_task_time_bonus := 15.0
 @export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
 
-@onready var quest_panel: Panel = %QuestPanel
+@onready var quest_panel: Control = %QuestPanel
 @onready var teleport_panel: Control = %TeleportPanel
 @onready var scene_changer: Node = %SceneChanger
 @onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
 @onready var timer_label: Label = get_node_or_null(timer_label_path) as Label
-@onready var title_label: Label = $"../Panel/MarginContainer/VBoxContainer/TitleLabel"
-@onready var problem_label: Label = $"../Panel/MarginContainer/VBoxContainer/ProblemLabel"
-@onready var result_label: Label = $"../Panel/MarginContainer/VBoxContainer/ResultLabel"
+@onready var title_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/TitleLabel") as Label
+@onready var problem_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/ProblemLabel") as Label
+@onready var result_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/ResultLabel") as Label
 @onready var answer_buttons: Array[Button] = [
-	$"../Panel2/AnswerButton1",
-	$"../Panel3/AnswerButton2",
-	$"../Panel4/AnswerButton3",
+	get_node_or_null("../Panel2/AnswerButton1") as Button,
+	get_node_or_null("../Panel3/AnswerButton2") as Button,
+	get_node_or_null("../Panel4/AnswerButton3") as Button,
 ]
 
 var correct_answer_index := -1
@@ -39,6 +39,10 @@ func _ready() -> void:
 	randomize()
 
 	for button in answer_buttons:
+		if button == null:
+			push_warning("main_quest_logic.gd: answer button node not found.")
+			continue
+
 		button.pressed.connect(_on_answer_pressed.bind(button))
 
 	_reset_labels()
@@ -67,7 +71,7 @@ func start_puzzle(target_name: String, questions_config: CharacterQuestions = nu
 	puzzle_in_progress = true
 	_set_character_frozen(current_character, true)
 
-	title_label.text = "Question for %s" % current_target_name
+	_set_label_text(title_label, "Question for %s" % current_target_name)
 	teleport_panel.set_open(false)
 	quest_panel.set_open(true)
 	_show_random_question(questions_config)
@@ -80,15 +84,18 @@ func _show_random_question(questions_config: CharacterQuestions) -> void:
 		return
 
 	correct_answer_index = question.correct_answer_index
-	problem_label.text = question.question_text
+	_set_label_text(problem_label, question.question_text)
 
 	for i in range(answer_buttons.size()):
 		var button := answer_buttons[i]
+		if button == null:
+			continue
+
 		button.text = question.answers[i]
 		button.set_meta("answer_index", i)
 		button.disabled = false
 
-	result_label.text = "Choose an answer."
+	_set_label_text(result_label, "Choose an answer.")
 	input_locked = false
 
 
@@ -123,10 +130,13 @@ func _show_unavailable_question() -> void:
 	correct_answer_index = -1
 	input_locked = true
 	puzzle_in_progress = false
-	problem_label.text = "No narrative question is configured for this character."
-	result_label.text = "Add questions to the character resource."
+	_set_label_text(problem_label, "No narrative question is configured for this character.")
+	_set_label_text(result_label, "Add questions to the character resource.")
 
 	for button in answer_buttons:
+		if button == null:
+			continue
+
 		button.text = "-"
 		button.disabled = true
 
@@ -141,6 +151,9 @@ func _on_answer_pressed(button: Button) -> void:
 	input_locked = true
 
 	for answer_button in answer_buttons:
+		if answer_button == null:
+			continue
+
 		answer_button.disabled = true
 
 	var chosen_answer_index := int(button.get_meta("answer_index", -1))
@@ -151,7 +164,7 @@ func _on_answer_pressed(button: Button) -> void:
 		_apply_correct_answer_timer_reward()
 		counter.good += 1
 		puzzle_in_progress = false
-		result_label.text = "Correct. Teleport window unlocked."
+		_set_label_text(result_label, "Correct. Teleport window unlocked.")
 		await get_tree().create_timer(0.8).timeout
 		quest_panel.set_open(false)
 		teleport_panel.set_open(true)
@@ -160,7 +173,7 @@ func _on_answer_pressed(button: Button) -> void:
 	else:
 		counter.evil += 1
 		puzzle_in_progress = false
-		result_label.text = "Incorrect. Teleport failed."
+		_set_label_text(result_label, "Incorrect. Teleport failed.")
 		await get_tree().create_timer(1.0).timeout
 		var failed_character := current_character
 		quest_panel.set_open(false)
@@ -171,9 +184,16 @@ func _on_answer_pressed(button: Button) -> void:
 
 
 func _reset_labels() -> void:
-	title_label.text = "Narrative Puzzle"
-	problem_label.text = "Awaiting a traveler."
-	result_label.text = "Use the loupe and select a character."
+	_set_label_text(title_label, "Narrative Puzzle")
+	_set_label_text(problem_label, "Awaiting a traveler.")
+	_set_label_text(result_label, "Use the loupe and select a character.")
+
+
+func _set_label_text(label: Label, text: String) -> void:
+	if label == null:
+		return
+
+	label.text = text
 
 
 func _release_current_character() -> void:

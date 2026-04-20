@@ -36,8 +36,7 @@ normal_texture = ExtResource("2_ihbss")
 hover_texture = ExtResource("3_start_active")
 
 [node name="Quest" type="Sprite2D" parent="TextureRect" unique_id=2053500346]
-visible = false
-position = Vector2(641, 616)
+position = Vector2(646, 616)
 texture = ExtResource("6_loading_bg")
 
 [node name="LoadingIndicator" type="Panel" parent="TextureRect" unique_id=2114062463]
