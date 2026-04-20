@@ -29,9 +29,12 @@ var cached_bad_portal_frames: SpriteFrames = null
 func _ready() -> void:
 	randomize()
 	var map := _get_map()
-	if map != null:
-		for character in _get_map_characters(map):
-			_set_character_active(character, false)
+	if map == null:
+		return
+
+	for character in _get_map_characters(map):
+		_set_character_active(character, false)
+
 	call_deferred("show_random_character", false)
 
 

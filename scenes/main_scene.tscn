@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dm4aqm464dwcb" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
 [ext_resource type="Texture2D" uid="uid://5rusyddre0gj" path="res://assets/props/scope.png" id="24_scope"]
 [ext_resource type="Texture2D" uid="uid://dbolal5u0ngrc" path="res://assets/props/scope_active.png" id="25_scope_active"]
+[ext_resource type="Texture2D" uid="uid://b18gpwjbdeimj" path="res://assets/props/truba.png" id="27_k3g67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -314,34 +315,6 @@ text = "Message"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="TeleportPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=347741597]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.85800004
-anchor_right = 1.001
-anchor_bottom = 1.001
-offset_left = -0.23999023
-offset_top = -1.0
-offset_right = -0.2800293
-offset_bottom = 0.27996826
-script = ExtResource("15_01n6w")
-hidden_padding = 40.0
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/TeleportPanel" unique_id=2085511164]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.15100001
-anchor_top = 0.342
-anchor_right = 0.841
-anchor_bottom = 0.572
-offset_left = -0.026000977
-offset_top = 0.12199402
-offset_right = 0.033996582
-offset_bottom = 0.051986694
-text = "Teleport"
-script = ExtResource("17_bcnxi")
-
 [node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1670368985]
 unique_name_in_owner = true
 visible = false
@@ -455,6 +428,62 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Answer 3"
 
+[node name="Button2" type="Control" parent="CanvasLayer/UIRoot" unique_id=648229110]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -155.0
+offset_top = -290.0
+offset_right = -27.0
+offset_bottom = -132.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("11_valve_logic")
+
+[node name="Truba" type="Sprite2D" parent="CanvasLayer/UIRoot/Button2" unique_id=2111192317]
+position = Vector2(-61.999977, -144.99998)
+scale = Vector2(1.1850001, 1.1850001)
+texture = ExtResource("27_k3g67")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/UIRoot/Button2" unique_id=2010984916]
+position = Vector2(67.000015, 110.00003)
+scale = Vector2(0.18981484, 0.18981484)
+sprite_frames = ExtResource("2_valve")
+animation = &"left"
+
+[node name="TeleportPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=347741597]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85800004
+anchor_right = 1.001
+anchor_bottom = 1.001
+offset_left = -0.23999023
+offset_top = -1.0
+offset_right = -0.2800293
+offset_bottom = 0.27996826
+script = ExtResource("15_01n6w")
+hidden_padding = 40.0
+
+[node name="Button" type="Button" parent="CanvasLayer/UIRoot/TeleportPanel" unique_id=2085511164]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15100001
+anchor_top = 0.342
+anchor_right = 0.841
+anchor_bottom = 0.572
+offset_left = -0.026000977
+offset_top = 0.12199402
+offset_right = 0.033996582
+offset_bottom = 0.051986694
+text = "Teleport"
+script = ExtResource("17_bcnxi")
+
 [node name="Counters" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1753977379]
 layout_mode = 1
 anchors_preset = -1
@@ -490,21 +519,25 @@ text = "Evil: "
 
 [node name="TimerPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1323233606]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.47300002
-anchor_top = 0.004
-anchor_right = 0.58400005
-anchor_bottom = 0.072000004
-offset_left = -0.44000244
-offset_top = 0.119999886
-offset_right = 0.47991943
-offset_bottom = 0.15999603
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.45996094
+offset_top = 17.0
+offset_right = 0.45996094
+offset_bottom = 17.040009
+grow_horizontal = 2
 
 [node name="Timer" type="Label" parent="CanvasLayer/UIRoot/TimerPanel" unique_id=1739964339]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = -52.765003
+anchor_top = -174.46301
+anchor_right = 53.765003
+anchor_bottom = 675.356
+offset_left = -0.00035858154
+offset_top = 1.5735626e-05
+offset_right = 0.00035858154
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -514,28 +547,5 @@ theme_override_font_sizes/font_size = 24
 text = "Time: 30"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="Button2" type="Control" parent="CanvasLayer/UIRoot" unique_id=648229110]
-custom_minimum_size = Vector2(128, 128)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -155.0
-offset_top = -290.0
-offset_right = -27.0
-offset_bottom = -132.0
-grow_horizontal = 0
-grow_vertical = 0
-mouse_filter = 2
-script = ExtResource("11_valve_logic")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer/UIRoot/Button2" unique_id=2010984916]
-position = Vector2(67.000015, 110.00003)
-scale = Vector2(0.18981484, 0.18981484)
-sprite_frames = ExtResource("2_valve")
-animation = &"left"
 
 [connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]

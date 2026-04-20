@@ -145,6 +145,7 @@ func _on_answer_pressed(button: Button) -> void:
 
 	var chosen_answer_index := int(button.get_meta("answer_index", -1))
 	var is_correct := chosen_answer_index == correct_answer_index
+	_start_timer_if_needed()
 
 	if is_correct:
 		_apply_correct_answer_timer_reward()
@@ -241,12 +242,17 @@ func _set_animated_sprites_paused(node: Node, value: bool) -> void:
 
 
 func _apply_correct_answer_timer_reward() -> void:
-	if not timer_started:
-		timer_started = true
-		timer_remaining = initial_timer_seconds
-	else:
-		timer_remaining += solved_task_time_bonus
+	timer_remaining += solved_task_time_bonus
 
+	_update_timer_label()
+
+
+func _start_timer_if_needed() -> void:
+	if timer_started:
+		return
+
+	timer_started = true
+	timer_remaining = initial_timer_seconds
 	_update_timer_label()
 
 
