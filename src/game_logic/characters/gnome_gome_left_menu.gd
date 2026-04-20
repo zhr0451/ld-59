@@ -20,4 +20,4 @@ func _input_event(_viewport, event, _shape_idx):
 			pop_up_panel.set_open(true)
 			quest_panel.set_open(true)
 			if quest_logic.has_method("start_puzzle"):
-				quest_logic.start_puzzle(GNOME_GOME.name)
+				quest_logic.start_puzzle(GNOME_GOME.name, GNOME_GOME.questions)

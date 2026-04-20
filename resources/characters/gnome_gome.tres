@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jsu3gxaymauu" path="res://src/resources/character.gd" id="1_4ff8i"]
 [ext_resource type="Texture2D" uid="uid://fgsufl0x83yi" path="res://assets/persons/GnomeGome.png" id="1_m3h2p"]
+[ext_resource type="Resource" path="res://resources/questions/gnome_questions.tres" id="3_4ff8i"]
 [ext_resource type="SpriteFrames" uid="uid://06xokgtyqpey" path="res://assets/animations/gnome_gome/gnome_gome.tres" id="3_238w3"]
 
 [resource]
@@ -10,4 +11,5 @@ icon = ExtResource("1_m3h2p")
 sprite = ExtResource("3_238w3")
 name = "Gnome Gome"
 message = "Hi, my name is Gnome Gome"
+questions = ExtResource("3_4ff8i")
 metadata/_custom_type_script = "uid://jsu3gxaymauu"

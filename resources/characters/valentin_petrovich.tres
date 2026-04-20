@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jsu3gxaymauu" path="res://src/resources/character.gd" id="1_5113u"]
 [ext_resource type="Texture2D" uid="uid://c4ngs6i6xql4y" path="res://assets/persons/ValentinPetrovich.png" id="1_cq1w8"]
+[ext_resource type="Resource" path="res://resources/questions/valentin_questions.tres" id="3_5113u"]
 [ext_resource type="SpriteFrames" uid="uid://eif3au7e3651" path="res://assets/animations/valentin_petrovich/valentin_petrovich.tres" id="3_rsel3"]
 
 [resource]
@@ -11,4 +12,5 @@ icon = ExtResource("1_cq1w8")
 sprite = ExtResource("3_rsel3")
 name = "Valentin Petrovich"
 message = "This little creature is searching for scuma"
+questions = ExtResource("3_5113u")
 metadata/_custom_type_script = "uid://jsu3gxaymauu"

@@ -14,14 +14,15 @@
 [ext_resource type="Texture2D" uid="uid://b3g65cwu6y3hd" path="res://assets/props/left_wall.png" id="7_k6f3i"]
 [ext_resource type="Script" uid="uid://ba6pkqxcmdbxm" path="res://src/ui/tutorial_openner.gd" id="8_18nlu"]
 [ext_resource type="Script" uid="uid://dxmyqy2cgujwx" path="res://src/counter/counter_logic.gd" id="9_c1pb6"]
-[ext_resource type="Script" uid="uid://c3oa2oi35q8ex" path="res://src/ui/left_popup_button.gd" id="10_6wevv"]
 [ext_resource type="Script" uid="uid://b3xjxynwvqbo3" path="res://src/ui/left_popup_menu_logic.gd" id="10_e1cbu"]
 [ext_resource type="Texture2D" uid="uid://dd3gax0jqledp" path="res://icon.svg" id="14_01n6w"]
 [ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
+[ext_resource type="Texture2D" uid="uid://bo783s4fqtrox" path="res://assets/props/mirror .png" id="15_58gk3"]
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
 [ext_resource type="Texture2D" uid="uid://baiddp5iya6wh" path="res://assets/props/tablefinal.png" id="22_adb74"]
+[ext_resource type="Script" uid="uid://dm4aqm464dwcb" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
 size = Vector2(194.67593, 142.45996)
@@ -89,20 +90,50 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LeftWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=71823105]
-position = Vector2(27.999992, 365.00003)
-scale = Vector2(0.39279658, 0.39279664)
+[node name="LeftWall" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=1664884316]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.209
+anchor_right = 0.24100001
+anchor_bottom = 1.179
+offset_left = -0.47998047
+offset_top = -109.0
+offset_right = -0.480011
+offset_bottom = 0.11999512
+mouse_filter = 2
 texture = ExtResource("7_k6f3i")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="RightWall" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1262638848]
-position = Vector2(1369.0001, 370.00003)
-scale = Vector2(0.39597452, 0.39597458)
+[node name="RightWall" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=397688501]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.84400004
+anchor_top = -0.15100001
+anchor_right = 1.261
+anchor_bottom = 1.1850001
+offset_left = -0.32006836
+offset_top = 1.7200089
+offset_right = -0.080078125
+offset_bottom = 1.7999268
+mouse_filter = 2
 texture = ExtResource("20_xdqt8")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="Tablefinal" type="Sprite2D" parent="CanvasLayer/UIRoot" unique_id=1098941262]
-position = Vector2(683, 539)
-scale = Vector2(0.34628958, 0.34628966)
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=1677445696]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.425
+anchor_right = 1.0020001
+anchor_bottom = 1.0400001
+offset_top = -38.0
+offset_right = 0.4399414
+offset_bottom = 0.19995117
+mouse_filter = 2
 texture = ExtResource("22_adb74")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="LoupeOverlay" type="ColorRect" parent="CanvasLayer/UIRoot" unique_id=289034516]
 visible = false
@@ -164,97 +195,65 @@ text = "Ты придворный маг в дальнем королевств�
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Counters" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1753977379]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.86200005
-anchor_top = 0.101
-anchor_right = 1.0
-anchor_bottom = 0.21400002
-offset_left = -0.36010742
-offset_top = -52.72
-offset_bottom = -53.080017
-script = ExtResource("9_c1pb6")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Counters" unique_id=316029579]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIRoot/Counters/MarginContainer" unique_id=2074876555]
-layout_mode = 2
-
-[node name="Good" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=2107815132]
-layout_mode = 2
-text = "Good: "
-
-[node name="Evil" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=1854768296]
-layout_mode = 2
-text = "Evil: "
-
 [node name="PopUpPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1174193133]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.011000001
-anchor_top = 0.026
-anchor_right = 0.187
-anchor_bottom = 0.739
-offset_left = -0.08000088
-offset_top = 0.27999878
-offset_right = -0.36001587
-offset_bottom = -0.08001709
+anchor_right = 0.26200002
+anchor_bottom = 0.91800004
+offset_right = 0.6399536
+offset_bottom = 0.039978027
 script = ExtResource("10_e1cbu")
 hidden_padding = 40.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UIRoot/PopUpPanel" unique_id=1507323505]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot/PopUpPanel" unique_id=1317119429]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -300.0
+offset_right = 1177.287
+offset_bottom = 282.43213
+mouse_filter = 2
+texture = ExtResource("15_58gk3")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIRoot/PopUpPanel" unique_id=380968978]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 57.0
+offset_top = 148.0
+offset_right = -52.0
+offset_bottom = -107.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIRoot/PopUpPanel/PanelContainer" unique_id=380968978]
-layout_mode = 2
-
-[node name="Close Button" type="Button" parent="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer" unique_id=1978039071]
-layout_mode = 2
-text = "Popup Close"
-script = ExtResource("10_6wevv")
-panel_path = NodePath("../../..")
-
-[node name="NameLabel" type="Label" parent="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer" unique_id=1103028925]
+[node name="NameLabel" type="Label" parent="CanvasLayer/UIRoot/PopUpPanel/VBoxContainer" unique_id=1103028925]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureIcon" type="TextureRect" parent="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer" unique_id=1396994]
+[node name="TextureIcon" type="TextureRect" parent="CanvasLayer/UIRoot/PopUpPanel/VBoxContainer" unique_id=1396994]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("14_01n6w")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="MessageContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/PopUpPanel" unique_id=1826880522]
-layout_mode = 0
-offset_top = 444.0
-offset_right = 225.0
-offset_bottom = 513.0
+[node name="MessageContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/PopUpPanel/VBoxContainer" unique_id=1826880522]
+layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="MessageLable" type="Label" parent="CanvasLayer/UIRoot/PopUpPanel/MessageContainer" unique_id=1865572000]
+[node name="MessageLable" type="Label" parent="CanvasLayer/UIRoot/PopUpPanel/VBoxContainer/MessageContainer" unique_id=1865572000]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -265,14 +264,13 @@ autowrap_mode = 3
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.882
-anchor_top = 0.172
-anchor_right = 0.98
-anchor_bottom = 0.74
-offset_left = 0.039916992
-offset_top = 0.15999603
-offset_right = 0.5999756
-offset_bottom = 0.2000122
+anchor_left = 0.85800004
+anchor_right = 1.001
+anchor_bottom = 1.001
+offset_left = -0.23999023
+offset_top = -1.0
+offset_right = -0.2800293
+offset_bottom = 0.27996826
 script = ExtResource("15_01n6w")
 hidden_padding = 40.0
 
@@ -292,15 +290,18 @@ script = ExtResource("17_bcnxi")
 
 [node name="QuestPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1670368985]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(524, 280)
+custom_minimum_size = Vector2(524, 420)
 layout_mode = 1
 anchors_preset = -1
-offset_left = 580.0
-offset_top = 286.0
-offset_right = 1104.0
-offset_bottom = 566.0
-script = ExtResource("15_01n6w")
-hidden_padding = 370.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -262.0
+offset_top = -210.0
+offset_right = 262.0
+offset_bottom = 210.0
+script = ExtResource("23_qcent")
 
 [node name="QuestLogic" type="Node" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1585092825]
 unique_name_in_owner = true
@@ -310,9 +311,8 @@ script = ExtResource("16_qstlg")
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.72
+anchor_bottom = 0.48
 offset_right = 0.00012207031
-offset_bottom = 0.040000916
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/QuestPanel/Panel" unique_id=106543735]
 layout_mode = 1
@@ -338,7 +338,7 @@ horizontal_alignment = 1
 [node name="ProblemLabel" type="Label" parent="CanvasLayer/UIRoot/QuestPanel/Panel/MarginContainer/VBoxContainer" unique_id=76897833]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-text = "Stabilize the route: 1 + 1 = ?"
+text = "Question text"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -352,11 +352,10 @@ autowrap_mode = 2
 [node name="Panel2" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1391336009]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.753
-anchor_right = 0.30400002
-anchor_bottom = 1.0
-offset_top = -0.028999329
-offset_right = 3.4332275e-05
+anchor_left = 0.08
+anchor_top = 0.54
+anchor_right = 0.92
+anchor_bottom = 0.66
 
 [node name="AnswerButton1" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel2" unique_id=842406623]
 layout_mode = 1
@@ -365,18 +364,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "0"
+text = "Answer 1"
 
 [node name="Panel3" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=984412285]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.344
-anchor_top = 0.753
-anchor_right = 0.64000005
-anchor_bottom = 1.0
-offset_left = 4.196167e-05
-offset_top = -0.028999329
-offset_right = 6.866455e-05
+anchor_left = 0.08
+anchor_top = 0.7
+anchor_right = 0.92
+anchor_bottom = 0.82
 
 [node name="AnswerButton2" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel3" unique_id=1955192354]
 layout_mode = 1
@@ -385,18 +381,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "0"
+text = "Answer 2"
 
 [node name="Panel4" type="Panel" parent="CanvasLayer/UIRoot/QuestPanel" unique_id=1147281451]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.712
-anchor_top = 0.753
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.392334e-05
-offset_top = -0.028999329
-offset_right = 0.00012207031
+anchor_left = 0.08
+anchor_top = 0.86
+anchor_right = 0.92
+anchor_bottom = 0.98
 
 [node name="AnswerButton3" type="Button" parent="CanvasLayer/UIRoot/QuestPanel/Panel4" unique_id=30587644]
 layout_mode = 1
@@ -405,7 +398,40 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "0"
+text = "Answer 3"
+
+[node name="Counters" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1753977379]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85800004
+anchor_right = 1.0
+anchor_bottom = 0.14
+offset_left = -0.23999023
+offset_bottom = 0.19999695
+script = ExtResource("9_c1pb6")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot/Counters" unique_id=316029579]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIRoot/Counters/MarginContainer" unique_id=2074876555]
+layout_mode = 2
+
+[node name="Good" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=2107815132]
+layout_mode = 2
+text = "Good: "
+
+[node name="Evil" type="Label" parent="CanvasLayer/UIRoot/Counters/MarginContainer/VBoxContainer" unique_id=1854768296]
+layout_mode = 2
+text = "Evil: "
 
 [node name="TimerPanel" type="Panel" parent="CanvasLayer/UIRoot" unique_id=1323233606]
 layout_mode = 1
@@ -436,10 +462,10 @@ vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1416254591]
 layout_mode = 0
-offset_left = 414.0
-offset_top = 565.52
-offset_right = 562.0
-offset_bottom = 719.52
+offset_left = 407.0
+offset_top = 549.0
+offset_right = 555.0
+offset_bottom = 703.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -454,10 +480,10 @@ loupe_overlay_path = NodePath("../../LoupeOverlay")
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1226876305]
 layout_mode = 0
-offset_left = 566.0
-offset_top = 565.52
-offset_right = 714.0
-offset_bottom = 719.52
+offset_left = 559.0
+offset_top = 549.0
+offset_right = 707.0
+offset_bottom = 703.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -470,10 +496,10 @@ text = "Tutorial"
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/UIRoot" unique_id=1583419901]
 layout_mode = 0
-offset_left = 718.0
-offset_top = 565.52
-offset_right = 866.0
-offset_bottom = 719.52
+offset_left = 711.0
+offset_top = 549.0
+offset_right = 859.0
+offset_bottom = 703.0
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -485,7 +511,6 @@ layout_mode = 2
 text = "lever"
 script = ExtResource("6_rt2n2")
 
-[connection signal="button_up" from="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer/Close Button" to="CanvasLayer/UIRoot/PopUpPanel/PanelContainer/VBoxContainer/Close Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer/Button" to="CanvasLayer/UIRoot/MarginContainer/Button" method="_on_button_up"]
 [connection signal="button_up" from="CanvasLayer/UIRoot/MarginContainer2/Button" to="CanvasLayer/UIRoot/Tutorial" method="_on_button_button_up"]

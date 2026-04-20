@@ -13,6 +13,7 @@ func _ready() -> void:
 	shown_position = position
 	hidden_position = shown_position - Vector2(size.x + hidden_padding, 0.0)
 	position = hidden_position
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
 func set_open(value: bool) -> void:
@@ -20,6 +21,7 @@ func set_open(value: bool) -> void:
 		return
 
 	is_open = value
+	mouse_filter = Control.MOUSE_FILTER_STOP if is_open else Control.MOUSE_FILTER_IGNORE
 
 	if slide_tween != null:
 		slide_tween.kill()
