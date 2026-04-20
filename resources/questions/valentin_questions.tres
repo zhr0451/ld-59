@@ -2,22 +2,31 @@
 
 [ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_questions"]
 [ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="2_question"]
+[ext_resource type="Texture2D" uid="uid://ctw7aoha5xrh3" path="res://assets/banners/v-p-tower.png" id="3_valentin_tower"]
+[ext_resource type="Texture2D" uid="uid://duftbuursjfir" path="res://assets/banners/v-p-sea.png" id="4_valentin_sea"]
+[ext_resource type="Texture2D" uid="uid://mxs6hfv36bu8" path="res://assets/banners/v-p-dragons.png" id="5_valentin_dragons"]
+[ext_resource type="Texture2D" uid="uid://c7hf5cxv0wudu" path="res://assets/banners/v-p-forest.png" id="6_valentin_forest"]
+[ext_resource type="Texture2D" uid="uid://duqedq54152ar" path="res://assets/banners/v-p-mountians.png" id="7_valentin_mountains"]
+[ext_resource type="Texture2D" uid="uid://cm8hqv1ad4phu" path="res://assets/banners/v-p-pustosh.png" id="8_valentin_wasteland"]
 
 [sub_resource type="Resource" id="Resource_valentin_1"]
 script = ExtResource("2_question")
 question_text = "Valentin Petrovich lost the signal thread. Which trace should he follow?"
 answers = Array[String](["The warm trace", "The loudest trace", "The trace moving backward"])
+answer_banners = Array[Texture2D]([ExtResource("3_valentin_tower"), ExtResource("5_valentin_dragons"), ExtResource("8_valentin_wasteland")])
 
 [sub_resource type="Resource" id="Resource_valentin_2"]
 script = ExtResource("2_question")
 question_text = "A mirror shows three reflections. Which one is safe?"
 answers = Array[String](["The reflection that blinks first", "The reflection holding the same map", "The reflection without a shadow"])
 correct_answer_index = 1
+answer_banners = Array[Texture2D]([ExtResource("6_valentin_forest"), ExtResource("3_valentin_tower"), ExtResource("8_valentin_wasteland")])
 
 [sub_resource type="Resource" id="Resource_valentin_3"]
 script = ExtResource("2_question")
 question_text = "The route is unstable. What should Valentin Petrovich anchor first?"
 answers = Array[String](["The destination", "The weather", "The rumor"])
+answer_banners = Array[Texture2D]([ExtResource("3_valentin_tower"), ExtResource("4_valentin_sea"), ExtResource("7_valentin_mountains")])
 
 [resource]
 script = ExtResource("1_questions")

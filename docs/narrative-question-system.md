@@ -106,6 +106,7 @@ src/resources/narrative_question.gd
 @export_multiline var question_text: String = ""
 @export var answers: Array[String] = []
 @export_range(0, 2) var correct_answer_index: int = 0
+@export var answer_banners: Array[Texture2D] = []
 ```
 
 Правила:
@@ -113,6 +114,7 @@ src/resources/narrative_question.gd
 - `question_text` - текст вопроса.
 - `answers` - список из трёх ответов.
 - `correct_answer_index` - индекс правильного ответа.
+- `answer_banners` - список баннеров последствий для ответов. Индекс баннера должен совпадать с индексом ответа.
 - Индексы начинаются с нуля: `0`, `1`, `2`.
 
 Пример:
@@ -121,9 +123,15 @@ src/resources/narrative_question.gd
 question_text = "A mirror shows three reflections. Which one is safe?"
 answers = ["The reflection that blinks first", "The reflection holding the same map", "The reflection without a shadow"]
 correct_answer_index = 1
+answer_banners = [
+  res://assets/banners/v-p-forest.png,
+  res://assets/banners/v-p-tower.png,
+  res://assets/banners/v-p-pustosh.png
+]
 ```
 
 В этом примере правильный ответ - второй вариант.
+Если игрок выберет второй вариант, будет показан второй баннер из `answer_banners`.
 
 ## Формат конфига персонажа
 
@@ -209,14 +217,19 @@ var is_correct := chosen_answer_index == correct_answer_index
 
 - вызывается таймерная награда;
 - `counter.good += 1`;
+- если у выбранного ответа есть баннер, открывается `CanvasLayer/UIRoot/OutcomePanel`;
 - `QuestPanel` закрывается;
 - `TeleportPanel` открывается.
 
 Если ответ неправильный:
 
 - `counter.evil += 1`;
+- если у выбранного ответа есть баннер, открывается `CanvasLayer/UIRoot/OutcomePanel`;
 - `QuestPanel` закрывается;
 - `TeleportPanel` не открывается.
+
+`OutcomePanel` не меняет результат проверки. Он только показывает арт последствия и ждёт нажатия `Continue`.
+После закрытия баннера игра продолжает прежнюю ветку успеха или провала.
 
 Отображение счётчиков уже реализовано в:
 

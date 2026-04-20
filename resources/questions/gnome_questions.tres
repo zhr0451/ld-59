@@ -2,22 +2,31 @@
 
 [ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_questions"]
 [ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="2_question"]
+[ext_resource type="Texture2D" uid="uid://cuml4p42hojmb" path="res://assets/banners/gnome_tower.png" id="3_gnome_tower"]
+[ext_resource type="Texture2D" uid="uid://cqd2nvvuqjiaa" path="res://assets/banners/gnome-more.png" id="4_gnome_more"]
+[ext_resource type="Texture2D" uid="uid://chguvo72vuale" path="res://assets/banners/gnome-dragon.png" id="5_gnome_dragon"]
+[ext_resource type="Texture2D" uid="uid://c6c1yrk7wwqyk" path="res://assets/banners/gnom-gory.png" id="6_gnome_mountains"]
+[ext_resource type="Texture2D" uid="uid://dlxsywxsnkfcu" path="res://assets/banners/gnom-pushtosh.png" id="7_gnome_wasteland"]
+[ext_resource type="Texture2D" uid="uid://o0pfok0fxj5s" path="res://assets/banners/gnome_fairy.png" id="8_gnome_fairy"]
 
 [sub_resource type="Resource" id="Resource_gnome_1"]
 script = ExtResource("2_question")
 question_text = "Gnome Gome points at three stones. Which stone keeps a promise?"
 answers = Array[String](["The stone that returns to the hand", "The stone that shines the brightest", "The stone that makes no sound"])
+answer_banners = Array[Texture2D]([ExtResource("3_gnome_tower"), ExtResource("4_gnome_more"), ExtResource("5_gnome_dragon")])
 
 [sub_resource type="Resource" id="Resource_gnome_2"]
 script = ExtResource("2_question")
 question_text = "A tiny bridge asks for a toll. What should Gnome Gome offer?"
 answers = Array[String](["A secret told twice", "A button from his coat", "A coin taken from the river"])
 correct_answer_index = 1
+answer_banners = Array[Texture2D]([ExtResource("6_gnome_mountains"), ExtResource("3_gnome_tower"), ExtResource("7_gnome_wasteland")])
 
 [sub_resource type="Resource" id="Resource_gnome_3"]
 script = ExtResource("2_question")
 question_text = "The tunnel echoes only true names. What should you say?"
 answers = Array[String](["Gnome Gome", "King of Roots", "Nobody at all"])
+answer_banners = Array[Texture2D]([ExtResource("3_gnome_tower"), ExtResource("8_gnome_fairy"), ExtResource("7_gnome_wasteland")])
 
 [resource]
 script = ExtResource("1_questions")

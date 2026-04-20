@@ -2,22 +2,31 @@
 
 [ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_8q3m6"]
 [ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="1_v0kuo"]
+[ext_resource type="Texture2D" uid="uid://fpisa2n3j0pl" path="res://assets/banners/fairy_tower.png" id="2_fairy_tower"]
+[ext_resource type="Texture2D" uid="uid://unaeyaen17il" path="res://assets/banners/fairy_sea.png" id="3_fairy_sea"]
+[ext_resource type="Texture2D" uid="uid://cq5ipyl4uwrfv" path="res://assets/banners/fairy_dragon.png" id="4_fairy_dragon"]
+[ext_resource type="Texture2D" uid="uid://bjaittn7eejgw" path="res://assets/banners/fairy_forest.png" id="5_fairy_forest"]
+[ext_resource type="Texture2D" uid="uid://br7j82oeh2x8r" path="res://assets/banners/fairy_mountians.png" id="6_fairy_mountains"]
+[ext_resource type="Texture2D" uid="uid://ta6vkacowlnt" path="res://assets/banners/fairy-pystosh.png" id="7_fairy_wasteland"]
 
 [sub_resource type="Resource" id="Resource_gnome_1"]
 script = ExtResource("1_v0kuo")
 question_text = "Gnome Gome points at three stones. Which stone keeps a promise?"
 answers = Array[String](["The stone that returns to the hand", "The stone that shines the brightest", "The stone that makes no sound"])
+answer_banners = Array[Texture2D]([ExtResource("2_fairy_tower"), ExtResource("3_fairy_sea"), ExtResource("4_fairy_dragon")])
 
 [sub_resource type="Resource" id="Resource_gnome_2"]
 script = ExtResource("1_v0kuo")
 question_text = "A tiny bridge asks for a toll. What should Gnome Gome offer?"
 answers = Array[String](["A secret told twice", "A button from his coat", "A coin taken from the river"])
 correct_answer_index = 1
+answer_banners = Array[Texture2D]([ExtResource("5_fairy_forest"), ExtResource("2_fairy_tower"), ExtResource("7_fairy_wasteland")])
 
 [sub_resource type="Resource" id="Resource_gnome_3"]
 script = ExtResource("1_v0kuo")
 question_text = "The tunnel echoes only true names. What should you say?"
 answers = Array[String](["Gnome Gome", "King of Roots", "Nobody at all"])
+answer_banners = Array[Texture2D]([ExtResource("2_fairy_tower"), ExtResource("6_fairy_mountains"), ExtResource("7_fairy_wasteland")])
 
 [resource]
 script = ExtResource("1_8q3m6")

@@ -120,6 +120,7 @@
 [ext_resource type="Texture2D" uid="uid://dqtu3bdexsq8m" path="res://assets/animations/lasm/raw/Unnamed_0118.png" id="118_i73uk"]
 [ext_resource type="Texture2D" uid="uid://d21q7r4eu8wca" path="res://assets/animations/lasm/raw/Unnamed_0119.png" id="119_brepd"]
 [ext_resource type="Texture2D" uid="uid://c7cl7cgl4huaf" path="res://assets/animations/lasm/raw/Unnamed_0120.png" id="120_nepqs"]
+
 [resource]
 animations = [{
 "frames": [{

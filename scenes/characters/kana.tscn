@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ccfima5u8rtj8"]
+
+[ext_resource type="SpriteFrames" uid="uid://gxu3sw153abq" path="res://assets/animations/kana/kana.tres" id="1_m8nld"]
+[ext_resource type="Script" uid="uid://dhk4xti56cq1r" path="res://src/game_logic/animator.gd" id="2_meakv"]
+
+[node name="Kana" type="Node2D" unique_id=2039073665]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=982102376]
+sprite_frames = ExtResource("1_m8nld")
+animation = &"idle"
+frame = 93
+frame_progress = 0.31956968
+script = ExtResource("2_meakv")

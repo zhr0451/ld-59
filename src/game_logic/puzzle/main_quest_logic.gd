@@ -16,6 +16,7 @@ var counter = preload("uid://cs5lr50tom8xo")
 @onready var teleport_panel: Control = %TeleportPanel
 @onready var scene_changer: Node = %SceneChanger
 @onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
+@onready var outcome_panel: Node = get_node_or_null("../../OutcomePanel")
 @onready var timer_label: Label = get_node_or_null(timer_label_path) as Label
 @onready var title_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/TitleLabel") as Label
 @onready var problem_label: Label = get_node_or_null("../Panel/MarginContainer/VBoxContainer/ProblemLabel") as Label
@@ -30,8 +31,10 @@ var correct_answer_index := -1
 var input_locked := false
 var current_target_name := "Traveler"
 var current_character: Area2D = null
+var current_question: NarrativeQuestion = null
 var puzzle_in_progress := false
 var timer_started := false
+var timer_paused := false
 var timer_remaining := 0.0
 
 
@@ -51,6 +54,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not timer_started:
+		return
+	if timer_paused:
 		return
 
 	timer_remaining -= delta
@@ -83,6 +88,7 @@ func _show_random_question(questions_config: CharacterQuestions) -> void:
 		_show_unavailable_question()
 		return
 
+	current_question = question
 	correct_answer_index = question.correct_answer_index
 	_set_label_text(problem_label, question.question_text)
 
@@ -128,6 +134,7 @@ func _is_valid_question(question: NarrativeQuestion) -> bool:
 
 func _show_unavailable_question() -> void:
 	correct_answer_index = -1
+	current_question = null
 	input_locked = true
 	puzzle_in_progress = false
 	_set_label_text(problem_label, "No narrative question is configured for this character.")
@@ -165,8 +172,10 @@ func _on_answer_pressed(button: Button) -> void:
 		counter.good += 1
 		puzzle_in_progress = false
 		_set_label_text(result_label, "Correct. Teleport window unlocked.")
-		await get_tree().create_timer(0.8).timeout
-		quest_panel.set_open(false)
+		var showed_outcome := await _show_outcome_banner(chosen_answer_index)
+		if not showed_outcome:
+			await get_tree().create_timer(0.8).timeout
+			quest_panel.set_open(false)
 		teleport_panel.set_open(true)
 		_release_current_character()
 		_reset_labels()
@@ -174,13 +183,45 @@ func _on_answer_pressed(button: Button) -> void:
 		counter.evil += 1
 		puzzle_in_progress = false
 		_set_label_text(result_label, "Incorrect. Teleport failed.")
-		await get_tree().create_timer(1.0).timeout
 		var failed_character := current_character
-		quest_panel.set_open(false)
+		var showed_outcome := await _show_outcome_banner(chosen_answer_index)
+		if not showed_outcome:
+			await get_tree().create_timer(1.0).timeout
+			quest_panel.set_open(false)
 		_hide_pop_up_panel()
 		_release_current_character()
 		_show_failed_character_portal(failed_character)
 		_reset_labels()
+
+
+func _show_outcome_banner(answer_index: int) -> bool:
+	var banner := _get_banner_for_answer(answer_index)
+	if banner == null:
+		return false
+	if outcome_panel == null:
+		return false
+	if not outcome_panel.has_method("show_banner") or not outcome_panel.has_method("wait_until_closed"):
+		return false
+
+	timer_paused = true
+	quest_panel.set_open(false)
+	var was_shown: bool = bool(outcome_panel.call("show_banner", banner))
+	if not was_shown:
+		timer_paused = false
+		return false
+
+	await outcome_panel.call("wait_until_closed")
+	timer_paused = false
+	return true
+
+
+func _get_banner_for_answer(answer_index: int) -> Texture2D:
+	if current_question == null:
+		return null
+	if answer_index < 0 or answer_index >= current_question.answer_banners.size():
+		return null
+
+	return current_question.answer_banners[answer_index]
 
 
 func _reset_labels() -> void:
