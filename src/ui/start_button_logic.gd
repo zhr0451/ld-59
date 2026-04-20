@@ -4,8 +4,10 @@ extends TextureRect
 @export var hover_texture: Texture2D
 @export_file("*.tscn") var target_scene_path := "res://scenes/main_scene.tscn"
 @export_node_path("Control") var loading_indicator_path: NodePath = NodePath("../LoadingIndicator")
+@export_node_path("CanvasItem") var loading_art_path: NodePath = NodePath("../Quest")
 
 @onready var loading_indicator: Control = get_node_or_null(loading_indicator_path) as Control
+@onready var loading_art: CanvasItem = get_node_or_null(loading_art_path) as CanvasItem
 
 var transition_started := false
 
@@ -16,6 +18,7 @@ func _ready() -> void:
 	mouse_exited.connect(_on_mouse_exited)
 	set_process(false)
 	_set_loading_visible(false)
+	_set_loading_art_visible(false)
 	_set_normal_texture()
 
 
@@ -48,6 +51,7 @@ func _gui_input(event: InputEvent) -> void:
 	accept_event()
 	transition_started = true
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_set_loading_art_visible(true)
 	_set_loading_visible(true)
 
 	var error := ResourceLoader.load_threaded_request(target_scene_path)
@@ -81,6 +85,11 @@ func _set_current_scene_visible(value: bool) -> void:
 func _set_loading_visible(value: bool) -> void:
 	if loading_indicator != null:
 		loading_indicator.visible = value
+
+
+func _set_loading_art_visible(value: bool) -> void:
+	if loading_art != null:
+		loading_art.visible = value
 
 
 func _update_loading_progress(progress: Array) -> void:
@@ -121,4 +130,5 @@ func _restore_after_error() -> void:
 	transition_started = false
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_set_loading_visible(false)
+	_set_loading_art_visible(false)
 	_set_current_scene_visible(true)
