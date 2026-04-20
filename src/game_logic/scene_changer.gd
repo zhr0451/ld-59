@@ -5,11 +5,15 @@ extends Node
 
 const BAD_ENDING = preload("uid://c5ryjt2i58n1h")
 const GOOD_ENDING = preload("uid://be3ux7u1sf57l")
+const PORTAL_FRAMES = preload("res://assets/animations/portal/portal.tres")
 
 @export_node_path("Node2D") var map_path: NodePath = NodePath("../WorldRoot/Map")
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../LocationCamera")
 @export var screen_margin := Vector2(600.0, 600.0)
 @export var spawn_delay_seconds := 2.0
+@export var portal_duration_seconds := 1.2
+@export var portal_scale := Vector2(0.35, 0.35)
+@export var portal_animation_name := "portal"
 
 var counter = preload("uid://cs5lr50tom8xo")
 var final: bool
@@ -50,6 +54,7 @@ func show_random_character(use_delay := true) -> void:
 		return
 
 	var previous_character := active_character
+	_spawn_portal_for_character(map, previous_character)
 
 	for character in characters:
 		_set_character_active(character, false)
@@ -68,6 +73,30 @@ func show_random_character(use_delay := true) -> void:
 	active_character = _pick_next_character(characters, previous_character)
 	active_character.position = _get_spawn_position(map) - _get_character_offset(active_character)
 	_set_character_active(active_character, true)
+
+
+func _spawn_portal_for_character(map: Node2D, character: Area2D) -> void:
+	if character == null:
+		return
+
+	var portal := AnimatedSprite2D.new()
+	portal.name = "TeleportPortal"
+	portal.sprite_frames = PORTAL_FRAMES
+	portal.animation = portal_animation_name
+	portal.scale = portal_scale
+	portal.z_index = 100
+	portal.position = character.position + _get_character_offset(character)
+
+	map.add_child(portal)
+	portal.play()
+	_free_portal_after_delay(portal)
+
+
+func _free_portal_after_delay(portal: AnimatedSprite2D) -> void:
+	await get_tree().create_timer(portal_duration_seconds).timeout
+
+	if is_instance_valid(portal):
+		portal.queue_free()
 
 
 func _get_map() -> Node2D:

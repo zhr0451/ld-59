@@ -1,7 +1,7 @@
 extends Button
 
-@export_node_path("Panel") var panel_path: NodePath = NodePath("../PopUpPanel")
-@onready var panel: Panel = get_node_or_null(panel_path) as Panel
+@export_node_path("Control") var panel_path: NodePath = NodePath("../PopUpPanel")
+@onready var panel = get_node_or_null(panel_path)
 
 
 func _ready() -> void:
@@ -10,7 +10,7 @@ func _ready() -> void:
 		return
 
 	if panel == null:
-		push_error("popup_button.gd: Panel not found at path '%s'." % panel_path)
+		push_error("popup_button.gd: Control not found at path '%s'." % panel_path)
 		return
 
 	if not panel.has_method("toggle_open"):

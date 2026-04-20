@@ -19,6 +19,7 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	visible = false
 	set_process(false)
+	_reset_loupe_anchors()
 	_refresh_visuals()
 
 
@@ -69,6 +70,13 @@ func _update_loupe() -> void:
 
 func _refresh_visuals() -> void:
 	size = Vector2.ONE * lens_radius * 2.0
+
+
+func _reset_loupe_anchors() -> void:
+	anchor_left = 0.0
+	anchor_top = 0.0
+	anchor_right = 0.0
+	anchor_bottom = 0.0
 
 
 func _update_shader(mouse_position: Vector2) -> void:

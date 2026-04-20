@@ -1,7 +1,7 @@
 extends Button
 
 @onready var teleport_panel: Panel = %TeleportPanel
-@onready var pop_up_panel: Panel = $"../../PopUpPanel"
+@onready var pop_up_panel = $"../../PopUpPanel"
 @onready var scene_changer: Node = %SceneChanger
 
 func _on_button_up() -> void:
