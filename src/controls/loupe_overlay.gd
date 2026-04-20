@@ -5,11 +5,11 @@ signal world_focus_changed(world_position: Vector2)
 @export var lens_radius: float = 120.0
 @export var magnification: float = 2.0
 @export_node_path("Camera2D") var camera_path: NodePath = NodePath("../../../LocationCamera")
-@export_node_path("BaseButton") var toggle_button_path: NodePath = NodePath("../DownPanel/Buttons/MarginContainer/Button")
+@export_node_path("Control") var toggle_button_path: NodePath = NodePath("../Button")
 
 @onready var camera: Camera2D = get_node_or_null(camera_path) as Camera2D
 @onready var shader_material: ShaderMaterial = material as ShaderMaterial
-@onready var toggle_button: BaseButton = get_node_or_null(toggle_button_path) as BaseButton
+@onready var toggle_button: Control = get_node_or_null(toggle_button_path) as Control
 
 var loupe_enabled := false
 var world_focus_position := Vector2.ZERO
@@ -19,11 +19,25 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	visible = false
 	set_process(false)
+	_reset_loupe_anchors()
 	_refresh_visuals()
 
 
 func _process(_delta: float) -> void:
 	_update_loupe()
+
+
+func _input(event: InputEvent) -> void:
+	if not loupe_enabled:
+		return
+
+	var mouse_event := event as InputEventMouseButton
+	if mouse_event == null:
+		return
+
+	if mouse_event.button_index == MOUSE_BUTTON_RIGHT and mouse_event.pressed:
+		get_viewport().set_input_as_handled()
+		set_loupe_enabled(false)
 
 
 func set_loupe_enabled(value: bool) -> void:
@@ -58,6 +72,13 @@ func _refresh_visuals() -> void:
 	size = Vector2.ONE * lens_radius * 2.0
 
 
+func _reset_loupe_anchors() -> void:
+	anchor_left = 0.0
+	anchor_top = 0.0
+	anchor_right = 0.0
+	anchor_bottom = 0.0
+
+
 func _update_shader(mouse_position: Vector2) -> void:
 	if shader_material == null:
 		return
@@ -85,10 +106,21 @@ func _update_world_focus(mouse_position: Vector2) -> void:
 
 
 func _sync_toggle_buttons(value: bool) -> void:
-	if toggle_button != null and toggle_button.button_pressed != value:
-		toggle_button.set_pressed_no_signal(value)
+	_sync_toggle_control(toggle_button, value)
 
 	for button in get_tree().get_nodes_in_group("loupe_toggle_buttons"):
-		var toggle := button as BaseButton
-		if toggle != null and toggle.button_pressed != value:
-			toggle.set_pressed_no_signal(value)
+		_sync_toggle_control(button, value)
+
+
+func _sync_toggle_control(node: Node, value: bool) -> void:
+	if node == null:
+		return
+
+	var base_button := node as BaseButton
+	if base_button != null:
+		if base_button.button_pressed != value:
+			base_button.set_pressed_no_signal(value)
+		return
+
+	if node.has_method("set_loupe_button_pressed"):
+		node.call("set_loupe_button_pressed", value)

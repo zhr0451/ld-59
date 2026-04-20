@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c36qra5t61tjg"]
+
+[ext_resource type="Texture2D" uid="uid://bj0a5cldov3kn" path="res://assets/window/title_screen.png" id="1_x3v2e"]
+[ext_resource type="Texture2D" uid="uid://c5a0jprqhf7n" path="res://assets/buttons/start.png" id="2_ihbss"]
+[ext_resource type="Texture2D" uid="uid://xs756oden8sg" path="res://assets/buttons/start_activate.png" id="3_start_active"]
+[ext_resource type="Script" path="res://src/ui/start_button_logic.gd" id="4_start_logic"]
+[ext_resource type="Script" path="res://src/ui/start_scene_scaler.gd" id="5_start_scaler"]
+
+[node name="StartGameScene" type="Node2D" unique_id=2033238938]
+script = ExtResource("5_start_scaler")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1392371710]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1312059436]
+offset_left = -641.0
+offset_top = -362.0
+offset_right = 641.0
+offset_bottom = 361.0
+texture = ExtResource("1_x3v2e")
+expand_mode = 1
+
+[node name="StartButton" type="TextureRect" parent="TextureRect" unique_id=2032034109]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.089
+anchor_right = 0.47900003
+anchor_bottom = 0.69200003
+offset_left = -0.09799957
+offset_right = -141.07806
+offset_bottom = -331.316
+mouse_filter = 0
+texture = ExtResource("2_ihbss")
+script = ExtResource("4_start_logic")
+normal_texture = ExtResource("2_ihbss")
+hover_texture = ExtResource("3_start_active")

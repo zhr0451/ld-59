@@ -1,18 +1,21 @@
 extends Node
 
 const BAD_ENDING = preload("res://scenes/endings/bad_ending.tscn")
+const META_WAS_INPUT_PICKABLE = "quest_was_input_pickable"
+const META_WAS_PROCESSING = "quest_was_processing"
+const META_WAS_PHYSICS_PROCESSING = "quest_was_physics_processing"
+const META_WAS_ANIMATION_PLAYING = "quest_was_animation_playing"
 
 var counter = preload("uid://cs5lr50tom8xo")
 
-@export var base_tasks_required := 1
-@export var max_tasks_required := 6
-@export var attempts_per_difficulty_step := 2
-@export var initial_timer_seconds := 30.0
-@export var solved_task_time_bonus := 5.0
+@export var initial_timer_seconds := 60.0
+@export var solved_task_time_bonus := 15.0
 @export_node_path("Label") var timer_label_path: NodePath = NodePath("../../TimerPanel/Timer")
 
 @onready var quest_panel: Panel = %QuestPanel
 @onready var teleport_panel: Panel = %TeleportPanel
+@onready var scene_changer: Node = %SceneChanger
+@onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
 @onready var timer_label: Label = get_node_or_null(timer_label_path) as Label
 @onready var title_label: Label = $"../Panel/MarginContainer/VBoxContainer/TitleLabel"
 @onready var problem_label: Label = $"../Panel/MarginContainer/VBoxContainer/ProblemLabel"
@@ -23,12 +26,10 @@ var counter = preload("uid://cs5lr50tom8xo")
 	$"../Panel4/AnswerButton3",
 ]
 
-var correct_answer := 0
+var correct_answer_index := -1
 var input_locked := false
 var current_target_name := "Traveler"
-var teleport_attempts := 0
-var tasks_required := 1
-var tasks_solved := 0
+var current_character: Area2D = null
 var puzzle_in_progress := false
 var timer_started := false
 var timer_remaining := 0.0
@@ -56,94 +57,81 @@ func _process(delta: float) -> void:
 		get_tree().change_scene_to_packed(BAD_ENDING)
 
 
-func start_puzzle(target_name: String) -> void:
+func start_puzzle(target_name: String, questions_config: CharacterQuestions = null, character: Area2D = null) -> void:
 	if puzzle_in_progress and target_name == current_target_name:
 		return
 
+	_release_current_character()
 	current_target_name = target_name
-	teleport_attempts += 1
-	tasks_required = _get_tasks_required_for_attempt()
-	tasks_solved = 0
+	current_character = character
 	puzzle_in_progress = true
+	_set_character_frozen(current_character, true)
 
-	title_label.text = "Route for %s" % current_target_name
+	title_label.text = "Question for %s" % current_target_name
 	teleport_panel.set_open(false)
 	quest_panel.set_open(true)
-	_generate_task()
+	_show_random_question(questions_config)
 
 
-func _generate_task() -> void:
-	var task := _build_task()
-	correct_answer = task.answer
-	problem_label.text = "Stabilize the route: %s = ?" % task.expression
+func _show_random_question(questions_config: CharacterQuestions) -> void:
+	var question := _pick_valid_question(questions_config)
+	if question == null:
+		_show_unavailable_question()
+		return
 
-	var answers := _build_answers()
-	answers.shuffle()
+	correct_answer_index = question.correct_answer_index
+	problem_label.text = question.question_text
 
 	for i in range(answer_buttons.size()):
 		var button := answer_buttons[i]
-		var answer_value: int = answers[i]
-		button.text = str(answer_value)
-		button.set_meta("answer_value", answer_value)
+		button.text = question.answers[i]
+		button.set_meta("answer_index", i)
 		button.disabled = false
 
-	result_label.text = _get_progress_text()
+	result_label.text = "Choose an answer."
 	input_locked = false
 
 
-func _build_task() -> Dictionary:
-	var operation := randi_range(0, 3)
-	var a := 0
-	var b := 0
-	var expression := ""
-	var answer := 0
+func _pick_valid_question(questions_config: CharacterQuestions) -> NarrativeQuestion:
+	if questions_config == null:
+		return null
 
-	match operation:
-		0:
-			a = randi_range(1, 20)
-			b = randi_range(1, 20)
-			answer = a + b
-			expression = "%d + %d" % [a, b]
-		1:
-			a = randi_range(1, 20)
-			b = randi_range(1, 20)
-			if b > a:
-				var temp := a
-				a = b
-				b = temp
+	var valid_questions: Array[NarrativeQuestion] = []
+	for question_resource in questions_config.questions:
+		var question := question_resource as NarrativeQuestion
+		if _is_valid_question(question):
+			valid_questions.append(question)
 
-			answer = a - b
-			expression = "%d - %d" % [a, b]
-		2:
-			a = randi_range(2, 9)
-			b = randi_range(2, 9)
-			answer = a * b
-			expression = "%d x %d" % [a, b]
-		3:
-			b = randi_range(2, 9)
-			answer = randi_range(2, 9)
-			a = b * answer
-			expression = "%d / %d" % [a, b]
+	if valid_questions.is_empty():
+		return null
 
-	return {
-		"expression": expression,
-		"answer": answer,
-	}
+	return valid_questions[randi_range(0, valid_questions.size() - 1)]
 
 
-func _build_answers() -> Array[int]:
-	var answers: Array[int] = [correct_answer]
+func _is_valid_question(question: NarrativeQuestion) -> bool:
+	if question == null:
+		return false
+	if question.question_text.strip_edges().is_empty():
+		return false
+	if question.answers.size() != answer_buttons.size():
+		return false
 
-	while answers.size() < 3:
-		var candidate := correct_answer + randi_range(-4, 4)
-		if candidate < 0:
-			continue
-		if answers.has(candidate):
-			continue
+	return question.correct_answer_index >= 0 and question.correct_answer_index < question.answers.size()
 
-		answers.append(candidate)
 
-	return answers
+func _show_unavailable_question() -> void:
+	correct_answer_index = -1
+	input_locked = true
+	puzzle_in_progress = false
+	problem_label.text = "No narrative question is configured for this character."
+	result_label.text = "Add questions to the character resource."
+
+	for button in answer_buttons:
+		button.text = "-"
+		button.disabled = true
+
+	_release_current_character()
+	push_warning("main_quest_logic.gd: no valid questions for %s." % current_target_name)
 
 
 func _on_answer_pressed(button: Button) -> void:
@@ -155,61 +143,116 @@ func _on_answer_pressed(button: Button) -> void:
 	for answer_button in answer_buttons:
 		answer_button.disabled = true
 
-	var chosen_answer := int(button.get_meta("answer_value"))
-	var is_correct := chosen_answer == correct_answer
+	var chosen_answer_index := int(button.get_meta("answer_index", -1))
+	var is_correct := chosen_answer_index == correct_answer_index
+	_start_timer_if_needed()
 
 	if is_correct:
 		_apply_correct_answer_timer_reward()
-		tasks_solved += 1
-
-		if tasks_solved < tasks_required:
-			result_label.text = "Correct. %s" % _get_progress_text()
-			await get_tree().create_timer(0.8).timeout
-			_generate_task()
-			return
-
 		counter.good += 1
 		puzzle_in_progress = false
 		result_label.text = "Correct. Teleport window unlocked."
 		await get_tree().create_timer(0.8).timeout
 		quest_panel.set_open(false)
 		teleport_panel.set_open(true)
+		_release_current_character()
 		_reset_labels()
 	else:
 		counter.evil += 1
 		puzzle_in_progress = false
-		tasks_solved = 0
 		result_label.text = "Incorrect. Teleport failed."
 		await get_tree().create_timer(1.0).timeout
+		var failed_character := current_character
 		quest_panel.set_open(false)
+		_hide_pop_up_panel()
+		_release_current_character()
+		_show_failed_character_portal(failed_character)
 		_reset_labels()
 
 
 func _reset_labels() -> void:
-	title_label.text = "Quest Puzzle"
+	title_label.text = "Narrative Puzzle"
 	problem_label.text = "Awaiting a traveler."
 	result_label.text = "Use the loupe and select a character."
 
 
-func _get_progress_text() -> String:
-	return "Solve route %d/%d." % [tasks_solved + 1, tasks_required]
+func _release_current_character() -> void:
+	_set_character_frozen(current_character, false)
+	current_character = null
 
 
-func _get_tasks_required_for_attempt() -> int:
-	var safe_step := maxi(attempts_per_difficulty_step, 1)
-	var difficulty_level := floori(float(teleport_attempts - 1) / float(safe_step))
-	var required := base_tasks_required + difficulty_level
+func _show_failed_character_portal(character: Area2D) -> void:
+	if scene_changer != null and scene_changer.has_method("show_failed_character"):
+		scene_changer.call("show_failed_character", character)
 
-	return mini(required, max_tasks_required)
+
+func _hide_pop_up_panel() -> void:
+	if pop_up_panel != null and pop_up_panel.has_method("set_open"):
+		pop_up_panel.call("set_open", false)
+
+
+func _set_character_frozen(character: Area2D, value: bool) -> void:
+	if character == null:
+		return
+
+	if value:
+		character.set_meta(META_WAS_INPUT_PICKABLE, character.input_pickable)
+		character.input_pickable = false
+	else:
+		if character.has_meta(META_WAS_INPUT_PICKABLE):
+			character.input_pickable = bool(character.get_meta(META_WAS_INPUT_PICKABLE))
+			character.remove_meta(META_WAS_INPUT_PICKABLE)
+
+	_set_process_tree_frozen(character, value)
+	_set_animated_sprites_paused(character, value)
+
+
+func _set_process_tree_frozen(node: Node, value: bool) -> void:
+	if value:
+		node.set_meta(META_WAS_PROCESSING, node.is_processing())
+		node.set_meta(META_WAS_PHYSICS_PROCESSING, node.is_physics_processing())
+		node.set_process(false)
+		node.set_physics_process(false)
+	else:
+		if node.has_meta(META_WAS_PROCESSING):
+			node.set_process(bool(node.get_meta(META_WAS_PROCESSING)))
+			node.remove_meta(META_WAS_PROCESSING)
+		if node.has_meta(META_WAS_PHYSICS_PROCESSING):
+			node.set_physics_process(bool(node.get_meta(META_WAS_PHYSICS_PROCESSING)))
+			node.remove_meta(META_WAS_PHYSICS_PROCESSING)
+
+	for child in node.get_children():
+		_set_process_tree_frozen(child, value)
+
+
+func _set_animated_sprites_paused(node: Node, value: bool) -> void:
+	if node is AnimatedSprite2D:
+		var animated_sprite := node as AnimatedSprite2D
+		if value:
+			animated_sprite.set_meta(META_WAS_ANIMATION_PLAYING, animated_sprite.is_playing())
+			animated_sprite.pause()
+		else:
+			if animated_sprite.has_meta(META_WAS_ANIMATION_PLAYING):
+				if bool(animated_sprite.get_meta(META_WAS_ANIMATION_PLAYING)):
+					animated_sprite.play()
+				animated_sprite.remove_meta(META_WAS_ANIMATION_PLAYING)
+
+	for child in node.get_children():
+		_set_animated_sprites_paused(child, value)
 
 
 func _apply_correct_answer_timer_reward() -> void:
-	if not timer_started:
-		timer_started = true
-		timer_remaining = initial_timer_seconds
-	else:
-		timer_remaining += solved_task_time_bonus
+	timer_remaining += solved_task_time_bonus
 
+	_update_timer_label()
+
+
+func _start_timer_if_needed() -> void:
+	if timer_started:
+		return
+
+	timer_started = true
+	timer_remaining = initial_timer_seconds
 	_update_timer_label()
 
 

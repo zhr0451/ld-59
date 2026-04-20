@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CharacterQuestions" format=3 uid="uid://cjf5a7d0slo3l"]
+
+[ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_questions"]
+[ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="2_question"]
+
+[sub_resource type="Resource" id="Resource_valentin_1"]
+script = ExtResource("2_question")
+question_text = "Valentin Petrovich lost the signal thread. Which trace should he follow?"
+answers = Array[String](["The warm trace", "The loudest trace", "The trace moving backward"])
+
+[sub_resource type="Resource" id="Resource_valentin_2"]
+script = ExtResource("2_question")
+question_text = "A mirror shows three reflections. Which one is safe?"
+answers = Array[String](["The reflection that blinks first", "The reflection holding the same map", "The reflection without a shadow"])
+correct_answer_index = 1
+
+[sub_resource type="Resource" id="Resource_valentin_3"]
+script = ExtResource("2_question")
+question_text = "The route is unstable. What should Valentin Petrovich anchor first?"
+answers = Array[String](["The destination", "The weather", "The rumor"])
+
+[resource]
+script = ExtResource("1_questions")
+questions = Array[Resource]([SubResource("Resource_valentin_1"), SubResource("Resource_valentin_2"), SubResource("Resource_valentin_3")])

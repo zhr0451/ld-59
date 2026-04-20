@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="CharacterQuestions" format=3 uid="uid://chp7t1pnyh42m"]
+
+[ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_questions"]
+[ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="2_question"]
+
+[sub_resource type="Resource" id="Resource_gnome_1"]
+script = ExtResource("2_question")
+question_text = "Gnome Gome points at three stones. Which stone keeps a promise?"
+answers = Array[String](["The stone that returns to the hand", "The stone that shines the brightest", "The stone that makes no sound"])
+
+[sub_resource type="Resource" id="Resource_gnome_2"]
+script = ExtResource("2_question")
+question_text = "A tiny bridge asks for a toll. What should Gnome Gome offer?"
+answers = Array[String](["A secret told twice", "A button from his coat", "A coin taken from the river"])
+correct_answer_index = 1
+
+[sub_resource type="Resource" id="Resource_gnome_3"]
+script = ExtResource("2_question")
+question_text = "The tunnel echoes only true names. What should you say?"
+answers = Array[String](["Gnome Gome", "King of Roots", "Nobody at all"])
+
+[resource]
+script = ExtResource("1_questions")
+questions = Array[Resource]([SubResource("Resource_gnome_1"), SubResource("Resource_gnome_2"), SubResource("Resource_gnome_3")])

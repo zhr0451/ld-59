@@ -6,3 +6,4 @@ class_name CharacterStats
 @export var sprite: SpriteFrames
 @export var name: String
 @export var message: String
+@export var questions: CharacterQuestions
