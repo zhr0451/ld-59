@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ceew30b2cr2fd"
-path="res://.godot/imported/guid-active-final.png-8abcb00dc72931cff03bf5854ad269ad.ctex"
+path.s3tc="res://.godot/imported/guid-active-final.png-8abcb00dc72931cff03bf5854ad269ad.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/props/guid-active-final.png"
-dest_files=["res://.godot/imported/guid-active-final.png-8abcb00dc72931cff03bf5854ad269ad.ctex"]
+dest_files=["res://.godot/imported/guid-active-final.png-8abcb00dc72931cff03bf5854ad269ad.s3tc.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
