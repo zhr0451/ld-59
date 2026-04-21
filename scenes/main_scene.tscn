@@ -23,11 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://ccfima5u8rtj8" path="res://scenes/characters/kana.tscn" id="10_xa0eo"]
 [ext_resource type="Script" uid="uid://bo5e6tlr2agib" path="res://src/controls/valve_ui_logic.gd" id="11_valve_logic"]
 [ext_resource type="Texture2D" uid="uid://dd3gax0jqledp" path="res://icon.svg" id="14_01n6w"]
-[ext_resource type="Script" uid="uid://cscgssvs3xfpu" path="res://src/ui/right_popup_menu_logic.gd" id="15_01n6w"]
 [ext_resource type="Texture2D" uid="uid://bo783s4fqtrox" path="res://assets/props/mirror .png" id="15_58gk3"]
 [ext_resource type="Texture2D" uid="uid://cfifpd6qrrtln" path="res://assets/props/lupamax.png" id="16_k67gn"]
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
-[ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 [ext_resource type="FontFile" uid="uid://bjkm3mc1an7ev" path="res://assets/fonts/Spaghetti Cyrillic/Spaghetti Cyrillic.otf" id="17_jix7a"]
 [ext_resource type="Texture2D" uid="uid://cgmj8bf7undit" path="res://assets/props/table-really-final.png" id="19_267kh"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
@@ -37,7 +35,6 @@
 [ext_resource type="Texture2D" uid="uid://dbolal5u0ngrc" path="res://assets/props/scope_active.png" id="25_scope_active"]
 [ext_resource type="Texture2D" uid="uid://b18gpwjbdeimj" path="res://assets/props/truba.png" id="27_k3g67"]
 [ext_resource type="Texture2D" uid="uid://cx2y77ud305ur" path="res://assets/props/good_and_evil.png" id="28_good_evil"]
-[ext_resource type="Texture2D" uid="uid://bi6cqtbpbjf1s" path="res://assets/props/teleport-button.png" id="29_teleport_button"]
 [ext_resource type="Texture2D" uid="uid://ct2ambum7uqb8" path="res://assets/props/svitok.png" id="30_svitok"]
 [ext_resource type="Texture2D" uid="uid://dj6ubmes24y7x" path="res://assets/props/quest.png" id="31_answer_bg"]
 [ext_resource type="Script" uid="uid://do87buyrh4g8a" path="res://src/ui/outcome_banner_logic.gd" id="32_outcome"]
@@ -692,34 +689,6 @@ scale = Vector2(0.18981484, 0.18981484)
 sprite_frames = ExtResource("2_valve")
 animation = &"left"
 
-[node name="TeleportPanel" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=347741597]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.81600004
-anchor_right = 0.95900005
-anchor_bottom = 1.001
-offset_left = -0.48010254
-offset_top = -1.0
-offset_right = -0.52001953
-offset_bottom = 0.27996826
-mouse_filter = 2
-texture = ExtResource("29_teleport_button")
-expand_mode = 1
-stretch_mode = 5
-script = ExtResource("15_01n6w")
-hidden_padding = 60.0
-
-[node name="Button" type="Button" parent="CanvasLayer/UIRoot/TeleportPanel" unique_id=2085511164]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-script = ExtResource("17_bcnxi")
-
 [node name="OutcomePanel" type="Control" parent="CanvasLayer/UIRoot" unique_id=2103706472]
 unique_name_in_owner = true
 visible = false
@@ -777,5 +746,3 @@ text = "Continue"
 stream = ExtResource("47_267kh")
 autoplay = true
 parameters/looping = true
-
-[connection signal="button_up" from="CanvasLayer/UIRoot/TeleportPanel/Button" to="CanvasLayer/UIRoot/TeleportPanel/Button" method="_on_button_up"]
