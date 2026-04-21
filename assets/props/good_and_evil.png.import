@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/good_and_evil.png-21f363ea9505e256767ba28597a
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

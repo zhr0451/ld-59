@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/lupamax.png-da81d38b9e72e38cb0c79e4e6eb7ae01.
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

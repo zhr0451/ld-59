@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/GnomeGome.png-0d572231dc0cff93488515dbf30c10b
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
