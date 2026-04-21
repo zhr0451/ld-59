@@ -3,6 +3,7 @@ extends Control
 @export var guide_texture: Texture2D
 @export var icon_path: NodePath = NodePath("..")
 @export var active_texture: Texture2D
+@export var inactive_texture: Texture2D
 @export var guide_size := Vector2(720.0, 540.0)
 @export var guide_display_name := "GuideDisplay"
 @export var start_highlighted := true
@@ -22,7 +23,7 @@ func _ready() -> void:
 		push_warning("guide_toggle_logic.gd: guide icon TextureRect node not found.")
 		return
 
-	normal_texture = icon.texture
+	normal_texture = inactive_texture if inactive_texture != null else icon.texture
 	if normal_texture == null:
 		normal_texture = active_texture
 

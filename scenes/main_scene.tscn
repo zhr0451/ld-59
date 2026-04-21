@@ -29,8 +29,9 @@
 [ext_resource type="Script" uid="uid://7iefnuluiopj" path="res://src/game_logic/puzzle/main_quest_logic.gd" id="16_qstlg"]
 [ext_resource type="Script" uid="uid://bm6mi4hrwk6k0" path="res://scenes/prototypes/teleport_prototype.gd" id="17_bcnxi"]
 [ext_resource type="FontFile" uid="uid://bjkm3mc1an7ev" path="res://assets/fonts/Spaghetti Cyrillic/Spaghetti Cyrillic.otf" id="17_jix7a"]
+[ext_resource type="Texture2D" uid="uid://cgmj8bf7undit" path="res://assets/props/table-really-final.png" id="19_267kh"]
 [ext_resource type="Texture2D" uid="uid://d1h5kq7os1puy" path="res://assets/props/right_wall.png" id="20_xdqt8"]
-[ext_resource type="Texture2D" uid="uid://baiddp5iya6wh" path="res://assets/props/tablefinal.png" id="22_adb74"]
+[ext_resource type="Texture2D" uid="uid://ceew30b2cr2fd" path="res://assets/props/guid-active-final.png" id="23_267kh"]
 [ext_resource type="Script" uid="uid://dong3r02pt8ru" path="res://src/ui/center_popup_menu_logic.gd" id="23_qcent"]
 [ext_resource type="Texture2D" uid="uid://5rusyddre0gj" path="res://assets/props/scope.png" id="24_scope"]
 [ext_resource type="Texture2D" uid="uid://dbolal5u0ngrc" path="res://assets/props/scope_active.png" id="25_scope_active"]
@@ -44,6 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://f51pf51siyg8" path="res://assets/ui/guide.png" id="34_guide"]
 [ext_resource type="Texture2D" uid="uid://bphqn8wgv8fq3" path="res://assets/ui/guide-activate.png" id="35_guide_active"]
 [ext_resource type="Texture2D" uid="uid://m5i3qj5kj3vt" path="res://assets/ui/close.png" id="36_close"]
+[ext_resource type="Texture2D" uid="uid://dan5xm4fbtuia" path="res://assets/props/tutor-final.png" id="37_guide_inactive"]
 [ext_resource type="AudioStream" uid="uid://cswlcqv2bl3gi" path="res://assets/sounds/game-music.mp3" id="45_segjr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u1mn"]
@@ -255,21 +257,21 @@ offset_top = -38.0
 offset_right = 0.4399414
 offset_bottom = 0.19995117
 mouse_filter = 2
-texture = ExtResource("22_adb74")
+texture = ExtResource("19_267kh")
 expand_mode = 1
 stretch_mode = 6
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIRoot/TextureRect" unique_id=243406889]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7
-anchor_top = 0.12
-anchor_right = 0.78
-anchor_bottom = 0.28
-offset_left = -899.1
-offset_top = -299.72
-offset_right = 285.26086
-offset_bottom = 588.32
+anchor_left = 0.36400002
+anchor_top = 0.65500003
+anchor_right = 0.54300004
+anchor_bottom = 0.919
+offset_left = -159.01202
+offset_top = -130.05502
+offset_right = 212.37604
+offset_bottom = 80.961
 mouse_filter = 2
 texture = ExtResource("35_guide_active")
 expand_mode = 1
@@ -277,19 +279,20 @@ stretch_mode = 5
 
 [node name="ClickArea" type="Control" parent="CanvasLayer/UIRoot/TextureRect/TextureRect" unique_id=1868736694]
 layout_mode = 1
-anchor_left = 0.381
-anchor_top = 0.56700003
-anchor_right = 0.54800004
-anchor_bottom = 0.693
-offset_left = -0.34735107
-offset_top = -0.1550293
-offset_right = -0.27648926
-offset_bottom = 0.25500488
+anchor_left = 0.28300002
+anchor_top = 0.39600003
+anchor_right = 0.689
+anchor_bottom = 0.75000006
+offset_left = -0.09577942
+offset_top = 0.1519928
+offset_right = -0.12008667
+offset_bottom = -0.04005432
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("33_guide_logic")
 guide_texture = ExtResource("34_guide")
-active_texture = ExtResource("35_guide_active")
+active_texture = ExtResource("23_267kh")
+inactive_texture = ExtResource("37_guide_inactive")
 
 [node name="Button" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=2001458344]
 custom_minimum_size = Vector2(128, 128)
@@ -408,10 +411,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = -300.0
-offset_right = 1177.2871
-offset_bottom = 282.43213
+offset_left = 7.0
+offset_top = -296.0
+offset_right = 1178.2871
+offset_bottom = 286.43213
 mouse_filter = 2
 texture = ExtResource("15_58gk3")
 expand_mode = 2
@@ -474,6 +477,7 @@ autowrap_mode = 3
 
 [node name="QuestPanel" type="TextureRect" parent="CanvasLayer/UIRoot" unique_id=1670368985]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(786, 630)
 layout_mode = 1
 anchors_preset = 8
