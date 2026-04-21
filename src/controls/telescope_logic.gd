@@ -10,6 +10,7 @@ extends TextureRect
 
 var button_pressed := false
 var is_hovered := false
+var suppress_hover_highlight := false
 
 
 func _ready() -> void:
@@ -44,12 +45,16 @@ func _handle_click_event(event: InputEvent) -> void:
 	var mouse_event := event as InputEventMouseButton
 	if mouse_event != null and mouse_event.button_index == MOUSE_BUTTON_LEFT and mouse_event.pressed:
 		accept_event()
-		set_loupe_button_pressed(!button_pressed)
+		var next_pressed := !button_pressed
+		suppress_hover_highlight = not next_pressed
+		set_loupe_button_pressed(next_pressed)
 		_apply_loupe_state()
 
 
 func _on_button_up() -> void:
-	set_loupe_button_pressed(!button_pressed)
+	var next_pressed := !button_pressed
+	suppress_hover_highlight = not next_pressed
+	set_loupe_button_pressed(next_pressed)
 	_apply_loupe_state()
 
 
@@ -64,7 +69,7 @@ func _apply_loupe_state() -> void:
 
 
 func _update_texture() -> void:
-	if (button_pressed or is_hovered) and active_texture != null:
+	if (button_pressed or (is_hovered and not suppress_hover_highlight)) and active_texture != null:
 		texture = active_texture
 	elif inactive_texture != null:
 		texture = inactive_texture
@@ -77,4 +82,5 @@ func _on_hover_started() -> void:
 
 func _on_hover_ended() -> void:
 	is_hovered = false
+	suppress_hover_highlight = false
 	_update_texture()

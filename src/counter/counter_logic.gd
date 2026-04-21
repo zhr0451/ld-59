@@ -2,9 +2,11 @@ extends Node
 
 var counter = preload("uid://cs5lr50tom8xo")
 
-@onready var good: Label = $MarginContainer/VBoxContainer/Good
-@onready var evil: Label = $MarginContainer/VBoxContainer/Evil
+@onready var good: Label = get_node_or_null("Good") as Label
+@onready var evil: Label = get_node_or_null("Evil") as Label
 
 func _process(_delta: float) -> void:
-	good.text = "Good: %s" % counter.good
-	evil.text = "Evil: %s" % counter.evil
+	if good != null:
+		good.text = "%s" % counter.good
+	if evil != null:
+		evil.text = "%s" % counter.evil

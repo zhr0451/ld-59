@@ -1,24 +1,17 @@
 [gd_scene format=3 uid="uid://be3ux7u1sf57l"]
 
+[ext_resource type="Texture2D" uid="uid://bth6cdpwwj5kh" path="res://assets/endings/good-end.png" id="1_dv3u5"]
+
 [node name="GoodEnding" type="Node2D" unique_id=1799714589]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1554074176]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1201369233]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1686341465]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1765592925]
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer" unique_id=1359781372]
-anchors_preset = 15
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1495978361]
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer" unique_id=763213510]
-layout_mode = 2
-text = "Your Kingdom was saved by you!
-
-Thanks for playing the game was made by:
-zhr – code and game design
-Kataron – art"
-horizontal_alignment = 1
-vertical_alignment = 1
+texture = ExtResource("1_dv3u5")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true

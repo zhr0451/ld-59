@@ -22,6 +22,7 @@ const BAD_PORTAL_RAW_DIR = "res://assets/animations/portal/portal_bad_raw"
 var counter = preload("uid://cs5lr50tom8xo")
 var final: bool
 var active_character: Area2D = null
+var last_spawned_character: Area2D = null
 var spawn_request_id := 0
 var cached_bad_portal_frames: SpriteFrames = null
 
@@ -90,6 +91,7 @@ func _transition_to_random_character(previous_character: Area2D, portal_frames: 
 			return
 
 	active_character = _pick_next_character(characters, previous_character)
+	last_spawned_character = active_character
 	active_character.position = _get_spawn_position(map) - _get_character_offset(active_character)
 	_set_character_active(active_character, true)
 
@@ -247,8 +249,13 @@ func _pick_next_character(characters: Array[Area2D], previous_character: Area2D)
 	var available_characters: Array[Area2D] = []
 
 	for character in characters:
-		if character != previous_character:
+		if character != previous_character and character != last_spawned_character:
 			available_characters.append(character)
+
+	if available_characters.is_empty():
+		for character in characters:
+			if character != previous_character:
+				available_characters.append(character)
 
 	if available_characters.is_empty():
 		return characters[randi() % characters.size()]

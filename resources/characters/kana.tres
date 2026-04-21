@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bnjkha6gvdgc6"]
+
+[ext_resource type="Script" uid="uid://jsu3gxaymauu" path="res://src/resources/character.gd" id="1_0j3jo"]
+[ext_resource type="Texture2D" uid="uid://cho3o3uvytdw1" path="res://assets/persons/kana.png" id="1_mi1to"]
+[ext_resource type="Resource" uid="uid://0ooq5r1g424e" path="res://resources/questions/kana_questions.tres" id="2_wyjpx"]
+[ext_resource type="SpriteFrames" uid="uid://gxu3sw153abq" path="res://assets/animations/kana/kana.tres" id="3_wyjpx"]
+
+[resource]
+script = ExtResource("1_0j3jo")
+id = 4
+icon = ExtResource("1_mi1to")
+sprite = ExtResource("3_wyjpx")
+name = "Kana"
+message = "Wow, Tiefling? It's not often you see them here, especially such gigantic ones.…Is she under two meters tall?"
+questions = ExtResource("2_wyjpx")
+metadata/_custom_type_script = "uid://jsu3gxaymauu"

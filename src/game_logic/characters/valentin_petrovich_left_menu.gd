@@ -5,7 +5,7 @@ extends Area2D
 @onready var name_label: Label = get_node_or_null("../../../CanvasLayer/UIRoot/PopUpPanel/TextureRect/NameLabel") as Label
 @onready var message_lable: Label = get_node_or_null("../../../CanvasLayer/UIRoot/PopUpPanel/TextureRect/MessageLable") as Label
 @onready var texture_icon: TextureRect = get_node_or_null("../../../CanvasLayer/UIRoot/PopUpPanel/TextureRect/TextureIcon") as TextureRect
-@onready var quest_panel: Panel = %QuestPanel
+@onready var quest_panel: Control = %QuestPanel
 @onready var quest_logic: Node = %QuestLogic
 
 const VALENTIN_PETROVICH = preload("uid://b8ai1hcqtstcw")

@@ -1,8 +1,8 @@
 extends Button
 
 @export_node_path("Control") var panel_path: NodePath = NodePath("../PopUpPanel")
-@onready var teleport_panel: Panel = $"../TeleportPanel"
-@onready var quest_panel: Panel = $"../QuestPanel"
+@onready var teleport_panel: Control = $"../TeleportPanel"
+@onready var quest_panel: Control = $"../QuestPanel"
 
 
 

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://bn25os8041ksj"]
+
+[ext_resource type="Script" uid="uid://jsu3gxaymauu" path="res://src/resources/character.gd" id="1_jov5q"]
+[ext_resource type="Texture2D" uid="uid://bjpqa7oq8vao" path="res://assets/persons/lasm.png" id="1_vfhct"]
+[ext_resource type="Resource" uid="uid://bvvofkwaidfij" path="res://resources/questions/lasm_questions.tres" id="2_ywc7t"]
+[ext_resource type="SpriteFrames" uid="uid://fepbb1u8tnn3" path="res://assets/animations/lasm/lasm.tres" id="3_ywc7t"]
+
+[resource]
+script = ExtResource("1_jov5q")
+id = 3
+icon = ExtResource("1_vfhct")
+sprite = ExtResource("3_ywc7t")
+name = "Lasm"
+message = "Little fawn, I wonder how she got here?"
+questions = ExtResource("2_ywc7t")
+metadata/_custom_type_script = "uid://jsu3gxaymauu"

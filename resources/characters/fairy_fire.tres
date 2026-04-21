@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterStats" format=3 uid="uid://djne0rgkahldw"]
+
+[ext_resource type="Script" uid="uid://jsu3gxaymauu" path="res://src/resources/character.gd" id="1_kq2f2"]
+[ext_resource type="Texture2D" uid="uid://j45qis5857hn" path="res://assets/persons/Fairy.png" id="1_tih7m"]
+[ext_resource type="Resource" uid="uid://d04baudkjhak7" path="res://resources/questions/fairy_questions.tres" id="2_sjvas"]
+[ext_resource type="SpriteFrames" uid="uid://bo0dhfgdpe2u0" path="res://assets/animations/fairy_firy/fairy_fire.tres" id="4_djwbk"]
+
+[resource]
+script = ExtResource("1_kq2f2")
+id = 2
+icon = ExtResource("1_tih7m")
+sprite = ExtResource("4_djwbk")
+name = "Fairy Light"
+message = "What a pretty little fairy"
+questions = ExtResource("2_sjvas")
+metadata/_custom_type_script = "uid://jsu3gxaymauu"

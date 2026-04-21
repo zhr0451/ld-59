@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="CharacterQuestions" format=3 uid="uid://d04baudkjhak7"]
+
+[ext_resource type="Script" uid="uid://dhxyto3vvjwjf" path="res://src/resources/character_questions.gd" id="1_questions"]
+[ext_resource type="Script" uid="uid://6jrdcv3q5wfj" path="res://src/resources/narrative_question.gd" id="2_question"]
+[ext_resource type="Texture2D" uid="uid://br7j82oeh2x8r" path="res://assets/banners/fairy_mountians.png" id="3_fairy_mountains"]
+[ext_resource type="Texture2D" uid="uid://cq5ipyl4uwrfv" path="res://assets/banners/fairy_dragon.png" id="4_fairy_dragon"]
+[ext_resource type="Texture2D" uid="uid://unaeyaen17il" path="res://assets/banners/fairy_sea.png" id="5_fairy_port"]
+[ext_resource type="Texture2D" uid="uid://ta6vkacowlnt" path="res://assets/banners/fairy-pystosh.png" id="6_fairy_desert"]
+[ext_resource type="Texture2D" uid="uid://fpisa2n3j0pl" path="res://assets/banners/fairy_tower.png" id="7_fairy_castle"]
+[ext_resource type="Texture2D" uid="uid://bjaittn7eejgw" path="res://assets/banners/fairy_forest.png" id="8_fairy_forest"]
+
+[sub_resource type="Resource" id="Resource_fairy_1"]
+script = ExtResource("2_question")
+question_text = "She seems to get along well with animals (in general, everything)."
+answers = Array[String](["Mountains", "The Dragon's Lair", "The Port"])
+correct_answer_index = 1
+answer_banners = Array[Texture2D]([ExtResource("3_fairy_mountains"), ExtResource("4_fairy_dragon"), ExtResource("5_fairy_port")])
+
+[sub_resource type="Resource" id="Resource_fairy_2"]
+script = ExtResource("2_question")
+question_text = "Baby is lost and can't find her home."
+answers = Array[String](["Desert", "Castle", "Forest of Fairies"])
+correct_answer_index = 2
+answer_banners = Array[Texture2D]([ExtResource("6_fairy_desert"), ExtResource("7_fairy_castle"), ExtResource("8_fairy_forest")])
+
+[sub_resource type="Resource" id="Resource_fairy_3"]
+script = ExtResource("2_question")
+question_text = "\"Does she want to wash up?\" Okay..."
+answers = Array[String](["Port", "The Dragon's Lair", "Forest of Fairies"])
+answer_banners = Array[Texture2D]([ExtResource("5_fairy_port"), ExtResource("4_fairy_dragon"), ExtResource("8_fairy_forest")])
+
+[resource]
+script = ExtResource("1_questions")
+questions = Array[Resource]([SubResource("Resource_fairy_1"), SubResource("Resource_fairy_2"), SubResource("Resource_fairy_3")])
+metadata/_custom_type_script = "uid://dhxyto3vvjwjf"
