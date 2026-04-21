@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cgmj8bf7undit"
-path="res://.godot/imported/table-really-final.png-b070f4df0e8ddab8c20ebfb37a2ac6ca.ctex"
+path.s3tc="res://.godot/imported/table-really-final.png-b070f4df0e8ddab8c20ebfb37a2ac6ca.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/props/table-really-final.png"
-dest_files=["res://.godot/imported/table-really-final.png-b070f4df0e8ddab8c20ebfb37a2ac6ca.ctex"]
+dest_files=["res://.godot/imported/table-really-final.png-b070f4df0e8ddab8c20ebfb37a2ac6ca.s3tc.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

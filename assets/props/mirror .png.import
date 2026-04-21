@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bo783s4fqtrox"
-path="res://.godot/imported/mirror .png-7657f3b6ab4925726bbe92a246da7b54.ctex"
+path.s3tc="res://.godot/imported/mirror .png-7657f3b6ab4925726bbe92a246da7b54.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/props/mirror .png"
-dest_files=["res://.godot/imported/mirror .png-7657f3b6ab4925726bbe92a246da7b54.ctex"]
+dest_files=["res://.godot/imported/mirror .png-7657f3b6ab4925726bbe92a246da7b54.s3tc.ctex"]
 
 [params]
 
-compress/mode=4
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
