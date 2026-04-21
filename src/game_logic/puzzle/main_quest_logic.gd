@@ -28,6 +28,7 @@ var current_target_name := "Traveler"
 var current_character: Area2D = null
 var current_question: NarrativeQuestion = null
 var puzzle_in_progress := false
+var last_solved_question_by_target: Dictionary = {}
 
 
 func _ready() -> void:
@@ -124,8 +125,19 @@ func _pick_valid_question(questions_config: CharacterQuestions) -> NarrativeQues
 
 	if valid_questions.is_empty():
 		return null
+	if valid_questions.size() == 1:
+		return valid_questions[0]
 
-	return valid_questions[randi_range(0, valid_questions.size() - 1)]
+	var last_solved_question := last_solved_question_by_target.get(current_target_name) as NarrativeQuestion
+	var available_questions: Array[NarrativeQuestion] = []
+	for question in valid_questions:
+		if question != last_solved_question:
+			available_questions.append(question)
+
+	if available_questions.is_empty():
+		return valid_questions[randi_range(0, valid_questions.size() - 1)]
+
+	return available_questions[randi_range(0, available_questions.size() - 1)]
 
 
 func _is_valid_question(question: NarrativeQuestion) -> bool:
@@ -172,6 +184,7 @@ func _on_answer_pressed(button: Button) -> void:
 
 	var chosen_answer_index := int(button.get_meta("answer_index", -1))
 	var is_correct := chosen_answer_index == correct_answer_index
+	_remember_solved_question()
 
 	if is_correct:
 		counter.good += 1
@@ -198,6 +211,13 @@ func _on_answer_pressed(button: Button) -> void:
 		_release_current_character()
 		_show_failed_character_portal(failed_character)
 		_reset_labels()
+
+
+func _remember_solved_question() -> void:
+	if current_question == null:
+		return
+
+	last_solved_question_by_target[current_target_name] = current_question
 
 
 func _on_close_button_gui_input(event: InputEvent) -> void:
