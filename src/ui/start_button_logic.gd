@@ -5,11 +5,13 @@ extends TextureRect
 @export_file("*.tscn") var target_scene_path := "res://scenes/main_scene.tscn"
 @export_node_path("Control") var loading_indicator_path: NodePath = NodePath("../LoadingIndicator")
 @export_node_path("CanvasItem") var loading_art_path: NodePath = NodePath("../Quest")
+@export var minimum_loading_seconds := 0.6
 
 @onready var loading_indicator: Control = get_node_or_null(loading_indicator_path) as Control
 @onready var loading_art: CanvasItem = get_node_or_null(loading_art_path) as CanvasItem
 
 var transition_started := false
+var loading_started_msec := 0
 
 
 func _ready() -> void:
@@ -31,6 +33,10 @@ func _process(_delta: float) -> void:
 		return
 
 	if status == ResourceLoader.THREAD_LOAD_LOADED:
+		_set_loading_progress_value(100.0)
+		if not _can_finish_loading():
+			return
+
 		var scene := ResourceLoader.load_threaded_get(target_scene_path) as PackedScene
 		_change_to_loaded_scene(scene)
 		return
@@ -53,6 +59,10 @@ func _gui_input(event: InputEvent) -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_set_loading_art_visible(true)
 	_set_loading_visible(true)
+	_set_loading_progress_value(0.0)
+	loading_started_msec = Time.get_ticks_msec()
+
+	await get_tree().process_frame
 
 	var error := ResourceLoader.load_threaded_request(target_scene_path)
 	if error != OK:
@@ -92,13 +102,33 @@ func _set_loading_art_visible(value: bool) -> void:
 		loading_art.visible = value
 
 
+func _can_finish_loading() -> bool:
+	var elapsed_seconds := float(Time.get_ticks_msec() - loading_started_msec) / 1000.0
+	return elapsed_seconds >= minimum_loading_seconds
+
+
 func _update_loading_progress(progress: Array) -> void:
 	if loading_indicator == null or progress.is_empty():
 		return
 
-	var progress_bar := loading_indicator.get_node_or_null("ProgressBar") as ProgressBar
+	_set_loading_progress_value(float(progress[0]) * 100.0)
+
+
+func _set_loading_progress_value(value: float) -> void:
+	var progress_bar := _get_progress_bar()
 	if progress_bar != null:
-		progress_bar.value = float(progress[0]) * 100.0
+		progress_bar.value = value
+
+
+func _get_progress_bar() -> ProgressBar:
+	if loading_indicator == null:
+		return null
+
+	var progress_bar := loading_indicator.get_node_or_null("MarginContainer/VBoxContainer/ProgressBar") as ProgressBar
+	if progress_bar != null:
+		return progress_bar
+
+	return loading_indicator.get_node_or_null("ProgressBar") as ProgressBar
 
 
 func _change_to_loaded_scene(scene: PackedScene) -> void:

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/truba.png-4ec85f850933a181b21ec1fafd97b713.ct
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

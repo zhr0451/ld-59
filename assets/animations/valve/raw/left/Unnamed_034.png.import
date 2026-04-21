@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/Unnamed_034.png-f132bd2160b460f84aa5dc0f6eaff
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

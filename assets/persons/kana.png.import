@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/kana.png-b2d41d43e8a2183b15e92f804557a6dd.cte
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

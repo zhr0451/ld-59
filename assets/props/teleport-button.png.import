@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/teleport-button.png-88c3a2445139e65cbc977da34
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

@@ -15,7 +15,7 @@ dest_files=["res://.godot/imported/lasm.png-e5643c19f80b673fbf1a0f680a6804db.cte
 
 [params]
 
-compress/mode=0
+compress/mode=4
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
