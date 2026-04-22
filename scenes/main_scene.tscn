@@ -745,4 +745,5 @@ text = "Continue"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1549048424]
 stream = ExtResource("47_267kh")
 autoplay = true
+playback_type = 1
 parameters/looping = true

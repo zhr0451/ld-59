@@ -8,7 +8,6 @@ const META_WAS_ANIMATION_PLAYING = "quest_was_animation_playing"
 var counter = preload("uid://cs5lr50tom8xo")
 
 @onready var quest_panel: Control = %QuestPanel
-@onready var teleport_panel: Control = %TeleportPanel
 @onready var scene_changer: Node = %SceneChanger
 @onready var pop_up_panel: Control = get_node_or_null("../../PopUpPanel") as Control
 @onready var outcome_panel: Node = get_node_or_null("../../OutcomePanel")
@@ -64,7 +63,6 @@ func start_puzzle(target_name: String, questions_config: CharacterQuestions = nu
 	_set_character_frozen(current_character, true)
 
 	_set_label_text(title_label, "Question for %s" % current_target_name)
-	teleport_panel.set_open(false)
 	quest_panel.set_open(true)
 	_show_random_question(questions_config)
 
